@@ -78,6 +78,9 @@ h2 {
 :checked + #labelCheck img {
     transform: scale(1.2);
     z-index: -1;
+
+    /*Se aplica una transformación en las imagenes, rota la imagen seleccionada*/
+    transform: rotate(45deg);
 }
 img:hover {
     transform: scale(1.1);
@@ -106,9 +109,13 @@ input[type="text"]:hover{
     color: #7E7297;
 }
 
-li{
-    display: inline-block;
+/*Se aplica una transición en los inputs de texto*/
+input[type="text"]:focus{
+   transition-duration: 0.2s;
+   transform:scale(1.03);
 }
+
+li {display: inline-block;}
 
 #buttonOutcome:hover{
    background-color:#6F1F42;
@@ -121,7 +128,8 @@ li{
     margin-bottom: 10px;
     padding-bottom: 20px;
     opacity: 99%;
-    /* position: relative; */
+   /*Se aplica una sombra donde las cajas del formulario*/
+    box-shadow: 1px 1px 1px 1px #6F1F42;
 }
 
 .form-control label {
@@ -148,7 +156,7 @@ li{
     cursor: pointer;
     background-color: #7e7297;
     border: 2px solid #303030;
-    color: #000000;
+    color: #f0f0f0;
     font-weight: bold;
     border-radius: 8px;
     display: block;
@@ -156,4 +164,27 @@ li{
     padding: 10px;
     margin-top: 20px;
     width: 100%;
+    /*Aplicamos un degradado a los botones*/
+    background: linear-gradient(#7E7297,#1A090D);
 }
+
+/*Se aplica una animación en el logo de la página*/
+.animation {
+    animation-duration: 5s;
+	animation-name: animation;
+	animation-iteration-count: infinite;
+}
+@keyframes animation {
+    from {
+        -webkit-transform: rotate(0deg);
+        transform: rotateY(0deg);
+    }
+    50% {
+        -webkit-transform: rotate(180deg);
+        transform: rotateY(180deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotateY(360deg);
+    }
+} 
