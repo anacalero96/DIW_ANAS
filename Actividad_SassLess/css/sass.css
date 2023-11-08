@@ -3,8 +3,35 @@ body {
   color: black;
 }
 
+body #articulo1 {
+  background-color: #cdc5dd;
+  width: 90%;
+  margin: auto;
+  margin-top: 1%;
+}
+
 body .btn {
   background-color: #7E7297;
+}
+
+body #imgPrincipal {
+  width: 650px;
+}
+
+body .caja1 {
+  text-align: center;
+  line-height: 1.6;
+}
+
+body .caja2 {
+  display: block;
+  text-align: center;
+  margin: 1%;
+}
+
+body p {
+  line-height: 1.6;
+  margin-bottom: 16px;
 }
 
 footer {

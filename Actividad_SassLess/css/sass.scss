@@ -6,13 +6,41 @@ $colorFondo2: #1A090D;
 $colorText: black;
 
 $colorButton: #7E7297;
+$colorArticulo:#cdc5dd;
+$sizeImg: 650px;
+$limite: 90%;
+$alineacion: center;
 body {
     background-color: $colorFondo;
     color: $colorText;
 
+    #articulo1{
+        background-color: $colorArticulo;
+        width: $limite;
+        margin: auto;
+        margin-top: 1%;
+    }
+
     .btn{
         background-color: $colorButton;
     }
+    #imgPrincipal {
+        width: $sizeImg;
+    }
+    .caja1 {
+        text-align: $alineacion;
+        line-height: 1.6;
+    }
+    .caja2 {
+        display: block;
+        text-align: $alineacion;
+        margin: 1%;
+    }
+    p {
+        line-height: 1.6;
+        margin-bottom: 16px;
+    }
+   
 }
 
 footer {
@@ -22,3 +50,4 @@ footer {
 #fondo{
     background-color: $colorFondo2;
 }
+
