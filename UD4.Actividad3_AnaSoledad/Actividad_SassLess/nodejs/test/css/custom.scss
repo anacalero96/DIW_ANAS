@@ -1,0 +1,10 @@
+$pColor: #292222;
+$sencondary: #7E7297;
+
+$theme-colors:(
+    primary: $pColor,
+    secondary: $sencondary
+);
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+

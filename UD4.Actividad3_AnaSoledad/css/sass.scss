@@ -1,0 +1,82 @@
+//Colores que usaré para la página web
+
+$colorFondo: #E8E1D5;
+$colorFondo2: #1A090D;
+
+$colorText: black;
+
+$colorButton: #7E7297;
+$colorArticulo:#cdc5dd;
+
+$limite: 90%;       //tamaño $limite indica el width máximo.
+$alineacion: center;
+
+//Tamaño de las imagenes
+
+$sizeImg: 650px;
+$imgLogo: 200px;
+$imgCrema: 400px;
+
+//Estilo de la fuente 
+
+$FuentePrincipal: 'AR One Sans', sans-serif;
+
+body {
+    background-color: $colorFondo;
+    color: $colorText;
+
+    #articulo1{
+        background-color: $colorArticulo;
+        width: $limite;
+        margin: auto;
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+
+    .btn{
+        background-color: $colorButton;
+    }
+    #imgPrincipal {
+        width: $sizeImg;
+    }
+    .caja1 {
+        text-align: $alineacion;
+        line-height: 1.6;
+        font-family: $FuentePrincipal;
+    }
+    .caja2 {
+        display: block;
+        text-align: $alineacion;
+        margin: 1%;
+        font-family: $FuentePrincipal;
+    }
+    p {
+        line-height: 1.6;
+        margin-bottom: 16px;
+    }
+    .caja3 {
+        text-align: $alineacion;
+        display: block;
+        padding: 1%;
+        margin:auto;
+        width: $limite;
+        margin-bottom: 1%;
+        font-family: $FuentePrincipal;
+        background-color: $colorArticulo;
+    }
+    .img_crema {
+        width: $imgCrema;
+    }
+}
+
+footer {
+    background-color: $colorFondo2;
+}
+
+#fondo{ background-color: $colorFondo2; }
+
+header {
+    #img_logo {
+        width: $imgLogo;
+    }
+}
