@@ -2,7 +2,6 @@ body {
   background-color: #E8E1D5;
   color: black;
 }
-
 body #articulo1 {
   background-color: #cdc5dd;
   width: 90%;
@@ -10,33 +9,27 @@ body #articulo1 {
   margin-top: 1%;
   margin-bottom: 1%;
 }
-
 body .btn {
   background-color: #7E7297;
 }
-
 body #imgPrincipal {
   width: 650px;
 }
-
 body .caja1 {
   text-align: center;
   line-height: 1.6;
   font-family: "AR One Sans", sans-serif;
 }
-
 body .caja2 {
   display: block;
   text-align: center;
   margin: 1%;
   font-family: "AR One Sans", sans-serif;
 }
-
 body p {
   line-height: 1.6;
   margin-bottom: 16px;
 }
-
 body .caja3 {
   text-align: center;
   display: block;
@@ -47,7 +40,6 @@ body .caja3 {
   font-family: "AR One Sans", sans-serif;
   background-color: #cdc5dd;
 }
-
 body .img_crema {
   width: 400px;
 }
@@ -62,4 +54,4 @@ footer {
 
 header #img_logo {
   width: 200px;
-}
+}/*# sourceMappingURL=sass.css.map */
