@@ -15,7 +15,7 @@ $textNegrita: bold;
 
 @import url('https://fonts.googleapis.com/css2?family=AR+One+Sans&family=Open+Sans:ital@1&family=Patua+One&display=swap');
 
-$font_family: 'AR One Sans, sans-serif';
+$font-family: 'AR One Sans', sans-serif;
 
 $theme-colors: (
     primary: $primary,
@@ -24,6 +24,7 @@ $theme-colors: (
     success: $success,
     font-bold: $textNegrita,
 );
+
 
 @import "../node_modules/bootstrap/scss/bootstrap";
 
