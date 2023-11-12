@@ -4,9 +4,12 @@ $colorFondo: #E8E1D5;
 $colorFondo2: #1A090D;
 
 $colorText: black;
+$colorText2: #ffff;
 
 $colorButton: #7E7297;
 $colorButton2: #6F1F42;
+
+//Color de fondo para el articulo
 $colorArticulo:#cdc5dd;
 
 $limite: 90%;       //tamaño $limite indica el width máximo.
@@ -25,53 +28,59 @@ $FuentePrincipal: 'AR One Sans', sans-serif;
 body {
     background-color: $colorFondo;
     color: $colorText;
+}
 
-    #articulo1{
-        background-color: $colorArticulo;
-        width: $limite;
-        margin: auto;
-        margin-top: 1%;
-        margin-bottom: 1%;
+#articulo1{
+    background-color: $colorArticulo;
+    width: $limite;
+    margin: auto;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+h5 {
+    padding-bottom: 10px;
+}
+.btn{
+    background-color: $colorButton;
+    &:hover {
+        background-color: $colorButton2;
     }
+}
 
-    .btn{
-        background-color: $colorButton;
-        &:hover {
-            background-color: $colorButton2;
-        }
-    }
-
-    #imgPrincipal {
-        width: $sizeImg;
-    }
-    .caja1 {
-        text-align: $alineacion;
-        line-height: 1.6;
-        font-family: $FuentePrincipal;
-    }
-    .caja2 {
-        display: block;
-        text-align: $alineacion;
-        margin: 1%;
-        font-family: $FuentePrincipal;
-    }
-    p {
-        line-height: 1.6;
-        margin-bottom: 16px;
-    }
-    .caja3 {
-        text-align: $alineacion;
-        display: block;
-        padding: 1%;
-        margin:auto;
-        width: $limite;
-        margin-bottom: 1%;
-        font-family: $FuentePrincipal;
-        background-color: $colorArticulo;
-    }
-    .img_crema {
-        width: $imgCrema;
-    }
+#imgPrincipal {
+    width: $sizeImg;
+}
+.caja1 {
+    text-align: $alineacion;
+    line-height: 1.6;
+    padding-top: 10px;
+    font-family: $FuentePrincipal;
+}
+.caja2 {
+    display: block;
+    text-align: $alineacion;
+    margin: 1%;
+    font-family: $FuentePrincipal;
+    padding-bottom: 10px;
+}
+p {
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+.caja3 {
+    text-align: $alineacion;
+    display: block;
+    padding: 1%;
+    margin:auto;
+    width: $limite;
+    margin-bottom: 1%;
+    padding-bottom: 10px;
+    font-family: $FuentePrincipal;
+    background-color: $colorArticulo;
+}
+.img_crema {
+    width: $imgCrema;
+    padding-bottom: 10px;
 }
 
 footer {
