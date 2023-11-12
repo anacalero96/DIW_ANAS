@@ -6,6 +6,7 @@ $colorFondo2: #1A090D;
 $colorText: black;
 
 $colorButton: #7E7297;
+$colorButton2: #6F1F42;
 $colorArticulo:#cdc5dd;
 
 $limite: 90%;       //tamaño $limite indica el width máximo.
@@ -35,7 +36,11 @@ body {
 
     .btn{
         background-color: $colorButton;
+        &:hover {
+            background-color: $colorButton2;
+        }
     }
+
     #imgPrincipal {
         width: $sizeImg;
     }

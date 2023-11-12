@@ -11,7 +11,7 @@ $success: rgb(154, 85, 170);
 //Colores del texto
 $textColor: black;
 $textColor2: white;
-$textNegrita: bold;
+// $textNegrita: bold;
 
 @import url('https://fonts.googleapis.com/css2?family=AR+One+Sans&family=Open+Sans:ital@1&family=Patua+One&display=swap');
 
@@ -19,10 +19,9 @@ $font-family: 'AR One Sans', sans-serif;
 
 $theme-colors: (
     primary: $primary,
-    fondo: $bs-color,
     color: $textColor,
     success: $success,
-    font-bold: $textNegrita,
+    // font-bold: $textNegrita,
 );
 
 

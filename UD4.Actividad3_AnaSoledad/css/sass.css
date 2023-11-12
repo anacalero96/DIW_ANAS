@@ -1,7 +1,6 @@
 body {
   background-color: #E8E1D5;
   color: black;
-  
 }
 body #articulo1 {
   background-color: #cdc5dd;
@@ -12,6 +11,9 @@ body #articulo1 {
 }
 body .btn {
   background-color: #7E7297;
+}
+body .btn:hover {
+  background-color: #6F1F42;
 }
 body #imgPrincipal {
   width: 650px;
