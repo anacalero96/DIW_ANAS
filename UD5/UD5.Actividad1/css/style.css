@@ -1,0 +1,190 @@
+/*Ana S.*/
+/*Font Style*/
+
+/* @import url('https://fonts.googleapis.com/css2?family=AR+One+Sans&family=Open+Sans:ital@1&family=Patua+One&display=swap'); */
+
+@font-face {
+    font-family: myFirstFont;
+    src: url(../AROneSans-VariableFont_ARRR\,wght.ttf);
+}
+
+header { background-color: #E8E1D5; }
+
+
+#fondo{ background-color: #1A090D;}
+
+.btn{ background-color: #7E7297; }
+
+.btn:hover {
+    background-color: #6F1F42;
+    color: #E8E1D5;
+}
+
+footer { background-color: #1A090D; }
+
+body {
+    background-color: #E8E1D5;
+    font-family: myFirstFont;
+
+    background-image: url(../img/gato2.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+img {
+    width: 30%;
+}
+/*Aspecto visual del formulario de registro*/
+
+#userForm {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    width: 500px;
+    padding: 30px 40px;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+/*Estilo de la imagen*/
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+h2 {
+    text-align: center;
+    margin: 0 0 20px;
+}
+
+#labelCheck {
+    padding: 10px;
+    display: block;
+    position: relative;
+    margin: 10px;
+    cursor: pointer;
+}
+
+#labelCheck img {
+    height: 75px;
+    width: 75px;
+    border-radius: 5px;
+    transition-duration: 0.2s;
+    transform-origin: 50% 50%;
+}
+
+:checked + #labelCheck img {
+    transform: scale(1.2);
+    z-index: -1;
+
+    /*Se aplica una transformación en las imagenes, rota la imagen seleccionada*/
+    transform: rotate(45deg);
+}
+img:hover {
+    transform: scale(1.1);
+    opacity: 70%;
+}
+
+#labelInput button {
+    border: transparent;
+    border-radius: 5px;
+    padding: 10px;
+    width: 90%;
+}
+#labelInput button span {
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+/*Selectors*/
+input[type="radio"][id^="avatarCheckbox"]{
+    display: none;
+}
+label[for="avatar"]{
+    font-weight: bold;
+}
+input[type="text"]:hover{
+    color: #7E7297;
+}
+
+/*Se aplica una transición en los inputs de texto*/
+input[type="text"]:focus{
+   transition-duration: 0.2s;
+   transform:scale(1.03);
+}
+
+li {display: inline-block;}
+
+#buttonOutcome:hover{
+   background-color:#6F1F42;
+   color: #E8E1D5;
+}
+
+/*Formulario de registro*/
+
+.form-control {
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    opacity: 99%;
+   /*Se aplica una sombra donde las cajas del formulario*/
+    box-shadow: 1px 1px 1px 1px #6F1F42;
+}
+
+.form-control label {
+    color: #000000;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-control input {
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 12px;
+}
+
+.form-control input:focus {
+    outline: 0;
+    border-color: #303030;
+}
+
+.form-control button{
+    cursor: pointer;
+    background-color: #7e7297;
+    border: 2px solid #303030;
+    color: #f0f0f0;
+    font-weight: bold;
+    border-radius: 8px;
+    display: block;
+    font-size: 16px;
+    padding: 10px;
+    margin-top: 20px;
+    width: 100%;
+    /*Aplicamos un degradado a los botones*/
+    background: linear-gradient(#7E7297,#1A090D);
+}
+
+/*Se aplica una animación en el logo de la página*/
+.animation {
+    animation-duration: 5s;
+	animation-name: animation;
+	animation-iteration-count: infinite;
+}
+@keyframes animation {
+    from {
+        -webkit-transform: rotate(0deg);
+        transform: rotateY(0deg);
+    }
+    50% {
+        -webkit-transform: rotate(180deg);
+        transform: rotateY(180deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotateY(360deg);
+    }
+} 
