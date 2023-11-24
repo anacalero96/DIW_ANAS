@@ -3,42 +3,107 @@
 var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB || window.shimIndexedDB;
 
 //Nombre de la bd
-
-const request = window.indexedDB.open("userDB", 1);
+var database = "usersDB";
+const DB_STORE_NAME = 'users';
+const DB_VERSION = 1;
 let db;
+var opened = false;
+var sendDataForm = document.querySelector("#sendData");
 
-request.onerror = (event) => {
-    console.error("El navegador no funciona");
-};
-request.onsuccess = (event) => {
-    db = event.target.result;
-    console.log("database opened");
-};
+function openCreateDb (onDbCompleted){
 
-//CREAR TABLAS PARA EL FORMULARIO 
+    if(opened){
+        db.close();
+        opened = false;
+    }
 
-request.onupgradeneeded = (event) => {
-    const db = event.target.result;
+    const request = indexedDB.open("usersDB", 1);
 
-    var store = db.createObjectStore("users", {keyPath: "id", autoIncrement: true} );
-    console.log("openCreateDb: Oject store created");
+    request.onsuccess = function(event) {
 
-    store.createIndex('name', 'name', {unique: false});
+        db = event.target.result;
+        console.log("database opened");
+        opened = true;
 
-    store.createIndex('username', 'username', {unique: false});
+        onDbCompleted(db);
+    };
 
-    store.createIndex('email', 'email', {unique: false});
+    request.onupgradeneeded = function() {
 
-    store.createIndex('password', 'password', {unique: false});
+        db = request.result;
 
-    console.log("Index created: name, username, email, password");
-};
+        //Crear tablas para el formulario.
+        var store = db.createObjectStore("users", {keyPath: "id", autoIncrement: true} );
+        console.log("openCreateDb: Oject store created");
 
+        store.createIndex('name', 'name', {unique: false});
+
+        store.createIndex('username', 'username', {unique: false});
+
+        store.createIndex('email', 'email', {unique: false});
+
+        store.createIndex('password', 'password', {unique: false});
+
+        console.log("Index created: name, username, email, password");
+    };
+
+    request.onerror = function(event) {
+        console.error("openCreateDb: error opening or creating DB:", event.target.errorCode);
+
+    };
+}
+
+//Recoge los valores del formulario y los inserta en la bd.
 function sendData() {
 
     openCreateDb(function(db){
         var hiddenId = document.getElementById("hiddenId").value;
         
+        if(hiddenId == 0){
+            addUser(db);
+        } else {
+            console.log("change user values");
+            // editUser(db);
+        }
     });
 }
+
+function addUser(db){
+    var name = document.getElementById("name");
+    var username = document.getElementById("username");
+    var email = document.getElementById("email");
+    var password = document.getElementById("password");
+
+    var obj = {name: name.value, username: username.value, email: email.value, password: password.value};
+
+    var tx = db.transaction("users", "readwrite");
+    var store = tx.objectStore("users");
+
+    try {
+        request = store.add(obj);
+    } catch(event){
+        console.log("Catch");
+    }
+    request.onsuccess = function(event){
+        console.log("addUser" + event.target.result);
+
+        // readData();
+        // clearFormInputs();
+    };
+    request.onerror = function(event){
+        console.error("addUsers: error creating data", this.error);
+    };
+    tx.oncomplete = function(){
+        console.log("addUser: transaction completed");
+        db.close();
+        opened = false;
+    };
+}
+
+
+window.addEventListener('load', (event) => {
+  sendDataForm.addEventListener("click", (event) => {
+    sendData();
+  });
+});
 
