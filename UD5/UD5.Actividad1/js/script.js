@@ -34,4 +34,11 @@ request.onupgradeneeded = (event) => {
     console.log("Index created: name, username, email, password");
 };
 
+function sendData() {
+
+    openCreateDb(function(db){
+        var hiddenId = document.getElementById("hiddenId").value;
+        
+    });
+}
 

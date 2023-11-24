@@ -71,29 +71,31 @@
         <div id="userForm">
             <form action="">
                 <h3>☆Registration form☆</h3>
-                        <div class="form-control">
-                            <label for="num1">Name</label>
-                            <input type="text" name="name" id="name">
-                        </div>
-                        <div class="form-control">
-                            <label for="num1">Username</label>
-                            <input type="text" name="username" id="username">
-                        </div>
-                        <div class="form-control">
-                            <label for="num1">Email</label>
-                            <input type="text" name="email" id="email">
-                        </div>
-                        <div class="form-control">
-                            <label for="num2">Password</label>
-                            <input type="password" name="password" class="password">
-                        </div>
-                        <div class="form-control">
-                            <label for="num2">Confirm password</label>
-                            <input type="password" name="confirmpassword" class="password">
-                        </div>
+                    <input id="hiddenId" type="text" name="hiddenId" value="0">
+                    <p id="show-errors"></p>
+                    <div class="form-control">
+                        <label for="num1">Name</label>
+                        <input type="text" name="name" id="name">
+                    </div>
+                    <div class="form-control">
+                        <label for="num1">Username</label>
+                        <input type="text" name="username" id="username">
+                    </div>
+                    <div class="form-control">
+                        <label for="num1">Email</label>
+                        <input type="text" name="email" id="email">
+                    </div>
+                    <div class="form-control">
+                        <label for="num2">Password</label>
+                        <input type="password" name="password" class="password">
+                    </div>
+                    <div class="form-control">
+                        <label for="num2">Confirm password</label>
+                        <input type="password" name="confirmpassword" class="password">
+                    </div>
                         
-                        <div id="inputsIMG">
-                            <label for="avatar">Select an avatar: </label>
+                    <div id="inputsIMG">
+                        <label for="avatar">Select an avatar: </label>
                             <ul>
                                 <li>
                                     <input type="radio" id="avatarCheckbox1" name="radioButton">
@@ -110,15 +112,16 @@
 
 
                             </ul>
-                        </div>
-                        <div class="form-control">
-                            <button type="button" id="buttonOutcome">Register</button>
-                        </div>
-                        <div class="form-control">
-                            <button type="reset" id="buttonReset">Reset</button>
-                        </div>
-                </form>
-            </div> 
+                    </div>
+                    <div class="form-control">
+                        <button type="button" id="sendData" onclick="sendData()">Add user</button>
+                            <!-- <button type="button" id="buttonOutcome">Register</button> -->
+                    </div>
+                    <div class="form-control">
+                        <button type="reset" id="buttonReset">Reset</button>
+                    </div>
+            </form>
+        </div> 
     </body>
     <footer>
         <div class="container">
