@@ -17,7 +17,7 @@ function openCreateDb (onDbCompleted){
         opened = false;
     }
 
-    const request = indexedDB.open("usersDB", 1);
+    const request = indexedDB.open(database, DB_VERSION);
 
     request.onsuccess = function(event) {
 
@@ -74,10 +74,11 @@ function addUser(db){
     var email = document.getElementById("email");
     var password = document.getElementById("password");
 
-    var obj = {name: name.value, username: username.value, email: email.value, password: password.value};
+    var hash = CryptoJS.MD5(password.value);
+    var obj = {name: name.value, username: username.value, email: email.value, password: hash.toString()};
 
-    var tx = db.transaction("users", "readwrite");
-    var store = tx.objectStore("users");
+    var tx = db.transaction(DB_STORE_NAME, "readwrite");
+    var store = tx.objectStore(DB_STORE_NAME);
 
     try {
         request = store.add(obj);
