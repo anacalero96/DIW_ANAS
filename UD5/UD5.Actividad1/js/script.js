@@ -86,7 +86,7 @@ function addUser(db){
     var errorPassword2 = document.getElementById("confirmError");
 
     if(name.value === '') {
-        errorName.innerText = "Los campos estan vacios";
+        errorName.innerText = "Los campos estan vacíos";
         errorName.style.display = "block";      //muestra el mensaje
         errorDetected = true;
         console.log("Name is empty");
@@ -96,7 +96,29 @@ function addUser(db){
         errorDetected = false;
     };
 
+    if(email === '') {
+        errorEmail.innerText = "Los campos están vacíos";
+        errorEmail.style.display = "block";
+        errorDetected = true;
+        console.log("Email is empty");
+    } else if (!isEmailValid === (email.value)){
+        errorEmail.innerText = "Los campos están vacíos";
+        errorEmail.style.display = "block";
+        errorDetected = true;
+        console.log("Email is not correct");
+    } else {
+        console.log("Email is correct");
+        errorName.style.display = "none";
+        errorDetected = false;
+    }
+    
+    //Función para comprobar el email
+    function isEmailValid(input) {
+        const reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return reg.test(String(input).toLocaleLowerCase());
+    };
 
+    //Función para mostrar los errores detectados.
     if(errorDetected) {
         console.log("Error detected");
         db.close();
