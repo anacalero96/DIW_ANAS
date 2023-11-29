@@ -177,6 +177,21 @@ li {display: inline-block;}
 #hiddenId {
     display: none;
 }
+#nameError {
+    display: none;
+}
+#userError {
+    display: none;
+}
+#emailError {
+    display: none;
+}
+#passwordError {
+    display: none;
+}
+#confirmError {
+    display: none;
+}
 @keyframes animation {
     from {
         -webkit-transform: rotate(0deg);

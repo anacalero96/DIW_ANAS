@@ -17,12 +17,11 @@ function openCreateDb (onDbCompleted){
         opened = false;
     }
 
-    const request = indexedDB.open(database, DB_VERSION);
+    var request = indexedDB.open(database, DB_VERSION);
 
     request.onsuccess = function(event) {
-
         db = event.target.result;
-        console.log("database opened");
+        console.log("database opened" + db);
         opened = true;
 
         onDbCompleted(db);
@@ -32,8 +31,9 @@ function openCreateDb (onDbCompleted){
 
         db = request.result;
 
+        console.log("openCreateDb: upgrade needed " + db);
         //Crear tablas para el formulario.
-        var store = db.createObjectStore("users", {keyPath: "id", autoIncrement: true} );
+        var store = db.createObjectStore(DB_STORE_NAME, {keyPath: "id", autoIncrement: true});
         console.log("openCreateDb: Oject store created");
 
         store.createIndex('name', 'name', {unique: false});
@@ -49,7 +49,6 @@ function openCreateDb (onDbCompleted){
 
     request.onerror = function(event) {
         console.error("openCreateDb: error opening or creating DB:", event.target.errorCode);
-
     };
 }
 
@@ -69,24 +68,61 @@ function sendData() {
 }
 
 function addUser(db){
+
+    var errorDetected = false;
+
     var name = document.getElementById("name");
     var username = document.getElementById("username");
     var email = document.getElementById("email");
     var password = document.getElementById("password");
 
+
+    //Variables de comprobación de posibles errores
+
+    var errorName = document.getElementById("nameError");
+    var errorUser = document.getElementById("userError");
+    var errorEmail = document.getElementById("emailError");
+    var errorPassword = document.getElementById("passwordError");
+    var errorPassword2 = document.getElementById("confirmError");
+
+    if(name.value === '') {
+        errorName.innerText = "Los campos estan vacios";
+        errorName.style.display = "block";      //muestra el mensaje
+        errorDetected = true;
+        console.log("Name is empty");
+    } else {
+        console.log("Name is correct");
+        errorName.style.display = "none";
+        errorDetected = false;
+    };
+
+
+    if(errorDetected) {
+        console.log("Error detected");
+        db.close();
+        opened = false;
+        return; 
+    } else {
+        console.log("All good");
+    }
+
+
+
+
+
     var hash = CryptoJS.MD5(password.value);
-    var obj = {name: name.value, username: username.value, email: email.value, password: hash.toString()};
+    var obj = { name: name.value, username: username.value, email: email.value, password: hash.toString()};
 
     var tx = db.transaction(DB_STORE_NAME, "readwrite");
     var store = tx.objectStore(DB_STORE_NAME);
 
     try {
         request = store.add(obj);
-    } catch(event){
+    } catch (event){
         console.log("Catch");
     }
     request.onsuccess = function(event){
-        console.log("addUser" + event.target.result);
+        console.log("addUser: Data insertion successfully done. Id:" + event.target.result);
 
         // readData();
         // clearFormInputs();
