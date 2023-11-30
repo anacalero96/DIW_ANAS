@@ -3,7 +3,7 @@
 var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB || window.shimIndexedDB;
 
 //Nombre de la bd
-var database = "usersDB";
+var database = "usersDB_AnaSoledad";
 const DB_STORE_NAME = 'users';
 const DB_VERSION = 1;
 let db;
@@ -85,7 +85,9 @@ function addUser(db){
     var errorPassword = document.getElementById("passwordError");
     var errorPassword2 = document.getElementById("confirmError");
 
-    if(name.value === '') {
+
+    //Comprueba que los campos no esten vacíos.
+    if(name.value.trim() === '') {
         errorName.innerText = "Los campos estan vacíos";
         errorName.style.display = "block";      //muestra el mensaje
         errorDetected = true;
@@ -95,27 +97,77 @@ function addUser(db){
         errorName.style.display = "none";
         errorDetected = false;
     };
-
+    //Comprueba que los campos no esten vacíos.
+    if(username.value.trim() === ''){
+        errorUser.innerText = "Los campos están vacíos";
+        errorUser.style.display = "block";
+        errorDetected = true;
+        console.log("Username is empty");
+    } else {
+        console.log("Username is correct");
+        errorUser.style.display = "none";
+        errorDetected = false;
+    };
+    //Comprueba que los campos no esten vacíos.
     if(email === '') {
         errorEmail.innerText = "Los campos están vacíos";
         errorEmail.style.display = "block";
         errorDetected = true;
         console.log("Email is empty");
+    //Comprueba que los valores introducidos sean correctos usando la función isEmailValid.
     } else if (!isEmailValid === (email.value)){
-        errorEmail.innerText = "Los campos están vacíos";
+        errorEmail.innerText = "El email no contiene el formato correcto";
         errorEmail.style.display = "block";
         errorDetected = true;
         console.log("Email is not correct");
     } else {
         console.log("Email is correct");
-        errorName.style.display = "none";
+        errorEmail.style.display = "none";
         errorDetected = false;
-    }
-    
-    //Función para comprobar el email
+    };
+    //Comprueba que la contraseña introducida contenga los requisitos minimos.
+    if(password === ''){
+       errorPassword.innerText = "Los campos están vacíos";
+       errorPassword.style.display = "block";
+       errorDetected = true;
+       console.log("Password is empty"); 
+    } else if (!isPasswordValid === (password.value)) {
+        errorPassword.innerText = "La contraseña introducida no es correcta";
+        errorPassword.style.display = "block";
+        errorDetected = true;
+        console.log("Password is not correct");
+    } else {
+        console.log("Password is correct");
+        errorPassword.style.display = "none";
+        errorDetected = false;
+    };
+    //Comprueba la segunda contraseña correcta.
+    if(password === ''){
+        errorPassword2.innerText = "Los campos están vacíos";
+        errorPassword2.style.display = "block";
+        errorDetected = true;
+        console.log("Password is empty"); 
+    } else if (!isPasswordValid === (password.value)) {
+        errorPassword2.innerText = "La segunda contraseña introducida no es correcta";
+        errorPassword2.style.display = "block";
+        errorDetected = true;
+        console.log("Password is not correct");
+    } else {
+        console.log("Password is correct");
+        errorPassword2.style.display = "none";
+        errorDetected = false;
+    };
+
+    //Función para comprobar el email sea correcto e introduzca los valores de la constante.
     function isEmailValid(input) {
         const reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return reg.test(String(input).toLocaleLowerCase());
+    };
+    //Función para comprobar que la contraseña introducida tenga el formato correcto.
+
+    function isPasswordValid (input) {
+        const regPasswd = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}/;
+        return regPasswd.test(String(input));
     };
 
     //Función para mostrar los errores detectados.
