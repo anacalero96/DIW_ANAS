@@ -75,6 +75,7 @@ function addUser(db){
     var username = document.getElementById("username");
     var email = document.getElementById("email");
     var password = document.getElementById("password");
+    var password2 = document.getElementById("confirmpassword");
 
 
     //Variables de comprobación de posibles errores
@@ -126,7 +127,7 @@ function addUser(db){
         errorDetected = false;
     };
     //Comprueba que la contraseña introducida contenga los requisitos minimos.
-    if(password === ''){
+    if(password.value === ''){
        errorPassword.innerText = "Los campos están vacíos";
        errorPassword.style.display = "block";
        errorDetected = true;
@@ -142,12 +143,12 @@ function addUser(db){
         errorDetected = false;
     };
     //Comprueba la segunda contraseña correcta.
-    if(password === ''){
+    if(password2.value === ''){
         errorPassword2.innerText = "Los campos están vacíos";
         errorPassword2.style.display = "block";
         errorDetected = true;
         console.log("Password is empty"); 
-    } else if (!isPasswordValid === (password.value)) {
+    } else if (!isPasswordValid === (password2.value)) {
         errorPassword2.innerText = "La segunda contraseña introducida no es correcta";
         errorPassword2.style.display = "block";
         errorDetected = true;
