@@ -75,7 +75,7 @@ function addUser(db){
     var username = document.getElementById("username");
     var email = document.getElementById("email");
     var password = document.getElementById("password");
-    var password2 = document.getElementById("confirmpassword");
+    var password2 = document.getElementById("password2");
 
 
     //Variables de comprobación de posibles errores
@@ -89,7 +89,7 @@ function addUser(db){
 
     //Comprueba que los campos no esten vacíos.
     if(name.value.trim() === '') {
-        errorName.innerText = "Los campos estan vacíos";
+        errorName.innerText = "The name field is empty ";
         errorName.style.display = "block";      //muestra el mensaje
         errorDetected = true;
         console.log("Name is empty");
@@ -100,7 +100,7 @@ function addUser(db){
     };
     //Comprueba que los campos no esten vacíos.
     if(username.value.trim() === ''){
-        errorUser.innerText = "Los campos están vacíos";
+        errorUser.innerText = "Username field is empty";
         errorUser.style.display = "block";
         errorDetected = true;
         console.log("Username is empty");
@@ -111,12 +111,12 @@ function addUser(db){
     };
     //Comprueba que los campos no esten vacíos.
     if(email === '') {
-        errorEmail.innerText = "Los campos están vacíos";
+        errorEmail.innerText = "The email fields are empty";
         errorEmail.style.display = "block";
         errorDetected = true;
         console.log("Email is empty");
     //Comprueba que los valores introducidos sean correctos usando la función isEmailValid.
-    } else if (!isEmailValid === (email.value)){
+    } else if (!isEmailValid(email.value)){
         errorEmail.innerText = "El email no contiene el formato correcto";
         errorEmail.style.display = "block";
         errorDetected = true;
@@ -128,12 +128,12 @@ function addUser(db){
     };
     //Comprueba que la contraseña introducida contenga los requisitos minimos.
     if(password.value === ''){
-       errorPassword.innerText = "Los campos están vacíos";
+       errorPassword.innerText = "The password field is empty";
        errorPassword.style.display = "block";
        errorDetected = true;
        console.log("Password is empty"); 
-    } else if (!isPasswordValid === (password.value)) {
-        errorPassword.innerText = "La contraseña introducida no es correcta";
+    } else if (!isPasswordValid(password.value)) {
+        errorPassword.innerText = "The password entered is not correct";
         errorPassword.style.display = "block";
         errorDetected = true;
         console.log("Password is not correct");
@@ -144,12 +144,12 @@ function addUser(db){
     };
     //Comprueba la segunda contraseña correcta.
     if(password2.value === ''){
-        errorPassword2.innerText = "Los campos están vacíos";
+        errorPassword2.innerText = "The password field is empty";
         errorPassword2.style.display = "block";
         errorDetected = true;
         console.log("Password is empty"); 
-    } else if (!isPasswordValid === (password2.value)) {
-        errorPassword2.innerText = "La segunda contraseña introducida no es correcta";
+    } else if (!isPasswordValid(password2.value)) {
+        errorPassword2.innerText = "The password entered is not correct";
         errorPassword2.style.display = "block";
         errorDetected = true;
         console.log("Password is not correct");
