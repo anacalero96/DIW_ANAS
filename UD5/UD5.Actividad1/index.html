@@ -20,10 +20,10 @@
                </div>
                <div class="row">
                 <div class="col-12 justify-content-end">
-                    <form class="d-flex">
+                    <div class="d-flex">
                         <button class="btn me-1" type="submit"><span class="material-symbols-outlined md-18 m-1" style="vertical-align: middle;">help</span>Help</button>
-                        <button class="btn ms-1" type="submit"><span class="material-symbols-outlined md-18 m-1" style="vertical-align: middle;">account_circle</span>Sign in</button>
-                    </form>
+                        <button class="btn ms-1" onclick="login()"><span class="material-symbols-outlined md-18 m-1" style="vertical-align: middle;">account_circle</span>Login</button>
+                    </div>
                 </div>
                </div>
             </div>
@@ -103,22 +103,22 @@
                     <label for="avatar">Select an avatar: </label>
                         <ul>
                             <li>
-                                <input type="radio" id="avatarCheckbox1" name="radioButton">
+                                <input type="radio" id="avatarCheckbox1" name="radioButton" value="./img/kerrigan.jpg">
                                 <label for="avatarCheckbox1" id="labelCheck"><img src="./img/kerrigan.jpg" alt="imgGame"></label> 
                             </li>
                             <li>
-                                <input type="radio" id="avatarCheckbox2" name="radioButton">
-                                <label for="avatarCheckbox2" id="labelCheck"><img src="./img/Sylvanas.jpg"></label>
+                                <input type="radio" id="avatarCheckbox2" name="radioButton" value="./img/Sylvanas.jpg">
+                                <label for="avatarCheckbox2" id="labelCheck"><img src="./img/Sylvanas.jpg" alt="imgGame"></label>
                             </li>
                             <li>
-                                <input type="radio" id="avatarCheckbox3" name="radioButton">
-                                <label for="avatarCheckbox3" id="labelCheck"><img src="./img/jaina.jpg"></label>
+                                <input type="radio" id="avatarCheckbox3" name="radioButton" value="./img/jaina.jpg">
+                                <label for="avatarCheckbox3" id="labelCheck"><img src="./img/jaina.jpg" alt="imgGame"></label>
                             </li>
                         </ul>
                 </div> 
                 <div>
-                    <label for="checkquestion" id="checkSelector">Do you want to be an administrator?</label>
-                    <input type="checkbox" name="checkbox">
+                    <label for="checkquestion">Do you want to be an administrator?</label>
+                    <input type="checkbox" name="checkbox" id="checkSelector">
                 </div>
                 <div class="form-control">
                     <button type="button" id="sendData">Add user</button>

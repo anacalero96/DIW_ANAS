@@ -36,15 +36,23 @@ function openCreateDb (onDbCompleted){
         console.log("openCreateDb: upgrade needed " + db);
         //Crear tablas para el formulario.
         var store = db.createObjectStore(DB_STORE_NAME, {keyPath: "id", autoIncrement: true});
+
+        // var store = db.createObjectStore(DB_STORE_NAME, {keyPath: ["id", "email"]});
         console.log("openCreateDb: Oject store created");
+        
+        // store.createIndex('id', 'id', {autoIncrement: true});
 
         store.createIndex('name', 'name', {unique: false});
 
         store.createIndex('username', 'username', {unique: false});
 
-        store.createIndex('email', 'email', {unique: false});
+        store.createIndex('email', 'email', {unique: true, });
 
         store.createIndex('password', 'password', {unique: false});
+
+        store.createIndex('admin', 'admin');
+
+        store.createIndex('avatar', 'avatar');
 
         console.log("Index created: name, username, email, password");
     };
@@ -79,9 +87,11 @@ function addUser(db){
     var password = document.getElementById("password");
     var password2 = document.getElementById("password2");
 
+    var admin = document.getElementById("checkSelector");       //Variable para recoger el check que indica que es administrador.
+    var avatar = document.querySelector("input[name=radioButton]:checked").value;
+
 
     //Variables de comprobación de posibles errores
-
     var errorName = document.getElementById("nameError");
     var errorUser = document.getElementById("userError");
     var errorEmail = document.getElementById("emailError");
@@ -183,11 +193,14 @@ function addUser(db){
         console.log("All good");
     }
 
+    // console.log("Es un administrador " + admin.getAttribute("checked"));
+
     var hash = CryptoJS.MD5(password.value);
-    var obj = { name: name.value, username: username.value, email: email.value, password: hash.toString()};
+    var obj = { name: name.value, username: username.value, email: email.value, password: hash.toString(), admin: admin.checked, avatar: avatar};
 
     var tx = db.transaction(DB_STORE_NAME, "readwrite");
     var store = tx.objectStore(DB_STORE_NAME);
+
 
     try {
         request = store.add(obj);
@@ -196,10 +209,15 @@ function addUser(db){
     }
     request.onsuccess = function(event){
         console.log("addUser: Data insertion successfully done. Id:" + event.target.result);
-
-        // readData();
-        // clearFormInputs();
+        
+        sessionStorage.setItem("id", event.target.result);
+        if(admin.checked){
+            location.replace("./index_admin.html");
+        } else {
+            location.replace("./index_user.html");
+        }
     };
+
     request.onerror = function(event){
         console.error("addUsers: error creating data", this.error);
     };
@@ -263,11 +281,10 @@ function getData () {
 
     req.onsuccess = function (e) {
         db = this.result;
-        console.log("openBD DONE");         //Muestra que se ha abierto la BD.
+        console.log("openBD DONE");      
 
-        //Cambiar id por variable global o sesión.
-        getUser(db, id);
-
+        //Obtiene los datos del usuario loggueado
+        getUser(db, sessionStorage.getItem("id"));
     };
 
     req.onerror = function(e) {
@@ -283,9 +300,8 @@ function getUser (db, id) {
     //Solo lectura
     var store = tx.objectStore(DB_STORE_NAME);      //Obtiene la tabla que usamos.
     
-    req = store.get(id);
+    req = store.get(parseInt(id));
     let datos;
-    
   
     req.onsuccess = function (e) {
        datos = e.target.result;
@@ -303,15 +319,62 @@ function getUser (db, id) {
 
 function loadUser (id, datos) {
     // var idUsuari = document.getElementById('id');
-
+    var avatarprofile = document.getElementById("avatar");
     var nomusuari = document.getElementById("nombreUsuario");
-    nomusuari.value =  datos.username;
+    //Muestra el nombre de usuario introducido
+    nomusuari.innerHTML =  datos.username;
+    avatarprofile.src = datos.avatar;
 };
 
+function login(){
+    // console.log("paco1");
+    location.replace("./login.html");
+};
 
+function loginValidation(){
+    var emailUser = document.getElementById("email").value;
+    var passwdUser = document.getElementById("password");
+
+    var request = indexedDB.open(database, DB_VERSION);   
+
+
+    request.onsuccess = function (e) { 
+
+        db = this.result; 
+        var tx = db.transaction(DB_STORE_NAME, "readwrite");
+        var store = tx.objectStore(DB_STORE_NAME);    
+        console.log("openBD DONE");  
+        var req = store.get(emailUser);
+        
+
+        req.onsuccess = function (e) {
+            let datos;
+            datos = e.target.result;
+            console.log(datos);
+        };
+     
+        req.onerror = function (e) {
+             console.error("Connection error", this.error);      //Indica que se ha producicdo un error y no se ha podido insertar.
+        };
+     
+        tx.oncomplete = function () {
+            db.close();     //Cierra la conexión.
+        }; 
+    };
+
+    request.onerror = function(e) {
+        console.error("openBD:", e.target.errorCode);
+    }; 
+};
 window.addEventListener('load', (event) => {
-  sendDataForm.addEventListener("click", (event) => {
-    sendData();
-  });
+    if(window.location.pathname.includes("/index.html")) {
+        sendDataForm.addEventListener("click", (event) => {
+            sendData();
+        });
+    } else if(window.location.pathname.includes("/login.html")){
+       
+    } else {
+        getData();
+    }
 });
 
