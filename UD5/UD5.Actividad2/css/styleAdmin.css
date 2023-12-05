@@ -1,6 +1,4 @@
 /*Ana S.*/
-/*Font Style*/
-
 /* @import url('https://fonts.googleapis.com/css2?family=AR+One+Sans&family=Open+Sans:ital@1&family=Patua+One&display=swap'); */
 
 @font-face {
@@ -10,10 +8,7 @@
 
 header { background-color: #E8E1D5; }
 
-.avatar_user {
-    width: 15%;
-    border-radius: 3%;
-}
+
 #fondo{ background-color: #1A090D;}
 
 .btn{ background-color: #7E7297; }
@@ -130,22 +125,25 @@ li {display: inline-block;}
     background: linear-gradient(#7E7297,#1A090D);
 }
 
-#hiddenId {
-    display: none;
-}
-#nameError {
-    display: none;
-}
-#userError {
-    display: none;
-}
-#emailError {
-    display: none;
-}
-#passwordError {
-    display: none;
-}
-#confirmError {
-    display: none;
-}
 
+/*Diseño del formulario de usuario*/
+
+main{
+   width: 50%;
+   text-align: center;
+   display: inline-block;
+}
+/* #avatar {
+ 
+} */
+
+.avatar_user {
+    width: 20%;
+    border-radius: 55%;
+}
+.container2 { 
+    
+    background-color: #f5ccd6;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 50%;
+}

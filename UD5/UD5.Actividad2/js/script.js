@@ -274,7 +274,7 @@ function showUser (db) {
 };
 
 function mostrarUsuario(id, datos) {
-    listaUsuario.innerHTML+= '<div class="usuario"><span>'+ datos.username + '</span> <button class="btn_edit" onclick="getData('+ id +')">Editar</button><button class="btn_edit" onclick="deleteData('+ id +')">Delete</button></div>';
+    listaUsuario.innerHTML+= '<div class="usuario"><span>'+ datos.username + '</span> <button class="btn_edit" onclick="getData('+ id +')">Edit</button><button class="btn_edit" onclick="deleteData('+ id +')">Delete</button></div>';
 };
 function getData () {
     var req = indexedDB.open(database, DB_VERSION);   
