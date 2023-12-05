@@ -5,7 +5,6 @@ var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedD
 //Nombre de la bd
 var database = "usersDB_AnaSoledad";
 const DB_STORE_NAME = 'users';
-//Versión de la base de datos.
 const DB_VERSION = 1;
 let db;
 var opened = false;
@@ -230,7 +229,7 @@ function addUser(db){
 }
 
 function showData () {
-    var req = indexedDB.open(database, DB_VERSION);     //Abre una conexión con la BD.
+    var req = indexedDB.open(database, DB_VERSION);     //abre una conexión con la BD.
 
     req.onsuccess = function (e) {
         db = this.result;
