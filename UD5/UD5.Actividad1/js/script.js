@@ -40,10 +40,7 @@ function openCreateDb (onDbCompleted){
 
         // var store = db.createObjectStore(DB_STORE_NAME, {keyPath: ["id", "email"]});
 
-        // var store = db.createObjectStore(DB_STORE_NAME, {keyPath: ["id", "email"]});
         console.log("openCreateDb: Oject store created");
-        
-        // store.createIndex('id', 'id', {autoIncrement: true});
         
         // store.createIndex('id', 'id', {autoIncrement: true});
 
@@ -52,13 +49,8 @@ function openCreateDb (onDbCompleted){
         store.createIndex('username', 'username', {unique: false});
 
         store.createIndex('email', 'email', {unique: true, });
-        store.createIndex('email', 'email', {unique: true, });
 
         store.createIndex('password', 'password', {unique: false});
-
-        store.createIndex('admin', 'admin');
-
-        store.createIndex('avatar', 'avatar');
 
         store.createIndex('admin', 'admin');
 
@@ -98,13 +90,12 @@ function addUser(db){
     var password2 = document.getElementById("password2");
 
     var admin = document.getElementById("checkSelector");       //Variable para recoger el check que indica que es administrador.
+
+    //Variable para obtener la imagem seleccionada.
     var avatar = document.querySelector("input[name=radioButton]:checked").value;
 
-    var admin = document.getElementById("checkSelector");       //Variable para recoger el check que indica que es administrador.
-    var avatar = document.querySelector("input[name=radioButton]:checked").value;
 
-
-    //Variables de comprobación de posibles errores
+    //Variables de comprobación de posibles errores. 
     var errorName = document.getElementById("nameError");
     var errorUser = document.getElementById("userError");
     var errorEmail = document.getElementById("emailError");
@@ -207,33 +198,22 @@ function addUser(db){
     }
 
     // console.log("Es un administrador " + admin.getAttribute("checked"));
-    // console.log("Es un administrador " + admin.getAttribute("checked"));
-
+    
     var hash = CryptoJS.MD5(password.value);
-    var obj = { name: name.value, username: username.value, email: email.value, password: hash.toString(), admin: admin.checked, avatar: avatar};
     var obj = { name: name.value, username: username.value, email: email.value, password: hash.toString(), admin: admin.checked, avatar: avatar};
 
     var tx = db.transaction(DB_STORE_NAME, "readwrite");
     var store = tx.objectStore(DB_STORE_NAME);
-
-
 
     try {
         request = store.add(obj);
     } catch (event){
         console.log("Catch");
     }
+
+
     request.onsuccess = function(event){
         console.log("addUser: Data insertion successfully done. Id:" + event.target.result);
-        
-        sessionStorage.setItem("id", event.target.result);
-        if(admin.checked){
-            location.replace("./index_admin.html");
-        } else {
-            location.replace("./index_user.html");
-        }
-    };
-
         
         sessionStorage.setItem("id", event.target.result);
         if(admin.checked){
@@ -252,6 +232,7 @@ function addUser(db){
         opened = false;
     };
 }
+
 
 function showData () {
     var req = indexedDB.open(database, DB_VERSION);     //Abre una conexión con la BD.
