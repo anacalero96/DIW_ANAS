@@ -1,0 +1,149 @@
+/*Ana S.*/
+/* @import url('https://fonts.googleapis.com/css2?family=AR+One+Sans&family=Open+Sans:ital@1&family=Patua+One&display=swap'); */
+
+@font-face {
+    font-family: myFirstFont;
+    src: url(../AROneSans-VariableFont_ARRR\,wght.ttf);
+}
+
+header { background-color: #E8E1D5; }
+
+
+#fondo{ background-color: #1A090D;}
+
+.btn{ background-color: #7E7297; }
+
+.btn:hover {
+    background-color: #6F1F42;
+    color: #E8E1D5;
+}
+
+footer { 
+    background-color: #1A090D; 
+
+    bottom: 0;
+    width: 100%;
+}
+
+body {
+    background-color: #E8E1D5;
+    font-family: myFirstFont;
+}
+
+img {
+    width: 30%;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+h2 {
+    text-align: center;
+    margin: 0 0 20px;
+}
+
+#labelCheck {
+    padding: 10px;
+    display: block;
+    position: relative;
+    margin: 10px;
+    cursor: pointer;
+}
+
+
+img:hover {
+    transform: scale(1.1);
+    opacity: 70%;
+}
+
+#labelInput button {
+    border: transparent;
+    border-radius: 5px;
+    padding: 10px;
+    width: 90%;
+}
+#labelInput button span {
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+li {display: inline-block;}
+
+#buttonOutcome:hover{
+   background-color:#6F1F42;
+   color: #E8E1D5;
+}
+
+/*Formulario de registro*/
+
+.form-control {
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    opacity: 99%;
+   /*Se aplica una sombra donde las cajas del formulario*/
+    box-shadow: 1px 1px 1px 1px #6F1F42;
+    width: 90%;
+}
+
+.form-control label {
+    color: #000000;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-control input {
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 12px;
+}
+
+.form-control input:focus {
+    outline: 0;
+    border-color: #303030;
+}
+
+.form-control button{
+    cursor: pointer;
+    background-color: #7e7297;
+    border: 2px solid #303030;
+    color: #f0f0f0;
+    font-weight: bold;
+    border-radius: 8px;
+    display: block;
+    font-size: 16px;
+    padding: 10px;
+    margin-top: 20px;
+    width: 100%;
+    /*Aplicamos un degradado a los botones*/
+    background: linear-gradient(#7E7297,#1A090D);
+}
+
+
+/*Diseño del formulario de usuario*/
+
+main{
+   width: 100%;
+   text-align: center;
+   display: inline-block;
+}
+
+.avatar_user {
+    width: 20%;
+    border-radius: 55%;
+}
+.container2 { 
+    background-color: #f5ccd6;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 40%;
+}
+.container3 { 
+    background-color: #f5ccd6;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 40%;
+    display: none;
+}
