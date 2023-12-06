@@ -5,6 +5,7 @@ var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedD
 //Nombre de la bd
 var database = "usersDB_AnaSoledad";
 const DB_STORE_NAME = 'users';
+//Versión de la base de datos.
 const DB_VERSION = 1;
 let db;
 var opened = false;
@@ -38,6 +39,7 @@ function openCreateDb (onDbCompleted){
         var store = db.createObjectStore(DB_STORE_NAME, {keyPath: "id", autoIncrement: true});
 
         // var store = db.createObjectStore(DB_STORE_NAME, {keyPath: ["id", "email"]});
+
         console.log("openCreateDb: Oject store created");
         
         // store.createIndex('id', 'id', {autoIncrement: true});
@@ -88,10 +90,12 @@ function addUser(db){
     var password2 = document.getElementById("password2");
 
     var admin = document.getElementById("checkSelector");       //Variable para recoger el check que indica que es administrador.
+
+    //Variable para obtener la imagem seleccionada.
     var avatar = document.querySelector("input[name=radioButton]:checked").value;
 
 
-    //Variables de comprobación de posibles errores
+    //Variables de comprobación de posibles errores. 
     var errorName = document.getElementById("nameError");
     var errorUser = document.getElementById("userError");
     var errorEmail = document.getElementById("emailError");
@@ -176,8 +180,8 @@ function addUser(db){
         const reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return reg.test(String(input).toLocaleLowerCase());
     };
-    //Función para comprobar que la contraseña introducida tenga el formato correcto.
 
+    //Función para comprobar que la contraseña introducida tenga el formato correcto.
     function isPasswordValid (input) {
         const regPasswd = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}/;
         return regPasswd.test(String(input));
@@ -194,19 +198,20 @@ function addUser(db){
     }
 
     // console.log("Es un administrador " + admin.getAttribute("checked"));
-
+    
     var hash = CryptoJS.MD5(password.value);
     var obj = { name: name.value, username: username.value, email: email.value, password: hash.toString(), admin: admin.checked, avatar: avatar};
 
     var tx = db.transaction(DB_STORE_NAME, "readwrite");
     var store = tx.objectStore(DB_STORE_NAME);
 
-
     try {
         request = store.add(obj);
     } catch (event){
         console.log("Catch");
     }
+
+
     request.onsuccess = function(event){
         console.log("addUser: Data insertion successfully done. Id:" + event.target.result);
         
@@ -228,8 +233,9 @@ function addUser(db){
     };
 }
 
+
 function showData () {
-    var req = indexedDB.open(database, DB_VERSION);     //abre una conexión con la BD.
+    var req = indexedDB.open(database, DB_VERSION);     //Abre una conexión con la BD.
 
     req.onsuccess = function (e) {
         db = this.result;
@@ -274,12 +280,12 @@ function showUser (db) {
 };
 
 function mostrarUsuario(id, datos) {
-    listaUsuario.innerHTML+= '<div class="usuario"><span>'+ datos.username + '</span> <button class="btn_edit" onclick="getData('+ id +')">Editar</button><button class="btn_edit" onclick="deleteData('+ id +')">Delete</button></div>';
+    listaUsuario.innerHTML+= '<div class="usuario"><span>'+ datos.username + '</span> <button class="btn_edit" onclick="getData('+ id +')">Edit</button><button class="btn_edit" onclick="deleteData('+ id +')">Delete</button></div>';
 };
 function getData () {
-    var req = indexedDB.open(database, DB_VERSION);   
+    var request = indexedDB.open(database, DB_VERSION);   
 
-    req.onsuccess = function (e) {
+    request.onsuccess = function (e) {
         db = this.result;
         console.log("openBD DONE");      
 
@@ -287,7 +293,7 @@ function getData () {
         getUser(db, sessionStorage.getItem("id"));
     };
 
-    req.onerror = function(e) {
+    request.onerror = function(e) {
         console.error("openBD:", e.target.errorCode);
     };
 };
@@ -367,6 +373,15 @@ function loginValidation(){
     }; 
 };
 window.addEventListener('load', (event) => {
+    if(window.location.pathname.includes("/index.html")) {
+        sendDataForm.addEventListener("click", (event) => {
+            sendData();
+        });
+    } else if(window.location.pathname.includes("/login.html")){
+       
+    } else {
+        getData();
+    }
     if(window.location.pathname.includes("/index.html")) {
         sendDataForm.addEventListener("click", (event) => {
             sendData();
