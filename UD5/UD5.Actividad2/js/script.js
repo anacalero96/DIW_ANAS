@@ -35,13 +35,12 @@ function openCreateDb (onDbCompleted){
 
         console.log("openCreateDb: upgrade needed " + db);
         //Crear tablas para el formulario.
-        var store = db.createObjectStore(DB_STORE_NAME, {keyPath: "id", autoIncrement: true});
 
-        // var store = db.createObjectStore(DB_STORE_NAME, {keyPath: ["id", "email"]});
+        // var store = db.createObjectStore(DB_STORE_NAME, {keyPath: "id", autoIncrement: true});
+
+        var store = db.createObjectStore(DB_STORE_NAME, {keyPath: "email"});
         console.log("openCreateDb: Oject store created");
         
-        // store.createIndex('id', 'id', {autoIncrement: true});
-
         store.createIndex('name', 'name', {unique: false});
 
         store.createIndex('username', 'username', {unique: false});
@@ -129,7 +128,7 @@ function addUser(db){
         console.log("Email is empty");
     //Comprueba que los valores introducidos sean correctos usando la función isEmailValid.
     } else if (!isEmailValid(email.value)){
-        errorEmail.innerText = "El email no contiene el formato correcto";
+        errorEmail.innerText = "The email does not contain the correct formatting";
         errorEmail.style.display = "block";
         errorDetected = true;
         console.log("Email is not correct");
@@ -193,8 +192,6 @@ function addUser(db){
         console.log("All good");
     }
 
-    // console.log("Es un administrador " + admin.getAttribute("checked"));
-
     var hash = CryptoJS.MD5(password.value);
     var obj = { name: name.value, username: username.value, email: email.value, password: hash.toString(), admin: admin.checked, avatar: avatar};
 
@@ -210,7 +207,8 @@ function addUser(db){
     request.onsuccess = function(event){
         console.log("addUser: Data insertion successfully done. Id:" + event.target.result);
         
-        sessionStorage.setItem("id", event.target.result);
+        sessionStorage.setItem("email", event.target.result);
+
         if(admin.checked){
             location.replace("./index_admin.html");
         } else {
@@ -229,38 +227,38 @@ function addUser(db){
 }
 
 function showData () {
-    var req = indexedDB.open(database, DB_VERSION);     //abre una conexión con la BD.
+    var request = indexedDB.open(database, DB_VERSION);    
 
-    req.onsuccess = function (e) {
+    request.onsuccess = function (e) {
         db = this.result;
-        console.log("openBD DONE");         //Muestra que se ha abierto la BD.
+        console.log("openBD DONE");         
 
         showUser(db);
     };
 
-    req.onerror = function(e) {
+    request.onerror = function(e) {
         console.error("openBD:", e.target.errorCode);
     };
 }
 
-function showUser (db) {
+function showUser(db) {
 
     var tx = db.transaction(DB_STORE_NAME, "readwrite");
-    var store = tx.objectStore(DB_STORE_NAME);      //Obtiene la tabla que usamos.
+    var store = tx.objectStore(DB_STORE_NAME);
+    //Muestra la lista de usuarios.  
     listaUsuario.innerHTML='';
 
     let request = store.openCursor();
 
     request.onsuccess = function () {
-        let cursor = request.result;      //captura un usuario  
+        let cursor = request.result;       
         
         if(cursor) {
             mostrarUsuario(cursor.key, cursor.value);
             cursor.continue();
         } else {
-            console.log("No hay usuarios");
+            console.log("usuario");
         }
-
         console.log("Edit from DB was successfull");
     };
 
@@ -273,42 +271,42 @@ function showUser (db) {
     }; 
 };
 
-function mostrarUsuario(id, datos) {
-    listaUsuario.innerHTML+= '<div class="usuario"><span>'+ datos.username + '</span> <button class="btn_edit" onclick="getData('+ id +')">Edit</button><button class="btn_edit" onclick="deleteData('+ id +')">Delete</button></div>';
+function mostrarUsuario(email, datos) {
+    listaUsuario.innerHTML+= '<div class="usuario"><span>'+ datos.username + '</span> <button class="btn_edit" onclick="getData('+ email +')">Edit</button><button class="btn_edit" onclick="deleteData('+ email +')">Delete</button></div>';
 };
 function getData () {
-    var req = indexedDB.open(database, DB_VERSION);   
+    var request = indexedDB.open(database, DB_VERSION);   
 
-    req.onsuccess = function (e) {
+    request.onsuccess = function (e) {
         db = this.result;
         console.log("openBD DONE");      
 
         //Obtiene los datos del usuario loggueado
-        getUser(db, sessionStorage.getItem("id"));
+        getUser(db, sessionStorage.getItem("email"));
     };
 
-    req.onerror = function(e) {
+    request.onerror = function(e) {
         console.error("openBD:", e.target.errorCode);
     };
 };
 
 //Para obtener el usuario loggueado
-function getUser (db, id) {
+function getUser (db, email) {
     
     var tx = db.transaction(DB_STORE_NAME, "readwrite");
 
     //Solo lectura
     var store = tx.objectStore(DB_STORE_NAME);      //Obtiene la tabla que usamos.
     
-    req = store.get(parseInt(id));
+    request = store.get(email);
     let datos;
   
-    req.onsuccess = function (e) {
+    request.onsuccess = function (e) {
        datos = e.target.result;
-       loadUser(id, datos);
+       loadUser(email, datos);
     };
 
-    req.onerror = function (e) {
+    request.onerror = function (e) {
         console.error("Connection error", this.error);      //Indica que se ha producicdo un error y no se ha podido insertar.
     };
 
@@ -317,62 +315,119 @@ function getUser (db, id) {
     }; 
 };
 
-function loadUser (id, datos) {
+function loadUser (email, datos) {
     // var idUsuari = document.getElementById('id');
     var avatarprofile = document.getElementById("avatar");
     var nomusuari = document.getElementById("nombreUsuario");
+    var nombre = document.getElementById("name");
+    var emailU = document.getElementById("emailUser");
     //Muestra el nombre de usuario introducido
+    //name
     nomusuari.innerHTML =  datos.username;
+    nombre.innerHTML = datos.name;
+    emailU.innerHTML = datos.email;
     avatarprofile.src = datos.avatar;
 };
 
 function login(){
-    // console.log("paco1");
     location.replace("./login.html");
 };
 
-function loginValidation(){
-    var emailUser = document.getElementById("email").value;
-    var passwdUser = document.getElementById("password");
+function showEditor(){
+    var editor = document.getElementById("formEdit");
+    editor.style.display = "block";
+};
 
-    var request = indexedDB.open(database, DB_VERSION);   
+function editProfile(){
+    showEditor();
 
+    var req = indexedDB.open(database, DB_VERSION);   
 
-    request.onsuccess = function (e) { 
+    req.onsuccess = function (e) {
+        db = this.result;
+        console.log("openBD DONE");      
 
-        db = this.result; 
+        //obtiene los datos para que rellene los campos.
+        email = sessionStorage.getItem("email");
+     
         var tx = db.transaction(DB_STORE_NAME, "readwrite");
-        var store = tx.objectStore(DB_STORE_NAME);    
-        console.log("openBD DONE");  
-        var req = store.get(emailUser);
+        var store = tx.objectStore(DB_STORE_NAME);     
         
+        request = store.get(email);
 
-        req.onsuccess = function (e) {
-            let datos;
-            datos = e.target.result;
-            console.log(datos);
+        let datos;
+      
+        request.onsuccess = function (e) {
+           datos = e.target.result;
+
+           var nombreEdit = document.getElementById("editname");
+           var userEdit = document.getElementById("editusername");
+           var emailEdit = document.getElementById("editemail");
+       
+           nombreEdit.value =  datos.name;
+           userEdit.value = datos.username;
+           emailEdit.value = datos.email;
         };
-     
-        req.onerror = function (e) {
-             console.error("Connection error", this.error);      //Indica que se ha producicdo un error y no se ha podido insertar.
+    
+        request.onerror = function (e) {
+            console.error("Connection error", this.error);
         };
-     
+    
         tx.oncomplete = function () {
-            db.close();     //Cierra la conexión.
+            db.close();  
         }; 
     };
 
-    request.onerror = function(e) {
-        console.error("openBD:", e.target.errorCode);
-    }; 
+    req.onerror = function(event) {
+        console.error("openBD:", event.target.errorCode);
+    };
 };
+
+function updateUser(){
+    
+    var updateName = document.getElementById("editname");
+    var updateUser = document.getElementById("editusername");
+    var updateEmail = document.getElementById("editemail");
+
+    var obj = {name: updateName.value, username: updateUser.value, email: updateEmail.value};
+    
+    var req = indexedDB.open(database, DB_VERSION);   
+
+    req.onsuccess = function (event) {
+        db = this.result;
+        console.log("openBD DONE");      
+
+        var tx = db.transaction(DB_STORE_NAME, "readwrite");
+        var store = tx.objectStore(DB_STORE_NAME);     
+        
+        request = store.put(obj);
+        let datos;
+
+        request.onsuccess = function (e) { 
+           datos = e.target.result;
+           console.log("funciona");
+           location.replace("./index_admin.html");
+        };
+    
+        request.onerror = function (e) {
+            console.error("Connection error", this.error);
+        };
+    
+        tx.oncomplete = function () {
+            db.close();  
+        }; 
+    };
+
+    req.onerror = function(event) {
+        console.error("openBD:", event.target.errorCode);
+    };
+};
+
 window.addEventListener('load', (event) => {
     if(window.location.pathname.includes("/index.html")) {
         sendDataForm.addEventListener("click", (event) => {
             sendData();
         });
-    } else if(window.location.pathname.includes("/login.html")){
-       
     } else {
         getData();
     }

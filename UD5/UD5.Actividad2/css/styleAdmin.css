@@ -69,9 +69,6 @@ img:hover {
     vertical-align: middle;
 }
 
-
-
-
 li {display: inline-block;}
 
 #buttonOutcome:hover{
@@ -87,6 +84,7 @@ li {display: inline-block;}
     opacity: 99%;
    /*Se aplica una sombra donde las cajas del formulario*/
     box-shadow: 1px 1px 1px 1px #6F1F42;
+    width: 90%;
 }
 
 .form-control label {
@@ -129,21 +127,23 @@ li {display: inline-block;}
 /*Diseño del formulario de usuario*/
 
 main{
-   width: 50%;
+   width: 100%;
    text-align: center;
    display: inline-block;
 }
-/* #avatar {
- 
-} */
 
 .avatar_user {
-    width: 20%;
-    border-radius: 55%;
+    width: 25%;
+    border-radius: 50%;
 }
 .container2 { 
-    
     background-color: #f5ccd6;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    width: 50%;
+    width: 40%;
+}
+.container3 { 
+    background-color: #f5ccd6;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 40%;
+    display: none;
 }
