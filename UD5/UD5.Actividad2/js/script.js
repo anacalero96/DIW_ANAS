@@ -329,7 +329,6 @@ function getUser (db, email) {
 };
 
 function loadUser (email, datos) {
-function loadUser (email, datos) {
     // var idUsuari = document.getElementById('id');
     var avatarprofile = document.getElementById("avatar");
     var nomusuari = document.getElementById("nombreUsuario");
@@ -403,7 +402,7 @@ function editProfile(){
     };
 };
 
-function updateUser(){
+function updateUser() {
     
     var updateName = document.getElementById("editname");
     var updateUser = document.getElementById("editusername");
@@ -428,27 +427,28 @@ function updateUser(){
            datos = e.target.result;
            console.log("funciona");
            location.replace("./index_admin.html");
-        request = store.put(obj);
-        let datos;
 
-        request.onsuccess = function (e) { 
-           datos = e.target.result;
-           console.log("funciona");
-           location.replace("./index_admin.html");
+            request = store.put(obj);
+            let datos;
+
+            request.onsuccess = function (e) { 
+            datos = e.target.result;
+            console.log("funciona");
+            location.replace("./index_admin.html");
+            };
+        
+            request.onerror = function (e) {
+                console.error("Connection error", this.error);
+            };
+            request.onerror = function (e) {
+                console.error("Connection error", this.error);
+            };
+        
+            tx.oncomplete = function () {
+                db.close();  
+                db.close();  
+            }; 
         };
-    
-        request.onerror = function (e) {
-            console.error("Connection error", this.error);
-    
-        request.onerror = function (e) {
-            console.error("Connection error", this.error);
-        };
-    
-    
-        tx.oncomplete = function () {
-            db.close();  
-            db.close();  
-        }; 
     };
 
     req.onerror = function(event) {
