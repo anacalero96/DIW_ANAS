@@ -38,8 +38,12 @@ function openCreateDb (onDbCompleted){
 
         // var store = db.createObjectStore(DB_STORE_NAME, {keyPath: "id", autoIncrement: true});
 
+        // var store = db.createObjectStore(DB_STORE_NAME, {keyPath: "id", autoIncrement: true});
+
+        var store = db.createObjectStore(DB_STORE_NAME, {keyPath: "email"});
         var store = db.createObjectStore(DB_STORE_NAME, {keyPath: "email"});
         console.log("openCreateDb: Oject store created");
+        
         
         store.createIndex('name', 'name', {unique: false});
 
@@ -129,6 +133,7 @@ function addUser(db){
     //Comprueba que los valores introducidos sean correctos usando la función isEmailValid.
     } else if (!isEmailValid(email.value)){
         errorEmail.innerText = "The email does not contain the correct formatting";
+        errorEmail.innerText = "The email does not contain the correct formatting";
         errorEmail.style.display = "block";
         errorDetected = true;
         console.log("Email is not correct");
@@ -209,6 +214,8 @@ function addUser(db){
         
         sessionStorage.setItem("email", event.target.result);
 
+        sessionStorage.setItem("email", event.target.result);
+
         if(admin.checked){
             location.replace("./index_admin.html");
         } else {
@@ -242,6 +249,7 @@ function showData () {
 }
 
 function showUser(db) {
+function showUser(db) {
 
     var tx = db.transaction(DB_STORE_NAME, "readwrite");
     var store = tx.objectStore(DB_STORE_NAME);
@@ -273,6 +281,8 @@ function showUser(db) {
 
 function mostrarUsuario(email, datos) {
     listaUsuario.innerHTML+= '<div class="usuario"><span>'+ datos.username + '</span> <button class="btn_edit" onclick="getData('+ email +')">Edit</button><button class="btn_edit" onclick="deleteData('+ email +')">Delete</button></div>';
+function mostrarUsuario(email, datos) {
+    listaUsuario.innerHTML+= '<div class="usuario"><span>'+ datos.username + '</span> <button class="btn_edit" onclick="getData('+ email +')">Edit</button><button class="btn_edit" onclick="deleteData('+ email +')">Delete</button></div>';
 };
 function getData () {
     var request = indexedDB.open(database, DB_VERSION);   
@@ -283,6 +293,7 @@ function getData () {
 
         //Obtiene los datos del usuario loggueado
         getUser(db, sessionStorage.getItem("email"));
+        getUser(db, sessionStorage.getItem("email"));
     };
 
     request.onerror = function(e) {
@@ -291,6 +302,7 @@ function getData () {
 };
 
 //Para obtener el usuario loggueado
+function getUser (db, email) {
 function getUser (db, email) {
     
     var tx = db.transaction(DB_STORE_NAME, "readwrite");
@@ -304,6 +316,7 @@ function getUser (db, email) {
     request.onsuccess = function (e) {
        datos = e.target.result;
        loadUser(email, datos);
+       loadUser(email, datos);
     };
 
     request.onerror = function (e) {
@@ -316,14 +329,20 @@ function getUser (db, email) {
 };
 
 function loadUser (email, datos) {
+function loadUser (email, datos) {
     // var idUsuari = document.getElementById('id');
     var avatarprofile = document.getElementById("avatar");
     var nomusuari = document.getElementById("nombreUsuario");
     var nombre = document.getElementById("name");
     var emailU = document.getElementById("emailUser");
+    var nombre = document.getElementById("name");
+    var emailU = document.getElementById("emailUser");
     //Muestra el nombre de usuario introducido
     //name
+    //name
     nomusuari.innerHTML =  datos.username;
+    nombre.innerHTML = datos.name;
+    emailU.innerHTML = datos.email;
     nombre.innerHTML = datos.name;
     emailU.innerHTML = datos.email;
     avatarprofile.src = datos.avatar;
@@ -341,6 +360,7 @@ function showEditor(){
 function editProfile(){
     showEditor();
 
+    var req = indexedDB.open(database, DB_VERSION);   
     var req = indexedDB.open(database, DB_VERSION);   
 
     req.onsuccess = function (e) {
@@ -399,7 +419,15 @@ function updateUser(){
 
         var tx = db.transaction(DB_STORE_NAME, "readwrite");
         var store = tx.objectStore(DB_STORE_NAME);     
+        var store = tx.objectStore(DB_STORE_NAME);     
         
+        request = store.put(obj);
+        let datos;
+
+        request.onsuccess = function (e) { 
+           datos = e.target.result;
+           console.log("funciona");
+           location.replace("./index_admin.html");
         request = store.put(obj);
         let datos;
 
@@ -411,9 +439,14 @@ function updateUser(){
     
         request.onerror = function (e) {
             console.error("Connection error", this.error);
+    
+        request.onerror = function (e) {
+            console.error("Connection error", this.error);
         };
     
+    
         tx.oncomplete = function () {
+            db.close();  
             db.close();  
         }; 
     };
