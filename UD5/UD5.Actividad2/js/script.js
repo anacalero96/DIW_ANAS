@@ -277,7 +277,7 @@ function showUser(db) {
 };
 
 function mostrarUsuario(email, datos) {
-    listaUsuario.innerHTML+= '<div class="usuario"><span>'+ datos.username + '</span> <button class="btn_edit" onclick="getData('+ email +')">Edit</button><button class="btn_edit" onclick="deleteData('+ email +')">Delete</button></div>';
+    listaUsuario.innerHTML+= '<div class="usuario"><span>'+ datos.username + '</span> <button class="btn_edit" onclick="editUser(&quot;'+ email +'&quot;)">Edit</button><button class="btn_edit" onclick="deleteData(&quot;'+ email +'&quot;)">Delete</button></div>';
 };
 
 
@@ -363,7 +363,6 @@ function editProfile(){
         var store = tx.objectStore(DB_STORE_NAME);     
         
         request = store.get(email);
-
 
         let datos;
       
@@ -548,6 +547,73 @@ function changePassword (){
         console.error("openBD:", event.target.errorCode);
     };
 };
+
+//Función para cerrar sesión.
+function logOut(){
+
+    sessionStorage.removeItem("profile");
+    sessionStorage.removeItem("email");
+    location.replace("./home.html")
+
+    console.log( sessionStorage);
+}
+
+//Función para borrar usuarios.
+
+function deleteData (email) {
+   
+    var req = indexedDB.open(database, DB_VERSION);   
+
+    req.onsuccess = function (event) {
+       
+        db = this.result;
+        console.log("openBD DONE");      
+
+        var tx = db.transaction(DB_STORE_NAME, "readwrite");
+        var store = tx.objectStore(DB_STORE_NAME);          
+
+        request = store.delete(email.toString());
+
+        request.onsuccess = function (e) {  
+            location.reload();      //carga la página de nuevo
+
+            datos = e.target.result;
+            console.log("funciona");
+        };
+    };
+
+    req.onerror = function(event) {
+        console.error("openBD:", event.target.errorCode);
+    };
+};
+
+function editUser(){
+    
+    var req = indexedDB.open(database, DB_VERSION);   
+
+    req.onsuccess = function (event) {
+       
+        db = this.result;
+        console.log("openBD DONE");      
+
+        var tx = db.transaction(DB_STORE_NAME, "readwrite");
+        var store = tx.objectStore(DB_STORE_NAME);          
+
+        request = store.put(email);
+
+        request.onsuccess = function (e) {  
+            location.reload();      //carga la página de nuevo
+
+            datos = e.target.result;
+            console.log("funciona");
+        };
+    };
+
+    req.onerror = function(event) {
+        console.error("openBD:", event.target.errorCode);
+    };
+}
+
 
 window.addEventListener('load', (event) => {
     if(window.location.pathname.includes("/index.html")) {
