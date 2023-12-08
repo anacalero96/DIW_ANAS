@@ -111,9 +111,37 @@
                         <input type="email" name="email" id="editemail">
                     </div>
                 </div>
+               
                 <div class="row">
                     <button class="col-2 col-sm-2 btn m-3 mx-auto " type="button" style="background-color: #671f42; color: #ffff; font-size: 14px;" onclick="updateUser()">UPDATE</button>
+                </div> 
+                <!--Botón para borrar la cuenta de usuario-->
+                <div class="row">
+                    <button class="col-2 col-sm-2 btn m-3 mx-auto " type="button" style="background-color: #671f42; color: #ffff; font-size: 14px;">DELETE ACCOUNT</button>
                 </div>
+                <div class="row">
+                    <button class="col-2 col-sm-2 btn m-3 mx-auto " type="button" style="background-color: #671f42; color: #ffff; font-size: 14px;" onclick="showPassword()">EDIT PASSWORD</button>
+                </div>
+            </div>
+            <!--Cambiar contraseñas-->
+            <div class="container3 mx-auto m-3" id="formPassword">
+                <div class="row">
+                    <div class="form-control mx-auto"> 
+                        <label for="num1">Password</label>
+                        <input type="password" name="password" id="editpassword">
+                        <small id="passwordError"></small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-control mx-auto"> 
+                        <label for="num2">Confirm Password</label>
+                        <input type="password" name="password2" id="confirmpassword">
+                        <small id="passwordError2"></small>
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="col-2 col-sm-2 btn m-3 mx-auto " type="button" style="background-color: #671f42; color: #ffff; font-size: 14px;" onclick="changePassword()">UPDATE</button>
+                </div> 
             </div>
         </div>
 

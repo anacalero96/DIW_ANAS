@@ -8,9 +8,6 @@ const DB_STORE_NAME = 'users';
 const DB_VERSION = 1;
 let db;
 var opened = false;
-// var sendDataForm = document.querySelector("#sendData");
-// const listaUsuario = document.getElementById("users-ul");
-
 
 function loginValidation(){
     var emailUser = document.getElementById("email").value;
