@@ -113,14 +113,19 @@
                 </div>
                
                 <div class="row">
-                    <button class="col-2 col-sm-2 btn m-3 mx-auto " type="button" style="background-color: #671f42; color: #ffff; font-size: 14px;" onclick="updateUser()">UPDATE</button>
+                    <button class="col-2 col-sm-2 btn m-3 mx-auto" id="updateProfile" type="button" style="background-color: #671f42; color: #ffff; font-size: 14px;" onclick="updateUser()">UPDATE</button>
+                </div> 
+
+                <!--Botón 2 para actualizar datos-->
+                <div class="row">
+                    <button class="col-2 col-sm-2 btn m-3 mx-auto" id="updateUser" type="button" style="background-color: #671f42; color: #ffff; font-size: 14px;" onclick="btnUpdate()">UPDATE</button>
                 </div> 
                 <!--Botón para borrar la cuenta de usuario-->
                 <div class="row">
-                    <button class="col-2 col-sm-2 btn m-3 mx-auto " type="button" style="background-color: #671f42; color: #ffff; font-size: 14px;">DELETE ACCOUNT</button>
+                    <button class="col-2 col-sm-2 btn m-3 mx-auto" type="button" id="deleteAcc" style="background-color: #671f42; color: #ffff; font-size: 14px;" onclick="deleteAccount()">DELETE ACCOUNT</button>
                 </div>
                 <div class="row">
-                    <button class="col-2 col-sm-2 btn m-3 mx-auto " type="button" style="background-color: #671f42; color: #ffff; font-size: 14px;" onclick="showPassword()">EDIT PASSWORD</button>
+                    <button class="col-2 col-sm-2 btn m-3 mx-auto" type="button" id="editPasswd" style="background-color: #671f42; color: #ffff; font-size: 14px;" onclick="showPassword()">EDIT PASSWORD</button>
                 </div>
             </div>
             <!--Cambiar contraseñas-->

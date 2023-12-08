@@ -345,6 +345,19 @@ function login(){
 function showEditor(){
     var editor = document.getElementById("formEdit");
     editor.style.display = "block";
+
+    var edit = document.getElementById("editPasswd");
+    edit.style.display = "block";
+
+    var deleteAcc = document.getElementById("deleteAcc");
+    deleteAcc.style.display = "block";
+
+    var updateUser = document.getElementById("updateProfile");
+    updateUser.style.display = "block";
+
+    //No muestra el botón.
+    var update = document.getElementById("updateUser");
+    update.style.display = "none";
 };
 
 function editProfile(){
@@ -406,6 +419,7 @@ function updateUser() {
         email: updateEmail.value,
         password: datos.password,
         avatar: datos.avatar,
+        admin: datos.admin
     };
     
     var req = indexedDB.open(database, DB_VERSION);   
@@ -419,12 +433,64 @@ function updateUser() {
 
         request = store.put(obj);
 
+        if(obj.email != datos.email) {
+            //Introduce el nuevo email 
+            sessionStorage.setItem("email", obj.email);
+            deleteData(datos.email);
+        }
+
+        request.onsuccess = function (e) { 
+           datos = e.target.result;
+           console.log("funciona");
+           location.replace("./index_admin.html");
+        };    
+        tx.oncomplete = function () {
+            db.close();  
+        };
+    };
+    req.onerror = function(event) {
+        console.error("openBD:", event.target.errorCode);
+    };
+
+};
+
+
+function btnUpdate (){
+    var updateName = document.getElementById("editname");
+    var updateUser = document.getElementById("editusername");
+    var updateEmail = document.getElementById("editemail");
+
+    let datos = JSON.parse(sessionStorage.getItem("user"));
+
+    var obj = {
+        name: updateName.value, 
+        username: updateUser.value, 
+        email: updateEmail.value,
+        password: datos.password,
+        avatar: datos.avatar,
+        admin: datos.admin
+    };
+    
+    var req = indexedDB.open(database, DB_VERSION);   
+
+    req.onsuccess = function (event) {
+        db = this.result;
+        console.log("openBD DONE");      
+
+        var tx = db.transaction(DB_STORE_NAME, "readwrite");
+        var store = tx.objectStore(DB_STORE_NAME);          
+
+        request = store.put(obj);
+
+        if(obj.email != datos.email) {
+            deleteData(datos.email);
+        }
+
         request.onsuccess = function (e) { 
            datos = e.target.result;
            console.log("funciona");
            location.replace("./index_admin.html");
 
-            // let datos;
             request.onsuccess = function (e) { 
                 datos = e.target.result;
                 console.log("funciona");
@@ -444,7 +510,7 @@ function updateUser() {
     req.onerror = function(event) {
         console.error("openBD:", event.target.errorCode);
     };
-};
+}
 
 //Funcion para mostrar el pop-up de modificar la contraseña.
 
@@ -553,6 +619,7 @@ function logOut(){
 
     sessionStorage.removeItem("profile");
     sessionStorage.removeItem("email");
+    sessionStorage.removeItem("user");
     location.replace("./home.html")
 
     console.log( sessionStorage);
@@ -587,7 +654,7 @@ function deleteData (email) {
     };
 };
 
-function editUser(){
+function deleteAccount(){
     
     var req = indexedDB.open(database, DB_VERSION);   
 
@@ -599,21 +666,77 @@ function editUser(){
         var tx = db.transaction(DB_STORE_NAME, "readwrite");
         var store = tx.objectStore(DB_STORE_NAME);          
 
-        request = store.put(email);
+        request = store.delete(sessionStorage.getItem("email"));
 
-        request.onsuccess = function (e) {  
-            location.reload();      //carga la página de nuevo
-
+        request.onsuccess = function (e) {   
             datos = e.target.result;
-            console.log("funciona");
+            console.log("funciona"); 
+            logOut();
+        };  
+       
+    };
+    req.onerror = function(event) {
+        console.error("openBD:", event.target.errorCode);
+    };
+
+};
+
+//Edita el usuario desde la parte de administrador.
+function editUser(email){
+    showEditor();
+
+    var edit = document.getElementById("editPasswd");
+    edit.style.display = "none";
+
+    var deleteAcc = document.getElementById("deleteAcc");
+    deleteAcc.style.display = "none";
+
+    var updateUser = document.getElementById("updateProfile");
+    updateUser.style.display = "none";
+
+    //Muestra el botón.
+    var update = document.getElementById("updateUser");
+    update.style.display = "block";
+
+    var req = indexedDB.open(database, DB_VERSION);     
+
+    req.onsuccess = function (e) {
+        db = this.result;
+        console.log("openBD DONE");      
+
+        var tx = db.transaction(DB_STORE_NAME, "readwrite");
+        var store = tx.objectStore(DB_STORE_NAME);     
+        
+        request = store.get(email);
+
+        let datos;
+      
+        request.onsuccess = function (e) {
+           datos = e.target.result;
+           sessionStorage.setItem("user",JSON.stringify(datos));
+           
+           var nombreEdit = document.getElementById("editname");
+           var userEdit = document.getElementById("editusername");
+           var emailEdit = document.getElementById("editemail");
+       
+           nombreEdit.value =  datos.name;
+           userEdit.value = datos.username;
+           emailEdit.value = datos.email;
         };
+    
+        request.onerror = function (e) {
+            console.error("Connection error", this.error);
+        };
+    
+        tx.oncomplete = function () {
+            db.close();  
+        }; 
     };
 
     req.onerror = function(event) {
         console.error("openBD:", event.target.errorCode);
     };
-}
-
+};
 
 window.addEventListener('load', (event) => {
     if(window.location.pathname.includes("/index.html")) {
