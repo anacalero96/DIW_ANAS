@@ -42,6 +42,7 @@ function openCreateDb (onDbCompleted){
         console.log("openCreateDb: Oject store created");
         
         
+        
         store.createIndex('name', 'name', {unique: false});
 
         store.createIndex('username', 'username', {unique: false});
@@ -131,6 +132,7 @@ function addUser(db){
     } else if (!isEmailValid(email.value)){
         errorEmail.innerText = "The email does not contain the correct formatting";
         errorEmail.innerText = "The email does not contain the correct formatting";
+        errorEmail.innerText = "The email does not contain the correct formatting";
         errorEmail.style.display = "block";
         errorDetected = true;
         console.log("Email is not correct");
@@ -209,6 +211,7 @@ function addUser(db){
     request.onsuccess = function(event){
         console.log("addUser: Data insertion successfully done. Id:" + event.target.result);
 
+
         sessionStorage.setItem("email", event.target.result);
 
         if(admin.checked){
@@ -233,7 +236,7 @@ function showData () {
 
     request.onsuccess = function (e) {
         db = this.result;
-        console.log("openBD DONE");         
+        console.log("openBD DONE");                 
 
         showUser(db);
     };
@@ -276,6 +279,7 @@ function showUser(db) {
 function mostrarUsuario(email, datos) {
     listaUsuario.innerHTML+= '<div class="usuario"><span>'+ datos.username + '</span> <button class="btn_edit" onclick="getData('+ email +')">Edit</button><button class="btn_edit" onclick="deleteData('+ email +')">Delete</button></div>';
 };
+
 
 function getData () {
     var request = indexedDB.open(database, DB_VERSION);   
@@ -359,6 +363,7 @@ function editProfile(){
         var store = tx.objectStore(DB_STORE_NAME);     
         
         request = store.get(email);
+
 
         let datos;
       
