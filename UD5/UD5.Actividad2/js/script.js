@@ -1,4 +1,3 @@
-
 //Crear bd
 var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB || window.shimIndexedDB;
 
@@ -34,14 +33,11 @@ function openCreateDb (onDbCompleted){
         db = request.result;
 
         console.log("openCreateDb: upgrade needed " + db);
-        //Crear tablas para el formulario.
 
-        // var store = db.createObjectStore(DB_STORE_NAME, {keyPath: "id", autoIncrement: true});
+        //Crear tablas para el formulario.
 
         var store = db.createObjectStore(DB_STORE_NAME, {keyPath: "email"});
         console.log("openCreateDb: Oject store created");
-        
-        
         
         store.createIndex('name', 'name', {unique: false});
 
@@ -202,7 +198,6 @@ function addUser(db){
     var tx = db.transaction(DB_STORE_NAME, "readwrite");
     var store = tx.objectStore(DB_STORE_NAME);
 
-
     try {
         request = store.add(obj);
     } catch (event){
@@ -302,8 +297,7 @@ function getUser (db, email) {
     
     var tx = db.transaction(DB_STORE_NAME, "readwrite");
 
-    //Solo lectura
-    var store = tx.objectStore(DB_STORE_NAME);      //Obtiene la tabla que usamos.
+    var store = tx.objectStore(DB_STORE_NAME);      
     
     request = store.get(email);
     let datos;
@@ -318,7 +312,7 @@ function getUser (db, email) {
     };
 
     tx.oncomplete = function () {
-        db.close();     //Cierra la conexión.
+        db.close();
     }; 
 };
 
@@ -330,7 +324,6 @@ function loadUser (email, datos) {
 
     sessionStorage.setItem("profile", JSON.stringify(datos));
     
-
     //Muestra el nombre de usuario introducido
     nomusuari.innerHTML =  datos.username;
     nombre.innerHTML = datos.name;
@@ -385,7 +378,6 @@ function editProfile(){
            var nombreEdit = document.getElementById("editname");
            var userEdit = document.getElementById("editusername");
            var emailEdit = document.getElementById("editemail");
-
 
            nombreEdit.value =  datos.name;
            userEdit.value = datos.username;
@@ -520,7 +512,6 @@ function btnUpdate (){
 }
 
 //Funcion para mostrar el pop-up de modificar la contraseña.
-
 function showPassword(){
     var editor = document.getElementById("formPassword");
     editor.style.display = "block";
@@ -580,11 +571,8 @@ function changePassword (){
         admin:datos.admin,
         avatar:datos.avatar
     };
-
-    // password: CryptoJS.MD5(passwdUser.value),
     
     var req = indexedDB.open(database, DB_VERSION);   
-    console.log("h");
     req.onsuccess = function (event) {
         db = this.result;
         console.log("openBD DONE");      
@@ -598,14 +586,12 @@ function changePassword (){
            datos = e.target.result;
            console.log("funciona");
            
-            // let datos;
-
             request.onsuccess = function (e) { 
                 datos = e.target.result;
                 console.log("funciona");
                 location.replace("./index_admin.html");
             };
-        
+
             request.onerror = function (e) {
                 console.error("Connection error", this.error);
             };
@@ -615,7 +601,6 @@ function changePassword (){
             }; 
         };
     };
-
     req.onerror = function(event) {
         console.error("openBD:", event.target.errorCode);
     };
@@ -633,7 +618,6 @@ function logOut(){
 }
 
 //Función para borrar usuarios.
-
 function deleteData (email) {
    
     var req = indexedDB.open(database, DB_VERSION);   
