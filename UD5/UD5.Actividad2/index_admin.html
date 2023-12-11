@@ -79,10 +79,10 @@
                     <p>Email: <strong id="emailUser"></strong></p>
                 </div>
                 <div class="row">
-                    <button class="col-2 col-sm-2 btn m-3 mx-auto " type="button" style="background-color: #671f42; color: #ffff; font-size: 14px;" onclick="editProfile()">EDIT PROFILE</button>
+                    <button class="col-2 col-sm-2 btn m-3 mx-auto " type="button" style="background-color: #671f42; color: #ffff; font-size: 15px; width: 90px;" onclick="editProfile()">EDIT PROFILE</button>
                 </div>
                 <div class="row">
-                    <button class="col-2 col-sm-2 btn m-3 mx-auto " type="button" style="background-color: #671f42; color: #ffff; font-size: 14px;" onclick="showData()">USER LIST</button>
+                    <button class="col-2 col-sm-2 btn m-3 mx-auto " type="button" style="background-color: #671f42; color: #ffff; font-size: 15px; width: 90px;" onclick="showData()">USER LIST</button>
                 </div>
                 <div id="users-container" class="container users-container">
                   <div class="row my-4">
@@ -112,26 +112,50 @@
                     </div>
                 </div>
                
-                <div class="row">
-                    <button class="col-2 col-sm-2 btn m-3 mx-auto" id="updateProfile" type="button" style="background-color: #671f42; color: #ffff; font-size: 14px;" onclick="updateUser()">UPDATE</button>
+                           
+                <div id="inputsIMG">
+                    <label for="avatar">Select an avatar: </label>
+                        <ul>
+                            <li>
+                                <input type="radio" id="avatarCheckbox1" name="radioButton" value="./img/kerrigan.jpg">
+                                <label for="avatarCheckbox1" id="labelCheck"><img src="./img/kerrigan.jpg" alt="imgGame"></label> 
+                            </li>
+                            <li>
+                                <input type="radio" id="avatarCheckbox2" name="radioButton" value="./img/Sylvanas.jpg">
+                                <label for="avatarCheckbox2" id="labelCheck"><img src="./img/Sylvanas.jpg" alt="imgGame"></label>
+                            </li>
+                            <li>
+                                <input type="radio" id="avatarCheckbox3" name="radioButton" value="./img/jaina.jpg">
+                                <label for="avatarCheckbox3" id="labelCheck"><img src="./img/jaina.jpg" alt="imgGame"></label>
+                            </li>
+                        </ul>
                 </div> 
 
-                <!--Botón 2 para actualizar datos-->
                 <div class="row">
-                    <button class="col-2 col-sm-2 btn m-3 mx-auto" id="updateUser" type="button" style="background-color: #671f42; color: #ffff; font-size: 14px;" onclick="btnUpdate()">UPDATE</button>
+                    <button class="col-2 col-sm-2 btn m-2 mx-auto" id="updateProfile" type="button" style="background-color: #671f42; color: #ffff; font-size: 15px; width: 95px; height: 60px;" onclick="updateUser()">UPDATE</button>
+                     <!--Botón 2 para actualizar datos-->
+                    <button class="col-2 col-sm-2 btn m-2 mx-auto" id="updateUser" type="button" style="background-color: #671f42; color: #ffff; font-size: 15px; width: 95px; height: 60px;" onclick="btnUpdate()">UPDATE</button>
+                     <!--Botón para borrar la cuenta de usuario-->
+                    <button class="col-2 col-sm-2 btn m-2 mx-auto" type="button" id="deleteAcc" style="background-color: #671f42; color: #ffff; font-size: 15px; width: 95px;" onclick="deleteAccount()">DELETE ACCOUNT</button>
+                    <button class="col-2 col-sm-2 btn m-2 mx-auto" type="button" id="editPasswd" style="background-color: #671f42; color: #ffff; font-size: 14px; width: 95px;" onclick="showPassword()">EDIT PASSWORD</button>
                 </div> 
-                <!--Botón para borrar la cuenta de usuario-->
-                <div class="row">
-                    <button class="col-2 col-sm-2 btn m-3 mx-auto" type="button" id="deleteAcc" style="background-color: #671f42; color: #ffff; font-size: 14px;" onclick="deleteAccount()">DELETE ACCOUNT</button>
-                </div>
-                <div class="row">
-                    <button class="col-2 col-sm-2 btn m-3 mx-auto" type="button" id="editPasswd" style="background-color: #671f42; color: #ffff; font-size: 14px;" onclick="showPassword()">EDIT PASSWORD</button>
-                </div>
+
+               
+                <!-- <div class="row">
+                    <button class="col-2 col-sm-2 btn m-3 mx-auto" id="updateUser" type="button" style="background-color: #671f42; color: #ffff; font-size: 15px; width: 95px; height: 55px;" onclick="btnUpdate()">UPDATE</button>
+                </div>  -->
+                <!-- <div class="row">
+                    <button class="col-2 col-sm-2 btn m-3 mx-auto" type="button" id="deleteAcc" style="background-color: #671f42; color: #ffff; font-size: 15px; width: 95px;" onclick="deleteAccount()">DELETE ACCOUNT</button>
+                </div> -->
+                <!-- <div class="row">
+                    <button class="col-2 col-sm-2 btn m-3 mx-auto" type="button" id="editPasswd" style="background-color: #671f42; color: #ffff; font-size: 14px; width: 95px;" onclick="showPassword()">EDIT PASSWORD</button>
+                </div> -->
             </div>
+            
             <!--Cambiar contraseñas-->
-            <div class="container3 mx-auto m-3" id="formPassword">
+            <div class="container4 mx-auto" id="formPassword" style="margin-bottom: 12px;">
                 <div class="row">
-                    <div class="form-control mx-auto"> 
+                    <div class="form-control mx-auto my-4"> 
                         <label for="num1">Password</label>
                         <input type="password" name="password" id="editpassword">
                         <small id="passwordError"></small>
@@ -145,13 +169,12 @@
                     </div>
                 </div>
                 <div class="row">
-                    <button class="col-2 col-sm-2 btn m-3 mx-auto " type="button" style="background-color: #671f42; color: #ffff; font-size: 14px;" onclick="changePassword()">UPDATE</button>
+                    <button class="col-2 col-sm-2 btn m-3 mx-auto " type="button" style="background-color: #671f42; color: #ffff; font-size: 15px; width: 82px;" onclick="changePassword()">UPDATE</button>
                 </div> 
             </div>
         </div>
-
-      
     </main>
+
     <footer>
         <div class="container">
             <div class="d-flex flex-wrap justify-content-between align-items-center py-3">

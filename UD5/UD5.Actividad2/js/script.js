@@ -277,7 +277,7 @@ function showUser(db) {
 };
 
 function mostrarUsuario(email, datos) {
-    listaUsuario.innerHTML+= '<div class="usuario"><span>'+ datos.username + '</span> <button class="btn_edit" onclick="editUser(&quot;'+ email +'&quot;)">Edit</button><button class="btn_edit" onclick="deleteData(&quot;'+ email +'&quot;)">Delete</button></div>';
+    listaUsuario.innerHTML+= '<div><span>'+ datos.username + '</span> <button  class="btn m-1" style="background-color: #671f42; color: #ffff; font-size: 14px; width: 95px;" onclick="editUser(&quot;'+ email +'&quot;)">Edit</button><button class="btn" style="background-color: #671f42; color: #ffff; font-size: 14px; width: 95px;"  onclick="deleteData(&quot;'+ email +'&quot;)">Delete</button></div>';
 };
 
 
@@ -385,7 +385,8 @@ function editProfile(){
            var nombreEdit = document.getElementById("editname");
            var userEdit = document.getElementById("editusername");
            var emailEdit = document.getElementById("editemail");
-       
+
+
            nombreEdit.value =  datos.name;
            userEdit.value = datos.username;
            emailEdit.value = datos.email;
@@ -413,12 +414,19 @@ function updateUser() {
 
     let datos = JSON.parse(sessionStorage.getItem("profile"));
 
+    var avatar = document.querySelector("input[name=radioButton]:checked");
+    var imgAvatar = datos.avatar;
+
+    if(avatar != undefined){
+        imgAvatar = avatar.value;
+    };
+
     var obj = {
         name: updateName.value, 
         username: updateUser.value, 
         email: updateEmail.value,
         password: datos.password,
-        avatar: datos.avatar,
+        avatar: imgAvatar,
         admin: datos.admin
     };
     
@@ -442,7 +450,7 @@ function updateUser() {
         request.onsuccess = function (e) { 
            datos = e.target.result;
            console.log("funciona");
-           location.replace("./index_admin.html");
+           location.reload();
         };    
         tx.oncomplete = function () {
             db.close();  
@@ -453,7 +461,6 @@ function updateUser() {
     };
 
 };
-
 
 function btnUpdate (){
     var updateName = document.getElementById("editname");
@@ -631,6 +638,7 @@ function deleteData (email) {
    
     var req = indexedDB.open(database, DB_VERSION);   
 
+   if(confirm("¿Quieres eliminar el usuario" + email + "?")) {
     req.onsuccess = function (event) {
        
         db = this.result;
@@ -652,33 +660,35 @@ function deleteData (email) {
     req.onerror = function(event) {
         console.error("openBD:", event.target.errorCode);
     };
+   }
 };
 
 function deleteAccount(){
     
     var req = indexedDB.open(database, DB_VERSION);   
 
-    req.onsuccess = function (event) {
-       
-        db = this.result;
-        console.log("openBD DONE");      
+    if(confirm("¿Quieres eliminar la cuenta?")) {
+        req.onsuccess = function (event) {
+            
+                db = this.result;
+                console.log("openBD DONE");      
 
-        var tx = db.transaction(DB_STORE_NAME, "readwrite");
-        var store = tx.objectStore(DB_STORE_NAME);          
+                var tx = db.transaction(DB_STORE_NAME, "readwrite");
+                var store = tx.objectStore(DB_STORE_NAME);          
 
-        request = store.delete(sessionStorage.getItem("email"));
+                request = store.delete(sessionStorage.getItem("email"));
 
-        request.onsuccess = function (e) {   
-            datos = e.target.result;
-            console.log("funciona"); 
-            logOut();
-        };  
-       
-    };
-    req.onerror = function(event) {
-        console.error("openBD:", event.target.errorCode);
-    };
-
+                request.onsuccess = function (e) {   
+                    datos = e.target.result;
+                    console.log("funciona"); 
+                    logOut();
+                };  
+            
+        };
+        req.onerror = function(event) {
+            console.error("openBD:", event.target.errorCode);
+        };
+    }
 };
 
 //Edita el usuario desde la parte de administrador.
@@ -738,13 +748,52 @@ function editUser(email){
     };
 };
 
+
+//Función para que te mande al formulario de registro.
+function formRegister(){
+    location.replace("./index.html");
+};
+//Función para cambiar el tema de la página.
+
+function cambiarTema(){
+    var body = document.querySelector("body");
+    var footer = document.querySelector("footer");
+    // var headerClaro = document.querySelector("");
+    // var letraOsc = document.querySelector("");
+    console.log(sessionStorage.getItem("tema"));
+
+
+    // letraOsc.style.color = "black";
+    
+    if(sessionStorage.getItem("tema") === undefined){
+        sessionStorage.setItem("tema", true);
+
+    }
+    var prueba = sessionStorage.getItem("tema");
+    console.log(sessionStorage.getItem("tema"));
+
+    //Modifica el fondo a un tema más oscuro, pero no vuelve a su estado original.
+    if(prueba){
+        sessionStorage.setItem("tema", false);
+        body.style.backgroundColor = "#1A090D"; 
+        footer.style.backgroundColor = "#E8E1D5";
+
+    } else {
+        sessionStorage.setItem("tema", true);
+        body.style.backgroundColor = "#E8E1D5"; 
+        footer.style.backgroundColor = "#1A090D";
+    }
+
+    console.log(sessionStorage.getItem("tema"));
+};
+
 window.addEventListener('load', (event) => {
     if(window.location.pathname.includes("/index.html")) {
         sendDataForm.addEventListener("click", (event) => {
             sendData();
         });
-    } else {
+    } else if(!window.location.pathname.includes("/home.html")){
         getData();
-    }
+    } 
 });
 

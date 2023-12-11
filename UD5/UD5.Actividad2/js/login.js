@@ -88,3 +88,8 @@ function loginValidation(){
     }; 
 };
 
+//Función para que te mande al formulario de registro.
+function formRegister(){
+    location.replace("./index.html");
+};
+
