@@ -1,4 +1,3 @@
-
 //Crear bd
 var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB || window.shimIndexedDB;
 
@@ -34,14 +33,11 @@ function openCreateDb (onDbCompleted){
         db = request.result;
 
         console.log("openCreateDb: upgrade needed " + db);
+
         //Crear tablas para el formulario.
 
-        // var store = db.createObjectStore(DB_STORE_NAME, {keyPath: "id", autoIncrement: true});
-
-        var store = db.createObjectStore(DB_STORE_NAME, {keyPath: "email"});
         var store = db.createObjectStore(DB_STORE_NAME, {keyPath: "email"});
         console.log("openCreateDb: Oject store created");
-        
         
         store.createIndex('name', 'name', {unique: false});
 
@@ -132,6 +128,7 @@ function addUser(db){
     } else if (!isEmailValid(email.value)){
         errorEmail.innerText = "The email does not contain the correct formatting";
         errorEmail.innerText = "The email does not contain the correct formatting";
+        errorEmail.innerText = "The email does not contain the correct formatting";
         errorEmail.style.display = "block";
         errorDetected = true;
         console.log("Email is not correct");
@@ -201,7 +198,6 @@ function addUser(db){
     var tx = db.transaction(DB_STORE_NAME, "readwrite");
     var store = tx.objectStore(DB_STORE_NAME);
 
-
     try {
         request = store.add(obj);
     } catch (event){
@@ -209,6 +205,7 @@ function addUser(db){
     }
     request.onsuccess = function(event){
         console.log("addUser: Data insertion successfully done. Id:" + event.target.result);
+
 
         sessionStorage.setItem("email", event.target.result);
 
@@ -234,7 +231,7 @@ function showData () {
 
     request.onsuccess = function (e) {
         db = this.result;
-        console.log("openBD DONE");         
+        console.log("openBD DONE");                 
 
         showUser(db);
     };
@@ -275,8 +272,9 @@ function showUser(db) {
 };
 
 function mostrarUsuario(email, datos) {
-    listaUsuario.innerHTML+= '<div class="usuario"><span>'+ datos.username + '</span> <button class="btn_edit" onclick="getData('+ email +')">Edit</button><button class="btn_edit" onclick="deleteData('+ email +')">Delete</button></div>';
+    listaUsuario.innerHTML+= '<div><span>'+ datos.username + '</span> <button  class="btn m-1" style="background-color: #671f42; color: #ffff; font-size: 14px; width: 95px;" onclick="editUser(&quot;'+ email +'&quot;)">Edit</button><button class="btn" style="background-color: #671f42; color: #ffff; font-size: 14px; width: 95px;"  onclick="deleteData(&quot;'+ email +'&quot;)">Delete</button></div>';
 };
+
 
 function getData () {
     var request = indexedDB.open(database, DB_VERSION);   
@@ -299,8 +297,7 @@ function getUser (db, email) {
     
     var tx = db.transaction(DB_STORE_NAME, "readwrite");
 
-    //Solo lectura
-    var store = tx.objectStore(DB_STORE_NAME);      //Obtiene la tabla que usamos.
+    var store = tx.objectStore(DB_STORE_NAME);      
     
     request = store.get(email);
     let datos;
@@ -315,19 +312,19 @@ function getUser (db, email) {
     };
 
     tx.oncomplete = function () {
-        db.close();     //Cierra la conexión.
+        db.close();
     }; 
 };
 
 function loadUser (email, datos) {
-    // var idUsuari = document.getElementById('id');
     var avatarprofile = document.getElementById("avatar");
     var nomusuari = document.getElementById("nombreUsuario");
     var nombre = document.getElementById("name");
     var emailU = document.getElementById("emailUser");
 
-    //Muestra el nombre de usuario introducido
+    sessionStorage.setItem("profile", JSON.stringify(datos));
     
+    //Muestra el nombre de usuario introducido
     nomusuari.innerHTML =  datos.username;
     nombre.innerHTML = datos.name;
     emailU.innerHTML = datos.email;
@@ -341,6 +338,19 @@ function login(){
 function showEditor(){
     var editor = document.getElementById("formEdit");
     editor.style.display = "block";
+
+    var edit = document.getElementById("editPasswd");
+    edit.style.display = "block";
+
+    var deleteAcc = document.getElementById("deleteAcc");
+    deleteAcc.style.display = "block";
+
+    var updateUser = document.getElementById("updateProfile");
+    updateUser.style.display = "block";
+
+    //No muestra el botón.
+    var update = document.getElementById("updateUser");
+    update.style.display = "none";
 };
 
 function editProfile(){
@@ -368,7 +378,7 @@ function editProfile(){
            var nombreEdit = document.getElementById("editname");
            var userEdit = document.getElementById("editusername");
            var emailEdit = document.getElementById("editemail");
-       
+
            nombreEdit.value =  datos.name;
            userEdit.value = datos.username;
            emailEdit.value = datos.email;
@@ -394,7 +404,23 @@ function updateUser() {
     var updateUser = document.getElementById("editusername");
     var updateEmail = document.getElementById("editemail");
 
-    var obj = {name: updateName.value, username: updateUser.value, email: updateEmail.value};
+    let datos = JSON.parse(sessionStorage.getItem("profile"));
+
+    var avatar = document.querySelector("input[name=radioButton]:checked");
+    var imgAvatar = datos.avatar;
+
+    if(avatar != undefined){
+        imgAvatar = avatar.value;
+    };
+
+    var obj = {
+        name: updateName.value, 
+        username: updateUser.value, 
+        email: updateEmail.value,
+        password: datos.password,
+        avatar: imgAvatar,
+        admin: datos.admin
+    };
     
     var req = indexedDB.open(database, DB_VERSION);   
 
@@ -405,13 +431,64 @@ function updateUser() {
         var tx = db.transaction(DB_STORE_NAME, "readwrite");
         var store = tx.objectStore(DB_STORE_NAME);          
 
+        request = store.put(obj);
+
+        if(obj.email != datos.email) {
+            //Introduce el nuevo email 
+            sessionStorage.setItem("email", obj.email);
+            deleteData(datos.email);
+        }
+
+        request.onsuccess = function (e) { 
+           datos = e.target.result;
+           console.log("funciona");
+           location.reload();
+        };    
+        tx.oncomplete = function () {
+            db.close();  
+        };
+    };
+    req.onerror = function(event) {
+        console.error("openBD:", event.target.errorCode);
+    };
+
+};
+
+function btnUpdate (){
+    var updateName = document.getElementById("editname");
+    var updateUser = document.getElementById("editusername");
+    var updateEmail = document.getElementById("editemail");
+
+    let datos = JSON.parse(sessionStorage.getItem("user"));
+
+    var obj = {
+        name: updateName.value, 
+        username: updateUser.value, 
+        email: updateEmail.value,
+        password: datos.password,
+        avatar: datos.avatar,
+        admin: datos.admin
+    };
+    
+    var req = indexedDB.open(database, DB_VERSION);   
+
+    req.onsuccess = function (event) {
+        db = this.result;
+        console.log("openBD DONE");      
+
+        var tx = db.transaction(DB_STORE_NAME, "readwrite");
+        var store = tx.objectStore(DB_STORE_NAME);          
+
+        request = store.put(obj);
+
+        if(obj.email != datos.email) {
+            deleteData(datos.email);
+        }
+
         request.onsuccess = function (e) { 
            datos = e.target.result;
            console.log("funciona");
            location.replace("./index_admin.html");
-
-            request = store.put(obj);
-            let datos;
 
             request.onsuccess = function (e) { 
                 datos = e.target.result;
@@ -432,6 +509,266 @@ function updateUser() {
     req.onerror = function(event) {
         console.error("openBD:", event.target.errorCode);
     };
+}
+
+//Funcion para mostrar el pop-up de modificar la contraseña.
+function showPassword(){
+    var editor = document.getElementById("formPassword");
+    editor.style.display = "block";
+};
+
+//Función para modificar la contraseña
+function changePassword (){
+    
+    var passwdUser = document.getElementById("editpassword");
+    var passwdConfirm = document.getElementById("confirmpassword");
+    var errorDetected = false;
+
+    var errorPassword = document.getElementById("passwordError");
+    var errorPassword2 = document.getElementById("passwordError2");
+
+    if (passwdUser.value === ''){
+        errorPassword.innerText = "The password fields are empty";
+        errorPassword.style.display = "block";
+        errorDetected = true;
+        console.log("Password is not correct");
+    } else {
+        errorPassword.style.display = "none";
+    }
+    if (passwdConfirm.value === ''){
+        errorPassword2.innerText = "The password fields are empty";
+        errorPassword2.style.display = "block";
+        errorDetected = true;
+        console.log("Password is not correct");
+    } else {
+        errorPassword2.style.display = "none";
+    }
+
+    if (passwdConfirm.value != passwdUser.value) {
+        errorPassword2.innerText = "The password is not the same";
+        errorPassword2.style.display = "block";
+        errorDetected = true;
+        console.log("Password is not correct");
+    }
+    if(errorDetected) {
+        console.log("Error detected");
+        return; 
+    } else {
+        console.log("Email is correct");
+        errorPassword2.style.display = "none"; 
+        console.log("Password is correct");
+        errorPassword.style.display = "none";
+        console.log("All good");
+    }
+    
+    //Accede a los datos del perfil.
+    let datos = JSON.parse(sessionStorage.getItem("profile"));
+    var obj = {
+        name:datos.name,
+        username:datos.username,
+        email:datos.email,
+        password:passwdUser.value,
+        admin:datos.admin,
+        avatar:datos.avatar
+    };
+    
+    var req = indexedDB.open(database, DB_VERSION);   
+    req.onsuccess = function (event) {
+        db = this.result;
+        console.log("openBD DONE");      
+
+        var tx = db.transaction(DB_STORE_NAME, "readwrite");
+        var store = tx.objectStore(DB_STORE_NAME); 
+
+        request = store.put(obj);
+
+        request.onsuccess = function (e) { 
+           datos = e.target.result;
+           console.log("funciona");
+           
+            request.onsuccess = function (e) { 
+                datos = e.target.result;
+                console.log("funciona");
+                location.replace("./index_admin.html");
+            };
+
+            request.onerror = function (e) {
+                console.error("Connection error", this.error);
+            };
+
+            tx.oncomplete = function () {
+                db.close();  
+            }; 
+        };
+    };
+    req.onerror = function(event) {
+        console.error("openBD:", event.target.errorCode);
+    };
+};
+
+//Función para cerrar sesión.
+function logOut(){
+
+    sessionStorage.removeItem("profile");
+    sessionStorage.removeItem("email");
+    sessionStorage.removeItem("user");
+    location.replace("./home.html")
+
+    console.log( sessionStorage);
+}
+
+//Función para borrar usuarios.
+function deleteData (email) {
+   
+    var req = indexedDB.open(database, DB_VERSION);   
+
+   if(confirm("¿Quieres eliminar el usuario" + email + "?")) {
+    req.onsuccess = function (event) {
+       
+        db = this.result;
+        console.log("openBD DONE");      
+
+        var tx = db.transaction(DB_STORE_NAME, "readwrite");
+        var store = tx.objectStore(DB_STORE_NAME);          
+
+        request = store.delete(email.toString());
+
+        request.onsuccess = function (e) {  
+            location.reload();      //carga la página de nuevo
+
+            datos = e.target.result;
+            console.log("funciona");
+        };
+    };
+
+    req.onerror = function(event) {
+        console.error("openBD:", event.target.errorCode);
+    };
+   }
+};
+
+function deleteAccount(){
+    
+    var req = indexedDB.open(database, DB_VERSION);   
+
+    if(confirm("¿Quieres eliminar la cuenta?")) {
+        req.onsuccess = function (event) {
+            
+                db = this.result;
+                console.log("openBD DONE");      
+
+                var tx = db.transaction(DB_STORE_NAME, "readwrite");
+                var store = tx.objectStore(DB_STORE_NAME);          
+
+                request = store.delete(sessionStorage.getItem("email"));
+
+                request.onsuccess = function (e) {   
+                    datos = e.target.result;
+                    console.log("funciona"); 
+                    logOut();
+                };  
+            
+        };
+        req.onerror = function(event) {
+            console.error("openBD:", event.target.errorCode);
+        };
+    }
+};
+
+//Edita el usuario desde la parte de administrador.
+function editUser(email){
+    showEditor();
+
+    var edit = document.getElementById("editPasswd");
+    edit.style.display = "none";
+
+    var deleteAcc = document.getElementById("deleteAcc");
+    deleteAcc.style.display = "none";
+
+    var updateUser = document.getElementById("updateProfile");
+    updateUser.style.display = "none";
+
+    //Muestra el botón.
+    var update = document.getElementById("updateUser");
+    update.style.display = "block";
+
+    var req = indexedDB.open(database, DB_VERSION);     
+
+    req.onsuccess = function (e) {
+        db = this.result;
+        console.log("openBD DONE");      
+
+        var tx = db.transaction(DB_STORE_NAME, "readwrite");
+        var store = tx.objectStore(DB_STORE_NAME);     
+        
+        request = store.get(email);
+
+        let datos;
+      
+        request.onsuccess = function (e) {
+           datos = e.target.result;
+           sessionStorage.setItem("user",JSON.stringify(datos));
+           
+           var nombreEdit = document.getElementById("editname");
+           var userEdit = document.getElementById("editusername");
+           var emailEdit = document.getElementById("editemail");
+       
+           nombreEdit.value =  datos.name;
+           userEdit.value = datos.username;
+           emailEdit.value = datos.email;
+        };
+    
+        request.onerror = function (e) {
+            console.error("Connection error", this.error);
+        };
+    
+        tx.oncomplete = function () {
+            db.close();  
+        }; 
+    };
+
+    req.onerror = function(event) {
+        console.error("openBD:", event.target.errorCode);
+    };
+};
+
+
+//Función para que te mande al formulario de registro.
+function formRegister(){
+    location.replace("./index.html");
+};
+//Función para cambiar el tema de la página.
+
+function cambiarTema(){
+    var body = document.querySelector("body");
+    var footer = document.querySelector("footer");
+    // var headerClaro = document.querySelector("");
+    // var letraOsc = document.querySelector("");
+    console.log(sessionStorage.getItem("tema"));
+
+
+    // letraOsc.style.color = "black";
+    
+    if(sessionStorage.getItem("tema") === undefined){
+        sessionStorage.setItem("tema", true);
+
+    }
+    var prueba = sessionStorage.getItem("tema");
+    console.log(sessionStorage.getItem("tema"));
+
+    //Modifica el fondo a un tema más oscuro, pero no vuelve a su estado original.
+    if(prueba){
+        sessionStorage.setItem("tema", false);
+        body.style.backgroundColor = "#1A090D"; 
+        footer.style.backgroundColor = "#E8E1D5";
+
+    } else {
+        sessionStorage.setItem("tema", true);
+        body.style.backgroundColor = "#E8E1D5"; 
+        footer.style.backgroundColor = "#1A090D";
+    }
+
+    console.log(sessionStorage.getItem("tema"));
 };
 
 window.addEventListener('load', (event) => {
@@ -439,8 +776,8 @@ window.addEventListener('load', (event) => {
         sendDataForm.addEventListener("click", (event) => {
             sendData();
         });
-    } else {
+    } else if(!window.location.pathname.includes("/home.html")){
         getData();
-    }
+    } 
 });
 

@@ -22,7 +22,7 @@ header { background-color: #E8E1D5; }
 
 footer { 
     background-color: #1A090D; 
-    position: fixed;
+    /* position: fixed; */
     bottom: 0;
     width: 100%;
 }
@@ -174,12 +174,6 @@ li {display: inline-block;}
     background: linear-gradient(#7E7297,#1A090D);
 }
 
-/*Se aplica una animación en el logo de la página*/
-/* .animation {
-    animation-duration: 5s;
-	animation-name: animation;
-	animation-iteration-count: infinite;
-} */
 #emailError{
     display: none;
 }
