@@ -23,6 +23,21 @@ ctx.lineTo(100, 5);
 ctx.lineTo(100, 450);
 ctx.lineTo(650, 450);
 
+//Flecha izquierda
+ctx.moveTo(100, 5);
+ctx.lineTo(110, 15);
+
+ctx.moveTo(100, 5);
+ctx.lineTo(90, 15);
+
+//Flecha derecha
+
+ctx.moveTo(650, 450);
+ctx.lineTo(640, 460);
+ctx.moveTo(650, 450);
+ctx.lineTo(640, 440);
+
+
 ctx.stroke();
 
 ctx.font = "bold 16px Arial";
@@ -32,9 +47,11 @@ ctx.font = "bold 16px Arial";
 ctx.fillText(sales[1].product, 310, 480);
 
 ctx.font = "bold 16px Arial";
-ctx.fillText(sales[2].product, 460, 480);
+ctx.fillText(sales[2].product, 490, 480);
 
+ctx.fillText("Units", 20, 260, 490);
 
+ctx.fillText("Product", 350, 520, 220)
 //Primer gráfico.
 const grd = ctx.createLinearGradient(130, 0, 240, 0);
 grd.addColorStop(0, "#fcaf27");
@@ -53,9 +70,9 @@ ctx.fillRect(300, 249, 100, 200);
 
 //Tercer gráfico
 
-const grd3 = ctx.createLinearGradient(450, 0, 200, 0);
+const grd3 = ctx.createLinearGradient(430, 0, 670, 0);
 grd3.addColorStop(0, "#f17d4c");
 grd3.addColorStop(1, "#EFE2F7");
 
 ctx.fillStyle = grd3;
-ctx.fillRect(475, 200, 100, 249);
+ctx.fillRect(476, 100, 100, 349);
