@@ -2,8 +2,18 @@ let canvas;
 let context;
 let sound = document.querySelector("#boing");
 
+let start = document.getElementById("btn_start");
+let stop = document.getElementById("btn_stop");
+
+let axisX = document.getElementById("axisx");
+let axisY = document.getElementById("axisy");
+
 canvas = document.getElementById('2d-animation-canvas');
 context = canvas.getContext('2d');
+
+let intervalo;
+
+
 
 function draw(x, y) {
   context.fillStyle = "#8E6FA4";
@@ -24,7 +34,7 @@ var directionY = 2;
 draw(ballX, ballY);
 
 function moverBola(){
-    setInterval(function(){
+   
     if (ballX > 520 || ballX < 0){
       directionX *= -1;
       sound.play();
@@ -39,12 +49,17 @@ function moverBola(){
     ballY += directionY;
     clearCanvas();
     draw(ballX, ballY);
-
-  }, 35)
+   
 };
 
 //Variable para parar el intervalo
 
-function stopInterval(){
-  
-}
+start.addEventListener("click", (e) =>{
+  //añadir los axis
+  intervalo = setInterval(moverBola, 20);
+});
+
+stop.addEventListener("click", (e) => {
+  clearInterval(intervalo);
+});
+
