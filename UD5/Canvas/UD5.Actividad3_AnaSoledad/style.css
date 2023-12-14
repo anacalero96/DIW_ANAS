@@ -1,0 +1,24 @@
+
+
+
+/*Estilo de los botones*/
+#btn_start, #btn_stop{
+    background-color: rgb(129, 129, 216);
+    width: 85px;
+    height: 40px;
+    font-weight: bold;
+    margin-top: 10px;
+    border-radius: 6px;
+    font-size: 16px;  
+    font-family:'Times New Roman', Times, serif;
+}
+
+.texto {
+    margin: 10px;
+    width: 40px;
+    background-color: rgb(220, 223, 226);
+}
+
+body{
+    background-color: #C0BDC2
+}
