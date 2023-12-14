@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2d animation AnaS</title>  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main style="text-align: center;">
+    <!--Sound Effect from <a href="https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=7111">Pixabay</a>-->
+    <audio id="boing" src="audio/jews_harp_boing-7111.mp3"></audio>
+    <canvas width="520" height="520" id="2d-animation-canvas" style="border: 2px solid rgb(68, 36, 100); background-color: rgb(220, 223, 226); margin-top: 40px;"></canvas>
+
+    <div>
+      <label>Axis X:</label><input type="text" class="texto"></input>
+      <label>Axis Y:</label><input type="text" class="texto"></input>
+    </div>
+
+    
+    <!--Botones para inciar la animación y pararla-->
+
+    <div class="btn">
+      <button id="btn_start">Start</button>
+      <button id="btn_stop">Stop</button>
+    </div>    
+   
+
+  </main>
+
+  <script src="2d_animation.js"></script> 
+</body>
+</html>
