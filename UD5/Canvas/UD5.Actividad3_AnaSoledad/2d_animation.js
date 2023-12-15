@@ -13,8 +13,6 @@ context = canvas.getContext('2d');
 
 let intervalo;
 
-
-
 function draw(x, y) {
   context.fillStyle = "#8E6FA4";
   context.beginPath();
@@ -30,6 +28,10 @@ var ballX = 60;
 var ballY = 60;
 var directionX = 2;
 var directionY = 2;
+
+//Carga los valores inciales en el input.
+axisX.value = directionX;
+axisY.value = directionY;
 
 draw(ballX, ballY);
 
@@ -52,14 +54,26 @@ function moverBola(){
    
 };
 
+
+axisX.addEventListener("change", (e) => {
+  directionX = parseInt(axisX.value);   //obtiene los valores del input
+  console.log(directionX);
+});
+axisY.addEventListener("change", (e) => {
+  directionY = parseInt(axisY.value);
+});
+
 //Variable para parar el intervalo
 
 start.addEventListener("click", (e) =>{
-  //añadir los axis
   intervalo = setInterval(moverBola, 20);
 });
-
 stop.addEventListener("click", (e) => {
   clearInterval(intervalo);
+  directionX = 0;
+  directionY = 0;
+
+  axisX.value = 0;
+  axisY.value = 0;
 });
 
