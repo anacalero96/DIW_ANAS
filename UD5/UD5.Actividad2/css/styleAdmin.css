@@ -21,6 +21,7 @@ header { background-color: #E8E1D5; }
 footer { 
     background-color: #1A090D; 
     bottom: 0;
+    position: fixed;
     width: 100%;
 }
 
