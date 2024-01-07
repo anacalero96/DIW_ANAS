@@ -1,0 +1,37 @@
+/*HOME*/
+
+
+/*Font Style*/
+@font-face {
+    font-family: myFirstFont;
+    src: url(../AROneSans-VariableFont_ARRR\,wght.ttf);
+}
+
+header { background-color: #E8E1D5; }
+
+body {
+    background-color: #E8E1D5;
+}
+
+#fondo{ background-color: #1A090D;}
+
+.btn{ background-color: #7E7297; }
+
+.btn:hover {
+    background-color: #6F1F42;
+    color: #E8E1D5;
+}
+
+footer { 
+    background-color: #1A090D; 
+    bottom: 0;
+    width: 100%;
+}
+
+li {
+    color: #ffff;
+}
+
+.container2 {
+    background-color: #7E7297;
+}
