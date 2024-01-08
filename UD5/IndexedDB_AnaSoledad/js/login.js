@@ -90,7 +90,7 @@ function loginValidation(){
 
 //Función para que te mande al formulario de registro.
 function formRegister(){
-    location.replace("./index.html");
+    location.replace("./register.html");
 };
 
 if(sessionStorage.getItem("email") != null) {

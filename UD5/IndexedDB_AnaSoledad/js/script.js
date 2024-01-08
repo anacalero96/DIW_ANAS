@@ -750,7 +750,7 @@ function editUser(email){
 
 //Función para que te mande al formulario de registro.
 function formRegister(){
-    location.replace("./index.html");
+    location.replace("./register.html");
 };
 //Función para cambiar el tema de la página.
 
@@ -788,7 +788,7 @@ function cambiarTema(){
 
 window.addEventListener('load', (event) => {  
     openCreateDb(function(db){});
-    if(window.location.pathname.includes("/index.html")) {
+    if(window.location.pathname.includes("/register.html")) {
         if(sessionStorage.getItem("email") != null) {
             location.replace("./home.html");
         }
