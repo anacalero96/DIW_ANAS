@@ -1,0 +1,19 @@
+.estilodiv{
+    margin: 13px;
+}
+input {
+    width: 20%;
+    height: 60%; 
+}
+h3{
+    text-align: center;
+    margin-top: 10px;
+}
+main {
+    background-color: rgb(177, 218, 204);
+    width: 30%;
+    text-align: center;
+}
+button {
+    margin-bottom: 10px;
+}
