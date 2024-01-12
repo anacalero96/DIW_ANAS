@@ -26,8 +26,6 @@ $(document).ready(function(){
 
         if(aux == true){
             aux = false;
-            console.log($(this).text());
-            console.log(girada.text());
             if($(this).text() == girada.text()){
                 $(".mensaje").text("Las cartas son iguales");
             } else {
