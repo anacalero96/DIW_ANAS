@@ -2,14 +2,19 @@
     padding: 0;
     margin: 0;
 }
-
+body {
+    background-image: url("./img/fondoJuego.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .cartas {
     background-color: #BCD6D7;
     margin: 0 auto;
     border: 3px solid #5995FB;
     border-radius: 10px ;
     margin-top: 100px;
-    width: 600px;
+    width: 650px;
+    padding-bottom: 50px;
 }
 .card{
     /* background-color: #3769BF; */

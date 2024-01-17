@@ -10,7 +10,7 @@ $(document).ready(function(){
 
     let img = ['abejabee.webp', 'aldeano.jpg', 'creeper.png', 'enderman.gif', 'espada.jpg', 'gatocreeper.webp', 'oveja.gif', 'panda-rolling.gif', 'pico.jpg', 'zombie.jpg'];
 
-    while(cantidadCartas < 4 || cantidadCartas > 20 || cantidadCartas%2 != 0){      //Compara el regango de cartas que vamos a usar y después si son pares.
+    while(cantidadCartas < 8 || cantidadCartas > 20 || cantidadCartas%2 != 0){      //Compara el rango de cartas que vamos a usar y después si son pares.
         cantidadCartas = Math.floor((Math.random()*10)*2);
         console.log(cantidadCartas);
     }
@@ -30,7 +30,6 @@ $(document).ready(function(){
         }
     };
 
-    
     for(i = 0; i < cantidadCartas;){
         nRandom = Math.floor((Math.random()*10));
         if(nRandom < cantidadCartas/2){
@@ -42,7 +41,6 @@ $(document).ready(function(){
             } 
         }
         //  $(".cartas").append($("<div class='card' value='"+nPartida[nRandom]+"'>"+'&nbsp'+"</div>"));
-
     };
 
     $(".card").on("click", function(){
