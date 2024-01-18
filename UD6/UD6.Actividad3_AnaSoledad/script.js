@@ -4,6 +4,8 @@ $(document).ready(function(){
     $("textarea").countCharacters();
 });
 
+//https://api.jquery.com/keyup/#on-
+
 $.fn.countCharacters = function(){
     // this.css("background", "pink");
     // return this;
@@ -14,6 +16,10 @@ $.fn.countCharacters = function(){
     $("form").data("test", texto2);
 
     $("span").html($("form").data("test")+ "characters");
+
+    $("#text1").keyup(function(){
+
+    });
 
 
 };
