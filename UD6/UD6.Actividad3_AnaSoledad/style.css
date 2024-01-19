@@ -1,3 +1,11 @@
 textarea {
-    margin: 10px;
+    display: block;
 }
+
+
+#text1{
+   margin: 20px;
+}
+#text2{
+    margin: 20px;
+ }
