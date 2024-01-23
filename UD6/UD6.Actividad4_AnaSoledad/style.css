@@ -1,2 +1,18 @@
 
 #draggable { width: 150px; height: 150px; padding: 0.5em; }
+
+#contenedor1{
+    background-color: #DBDFF7;
+    width: 300px;
+    height: 500px;
+    border-radius: 6px;
+    display:inline-block;
+}
+#contenerdor2{
+    background-color: #DBF7F6;
+    width: 300px;
+    height: 500px;
+    border-radius: 6px;
+   
+    display:inline-block;
+}
