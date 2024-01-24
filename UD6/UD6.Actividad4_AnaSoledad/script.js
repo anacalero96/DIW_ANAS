@@ -13,15 +13,16 @@ $(document).ready(function(){
     //contenedor1 es el que contiene los post-it de color lila oscuro.
     $("#contenedor1").droppable({
         accept: ".draggable_violeta",       //solo acepta los post-it color violeta/lila
-        drop:function(ui){
+        drop: function(ui){
             violetaId = ui.draggable.prop("id");
             console.log(violetaId);
-            if($("div#" + violetaId).hasClass("purple")){
+
+            if($("div#"+ violetaId).hasClass("purple")){
                 console.log("droppable");
             } else{
                 contadorVioleta++;
                 $("div#"+ violetaId).removeClass("purple");
-                $("contenedor1").find("p").html("Hay tantos post-it"+ violetaId);
+                $("contenedor1").find("p").html("Hay tantos post-it"+ contadorVioleta);
             }
         }
 
