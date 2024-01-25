@@ -55,9 +55,11 @@ $("#crearPost").on("click", function(){
     if(randPost === 1){
         purpleId++;
         $("main").append($("<div class='draggable_violeta' id='violeta_"+purpleId+"' ><p></p>post-it</div>"));
+        $( ".draggable_violeta").draggable();
     } else {
         turquoiseId++;
         $("main").append($("<div class='draggable_turquesa' id='turquesa_"+turquoiseId+"' ><p></p>post-it</div>"));
+        $( ".draggable_turquesa" ).draggable();
 
     }
 
