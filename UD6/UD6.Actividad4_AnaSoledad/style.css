@@ -1,0 +1,47 @@
+
+.draggable_violeta { width: 130px; height: 130px; padding: 0.5em; font-size: 15px; background-color: #51315C; color:white;}
+.draggable_turquesa { width: 50px; height: 50px; padding: 0.5em; font-size: 15px; background-color: #5496B6; color: white;}
+
+*{ padding: 0; margin: 0; }
+
+#contenedor1{
+    background-color: #DBDFF7;
+    width: 300px;
+    height: 500px;
+    border-radius: 6px;
+    /* display:inline-block; */
+    float: right;
+}
+#contenedor2{
+    background-color: #DBF7F6;
+    width: 300px;
+    height: 500px;
+    border-radius: 6px;
+    /* display:inline-block; */
+    float: right;
+}
+header{
+    background-color: #484650;
+    color: white;
+    height: 80px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.postIt {
+    float: left;
+    margin: 10px;
+}
+#crearPost{
+    background-color: #e9c4df;
+    border-radius: 7px;
+    height: 40px;
+    width: 120px;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 15px;
+}
+textarea{
+    background-color: rgba(169, 152, 174, 0.50);
+    color:white;
+    font-weight: bold;
+    
+}
