@@ -15,17 +15,28 @@ $(document).ready(function(){
     $("#contenedor1").droppable({
         accept: ".draggable_violeta",       //solo acepta los post-it color violeta/lila
         drop: function(event, ui) {
-            violetaId = ui.draggable.prop("id");
-            console.log(violetaId);
 
-            if($("div#"+ violetaId).hasClass("purple")){
-                console.log("droppable");
-            } else{
+            violetaId = ui.draggable.prop("id");
+            //Comprueba que la clase está añadida.
+            if($("#div#" + violetaId).hasClass("purple-contador")){
+                console.log("Este post-it está dentro del cuadro");
+            } else {
                 contadorVioleta++;
-                console.log("OH NO!");
-                $("div#"+ violetaId).removeClass("purple");
-                $(this).find("p").html("Hay tantos post-it "+ contadorVioleta);
+                $("div#" + violetaId).addClass("purple-contador");
+                $(this).find("p").html("Hay tantos post-it " + contadorVioleta + " de color violeta");
+                console.log(contadorVioleta);
             }
+        },
+        out: function(event, ui){
+            violetaId = ui.draggable.prop("id");
+
+            if($("div#"+ violetaId).hasClass("purple-contador")){
+                contadorVioleta--;
+
+                console.log("OH NO!");
+                $("div#"+ violetaId).removeClass("purple-contador");
+                $(this).find("p").html("Hay tantos post-it "+ contadorVioleta);
+            } 
         }
     });
 
@@ -36,16 +47,53 @@ $(document).ready(function(){
             turquesaId = ui.draggable.prop("id");
             console.log(turquesaId);
 
-            if($("div#"+ turquesaId).hasClass("turquoise")){
+            if($("div#"+ turquesaId).hasClass("turquoise-contador")){
                 console.log("droppable");   
             } else {
                 contadorTurquesa++;
                 console.log("!!!");
-                $("div#"+ turquesaId).removeClass("turquoise");
+                $("div#"+ turquesaId).removeClass("turquoise-contador");
                 $(this).find("p").html("Hay tantos post-it "+ contadorTurquesa);
+            }
+        },
+        out: function(event, ui){
+            turquesaId = ui.draggable.prop("id");
+
+            if($("div#"+ violetaId).hasClass("turquoise-contador")){
+                contadorTurquesa--;
+                $("div#"+ turquesaId).removeClass("turquoise-contador");
+                $(this).find("p").html("Hay tantos post-it "+ contadorTurquesa);
+            } 
+        }
+    });
+
+    $(document).on("click", ".borrar", function(){
+        //Coge la id del padre (post-it)
+        postId = $(this).parent().attr("id");
+
+        // $("div#" + postId).addClass("minimized");
+
+        $("#dialog-confirm").dialog("open");
+    });
+
+
+    $("#dialog-confirm").dialog({
+        resizable: false,
+        height: "auto",
+        width: 400,
+        modal: true,
+        autoOpen: false,
+        buttons: {
+            "Delete all items": function() {
+                $('#' + postId).remove();
+                $( this ).dialog("close");
+            },
+            Cancel: function() {
+                $( this ).dialog("close");
             }
         }
     });
+    
 });
 
 
@@ -54,15 +102,13 @@ $("#crearPost").on("click", function(){
     
     if(randPost === 1){
         purpleId++;
-        $("main").append($("<div class='draggable_violeta' id='violeta_"+purpleId+"' ><p></p>post-it</div>"));
+        $("main").append($("<div class='draggable_violeta' id='violeta_"+purpleId+"'><textarea></textarea></div>"));
         $( ".draggable_violeta").draggable();
     } else {
         turquoiseId++;
-        $("main").append($("<div class='draggable_turquesa' id='turquesa_"+turquoiseId+"' ><p></p>post-it</div>"));
+        $("main").append($("<div class='draggable_turquesa' id='turquesa_"+turquoiseId+"'><textarea></textarea></div>"));
         $( ".draggable_turquesa" ).draggable();
-
     }
-
 });
 
  

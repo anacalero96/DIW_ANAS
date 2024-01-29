@@ -6,6 +6,7 @@
     <title>Actividad4 JQuery</title>    
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="style.css">
 </head>  
 <body>
@@ -29,12 +30,19 @@
                 <p>...</p>
             </div>
         </div>
+        
+        <div id="dialog-confirm" title="Empty the recycle bin?">
+            <p>¡Este post-it va a ser borrado para siempre!</p>
+        </div>
+
         <div>
-            <div class="draggable_violeta" id="violeta_1">
-                <textarea></textarea>
+            <div class="draggable_violeta" id="violeta_1"> 
+                <button class="borrar">x</button>
+                <textarea maxlength="120"></textarea>
             </div>
             <div class="draggable_turquesa" id="turquesa_1">
-                <p>post-it 2</p>
+                <button class="borrar">x</button>
+                <textarea maxlength="100"></textarea>
             </div>
         </div>
     </main>
