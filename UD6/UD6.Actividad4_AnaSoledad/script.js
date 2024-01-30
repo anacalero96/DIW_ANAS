@@ -76,9 +76,15 @@ $(document).ready(function(){
     $(document).on("click", ".mxmin", function(){
         postMxmin = $(this).parent().attr("id");
 
+        $("div#" + postMxmin).removeClass("maximizar");
+        $("div#" +  postMxmin).addClass("minimizar");
+
+    });
+    $(document).on("click", ".max", function(){
+        postMxmin = $(this).parent().attr("id");
+
         $("div#" + postMxmin).removeClass("minimizar");
         $("div#" +  postMxmin).addClass("maximizar");
-
     });
 
     $("#dialog-confirm").dialog({

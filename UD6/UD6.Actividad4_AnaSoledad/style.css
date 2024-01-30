@@ -58,6 +58,35 @@ textarea{
     width: 20px;
     float: right;
 }
-.minimizar {
-    height: 10px;
+
+/*Botón para minimizar el post-it*/
+.draggable_violeta.minimizar{
+    height: 15px;
+}
+.draggable_turquesa.minimizar{
+    height: 15px;
+}
+
+/*Se oculta el textarea una vez se minimiza*/
+.draggable_violeta.minimizar textarea, .draggable_turquesa.minimizar textarea{
+    display: none;
+}
+
+
+
+/*Botón para maximizar*/
+.max{
+    display: none;
+    width: 20px;
+    float: right;
+}
+
+.draggable_turquesa.maximizar, .draggable_violeta.maximizar{
+    height: 130px;
+}
+.draggable_turquesa.minimizar .max, .draggable_violeta.minimizar .max{
+    display: inline;
+}
+.draggable_turquesa.minimizar .mxmin, .draggable_violeta.minimizar .mxmin{
+    display:none;
 }
