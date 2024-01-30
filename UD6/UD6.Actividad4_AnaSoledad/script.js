@@ -70,12 +70,16 @@ $(document).ready(function(){
     $(document).on("click", ".borrar", function(){
         //Coge la id del padre (post-it)
         postId = $(this).parent().attr("id");
-
-        // $("div#" + postId).addClass("minimized");
-
         $("#dialog-confirm").dialog("open");
     });
 
+    $(document).on("click", ".mxmin", function(){
+        postMxmin = $(this).parent().attr("id");
+
+        $("div#" + postMxmin).removeClass("minimizar");
+        $("div#" +  postMxmin).addClass("maximizar");
+
+    });
 
     $("#dialog-confirm").dialog({
         resizable: false,
@@ -102,11 +106,11 @@ $("#crearPost").on("click", function(){
     
     if(randPost === 1){
         purpleId++;
-        $("main").append($("<div class='draggable_violeta' id='violeta_"+purpleId+"'><textarea></textarea></div>"));
+        $("main").append($("<div class='draggable_violeta' id='violeta_"+purpleId+"'><button class='borrar'>x</button><button class='mxmin'>-</button><textarea maxlength='100'></textarea></div>"));
         $( ".draggable_violeta").draggable();
     } else {
         turquoiseId++;
-        $("main").append($("<div class='draggable_turquesa' id='turquesa_"+turquoiseId+"'><textarea></textarea></div>"));
+        $("main").append($("<div class='draggable_turquesa' id='turquesa_"+turquoiseId+"'><button class='borrar'>x</button><button class='mxmin'>-</button><textarea maxlength='100'></textarea></div>"));
         $( ".draggable_turquesa" ).draggable();
     }
 });
