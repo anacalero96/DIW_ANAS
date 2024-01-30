@@ -79,20 +79,20 @@ $(document).ready(function(){
 
         $("div#" + postMxmin).removeClass("maximizar");
 
+        //animación minimizar el post-it.
         $('div#' + postMxmin).animate({
             height: '15px',
         },500);
 
-
-        $("div#" +  postMxmin).addClass("minimizar");
-
-        
+        $("div#" +  postMxmin).addClass("minimizar");        
     });
 
     $(document).on("click", ".max", function(){
         postMxmin = $(this).parent().attr("id");
 
         $("div#" + postMxmin).removeClass("minimizar");
+        
+        //animación maximizar el post-it.
         $('div#' + postMxmin).animate({
             height: '130px',
         },500);
@@ -128,7 +128,6 @@ $(document).ready(function(){
     });
     
 });
-
 
 $("#crearPost").on("click", function(){
     randPost = Math.floor((Math.random()*2) + 1);
