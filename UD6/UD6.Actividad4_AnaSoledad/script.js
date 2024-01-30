@@ -112,11 +112,11 @@ $("#crearPost").on("click", function(){
     
     if(randPost === 1){
         purpleId++;
-        $("main").append($("<div class='draggable_violeta' id='violeta_"+purpleId+"'><button class='borrar'>x</button><button class='mxmin'>-</button><textarea maxlength='100'></textarea></div>"));
+        $("main").append($("<div class='draggable_violeta' id='violeta_"+purpleId+"'><button class='borrar'>x</button><button class='mxmin'>-</button><button class='max'>+</button><textarea maxlength='100'></textarea></div>"));
         $( ".draggable_violeta").draggable();
     } else {
         turquoiseId++;
-        $("main").append($("<div class='draggable_turquesa' id='turquesa_"+turquoiseId+"'><button class='borrar'>x</button><button class='mxmin'>-</button><textarea maxlength='100'></textarea></div>"));
+        $("main").append($("<div class='draggable_turquesa' id='turquesa_"+turquoiseId+"'><button class='borrar'>x</button><button class='mxmin'>-</button><button class='max'>+</button><textarea maxlength='100'></textarea></div>"));
         $( ".draggable_turquesa" ).draggable();
     }
 });
