@@ -4,8 +4,8 @@
 var contadorVioleta = 0;
 var contadorTurquesa = 0;
 
-var purpleId = 0; //Hace referencia a la id del post-it violeta.
-var turquoiseId = 0;
+var purpleId = 1; //Hace referencia a la id del post-it violeta.
+var turquoiseId = 1;
 
 
 $(document).ready(function(){
@@ -18,8 +18,8 @@ $(document).ready(function(){
 
             violetaId = ui.draggable.prop("id");
             //Comprueba que la clase está añadida.
-            if($("#div#" + violetaId).hasClass("purple-contador")){
-                console.log("Este post-it está dentro del cuadro");
+            if($("div#" + violetaId).hasClass("purple-contador")){
+                console.log(violetaId);
             } else {
                 contadorVioleta++;
                 $("div#" + violetaId).addClass("purple-contador");
@@ -51,16 +51,16 @@ $(document).ready(function(){
                 console.log("droppable");   
             } else {
                 contadorTurquesa++;
-                console.log("!!!");
-                $("div#"+ turquesaId).removeClass("turquoise-contador");
-                $(this).find("p").html("Hay tantos post-it "+ contadorTurquesa);
+                $("div#"+ turquesaId).addClass("turquoise-contador");
+                $(this).find("p").html("Hay tantos post-it "+ contadorTurquesa + " de color turquesa");
             }
         },
         out: function(event, ui){
             turquesaId = ui.draggable.prop("id");
 
-            if($("div#"+ violetaId).hasClass("turquoise-contador")){
+            if($("div#"+ turquesaId).hasClass("turquoise-contador")){
                 contadorTurquesa--;
+
                 $("div#"+ turquesaId).removeClass("turquoise-contador");
                 $(this).find("p").html("Hay tantos post-it "+ contadorTurquesa);
             } 
@@ -71,19 +71,32 @@ $(document).ready(function(){
         //Coge la id del padre (post-it)
         postId = $(this).parent().attr("id");
         $("#dialog-confirm").dialog("open");
+
     });
 
     $(document).on("click", ".mxmin", function(){
         postMxmin = $(this).parent().attr("id");
 
         $("div#" + postMxmin).removeClass("maximizar");
-        $("div#" +  postMxmin).addClass("minimizar");
 
+        //animación minimizar el post-it.
+        $('div#' + postMxmin).animate({
+            height: '15px',
+        },500);
+
+        $("div#" +  postMxmin).addClass("minimizar");        
     });
+
     $(document).on("click", ".max", function(){
         postMxmin = $(this).parent().attr("id");
 
         $("div#" + postMxmin).removeClass("minimizar");
+        
+        //animación maximizar el post-it.
+        $('div#' + postMxmin).animate({
+            height: '130px',
+        },500);
+
         $("div#" +  postMxmin).addClass("maximizar");
     });
 
@@ -95,6 +108,16 @@ $(document).ready(function(){
         autoOpen: false,
         buttons: {
             "Delete all items": function() {
+               
+                //Condicional para actualizar los contadores y que disminuya el valor.
+                if($("#"+ postId).hasClass("turquoise-contador")){
+                    contadorTurquesa--;
+                    $("#contenedor2").find("p").html("Hay tantos post-it "+ contadorTurquesa + " de color turquesa");
+                }
+                if($("#"+ postId).hasClass("purple-contador")){
+                    contadorVioleta--;
+                    $("#contenedor1").find("p").html("Hay tantos post-it "+ contadorVioleta + " de color violeta");
+                }
                 $('#' + postId).remove();
                 $( this ).dialog("close");
             },
@@ -106,17 +129,18 @@ $(document).ready(function(){
     
 });
 
-
 $("#crearPost").on("click", function(){
     randPost = Math.floor((Math.random()*2) + 1);
     
     if(randPost === 1){
         purpleId++;
-        $("main").append($("<div class='draggable_violeta' id='violeta_"+purpleId+"'><button class='borrar'>x</button><button class='mxmin'>-</button><button class='max'>+</button><textarea maxlength='100'></textarea></div>"));
+        $("main").append($("<div class='draggable_violeta' id='violeta_"+purpleId+"'><button class='borrar'>x</button><button class='mxmin'>-</button><button class='max'>+</button><textarea maxlength='120'></textarea></div>"));
         $( ".draggable_violeta").draggable();
+        console.log(purpleId);
     } else {
         turquoiseId++;
-        $("main").append($("<div class='draggable_turquesa' id='turquesa_"+turquoiseId+"'><button class='borrar'>x</button><button class='mxmin'>-</button><button class='max'>+</button><textarea maxlength='100'></textarea></div>"));
+        //append para añadir en el div contenido al post-it que se crea.
+        $("main").append($("<div class='draggable_turquesa' id='turquesa_"+turquoiseId+"'><button class='borrar'>x</button><button class='mxmin'>-</button><button class='max'>+</button><textarea maxlength='120'></textarea></div>"));
         $( ".draggable_turquesa" ).draggable();
     }
 });
