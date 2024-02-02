@@ -28,10 +28,10 @@ Spotify.prototype.getArtist = function (artist) {
       let urlSpotify = item.external_urls.spotify;
       let name = item.name;   //variable para obtener el nombre del artista.
 
-      let src = item.images[1].url;
-
       //Muestra el numero de popularidad del artista.
-      let popularity = item.popularity;
+      let popularity = item.popularity; 
+      
+      let src = item.images[1].url;
 
       $("#results").append(`
       <div>
