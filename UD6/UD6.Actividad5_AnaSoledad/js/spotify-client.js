@@ -1,5 +1,5 @@
-var client_id = '58d1e3d8394e492a89ba2efdde4dc55c';
-var client_secret = 'df0746395dd34649b1863baeadab9c03';
+var client_id = '';
+var client_secret = '';
 var access_token = '';
 
 //We create the Spotify class with the API to make the call to
@@ -11,7 +11,6 @@ function Spotify() {
 
 //Search for information on an artist, adding the possibility of obtaining their albums.
 Spotify.prototype.getArtist = function (artist) {
-
   $.ajax({
     type: "GET",
     url: this.apiUrl + 'v1/search?type=artist&q=' + artist,
@@ -27,18 +26,22 @@ Spotify.prototype.getArtist = function (artist) {
     items.map(function(item){
       let id = item.id;
       let urlSpotify = item.external_urls.spotify;
-      let name = item.name;
-      let src = item.image;
+      let name = item.name;   //variable para obtener el nombre del artista.
+
+      let src = item.images[1].url;
+
+      //Muestra el numero de popularidad del artista.
+      let popularity = item.popularity;
 
       $("#results").append(`
       <div>
         <h3>${name}</h3>
-        <a href="${urlSpotify}"><img src="${src}"></a>
+        <h4>${popularity}</h4>
+        <a href='${urlSpotify}'><img src='${src}'></a>
       </div>
       `); 
       console.log({items});
     });
-    console.log({items});
   });
 };
 
@@ -68,8 +71,6 @@ $(function () {
     data: { grant_type: "client_credentials" }
   }).done( function(response) {    
     access_token = response.access_token;    
-
-    
   });
 
   var spotify = new Spotify();
