@@ -7,7 +7,7 @@ function Spotify() {
   this.apiUrl = 'https://api.spotify.com/';
 }
 
-//Añadir un JSON para las claves de acceso.   //Añadir el JSON AL GIT
+//Añadir un JSON para las claves de acceso.   //Añadir el JSON AL git-ignore
 
 //Search for information on an artist, adding the possibility of obtaining their albums.
 Spotify.prototype.getArtist = function (artist) {
@@ -25,15 +25,19 @@ Spotify.prototype.getArtist = function (artist) {
     let items = response.artists.items;
 
     items.map(function(item){
-      // let id = item.id;
+      let id = item.id;
       let urlSpotify = item.external_urls.spotify;
       let name = item.name;
-    });
+      let src = item.image;
 
-    $("#results").append(`<div>
+      $("#results").append(`
+      <div>
         <h3>${name}</h3>
-        <a href="${urlSpotify}"></a></div>
-    `);
+        <a href="${urlSpotify}"><img src="${src}"></a>
+      </div>
+      `); 
+      console.log({items});
+    });
     console.log({items});
   });
 };
