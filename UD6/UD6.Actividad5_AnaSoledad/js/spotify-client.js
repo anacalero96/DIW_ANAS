@@ -6,7 +6,7 @@ var access_token = '';
 function Spotify() {
   this.apiUrl = 'https://api.spotify.com/';
 }
-//Comentario de prueba
+
 $.ajax({
   url: './js/keys.json',
   dataType: 'json',
