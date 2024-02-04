@@ -7,7 +7,14 @@ function Spotify() {
   this.apiUrl = 'https://api.spotify.com/';
 }
 
-//Añadir un JSON para las claves de acceso.   //Añadir el JSON AL git-ignore
+$.ajax({
+  url: './js/keys.json',
+  dataType: 'json',
+  success: function (data) {
+    client_id = data.client_id;
+    client_secret = data.client_secret;
+  }
+});
 
 //Search for information on an artist, adding the possibility of obtaining their albums.
 Spotify.prototype.getArtist = function (artist) {
@@ -31,7 +38,8 @@ Spotify.prototype.getArtist = function (artist) {
       //Muestra el numero de popularidad del artista.
       let popularity = item.popularity; 
       
-      let src = item.images[1].url;
+      //Comprueba si hay url para las imagenes, en el caso que no hay se pone una imagen predeterminada.
+      let src = item.images.length !=0? item.images[0].url :'No_Image_Available.jpg';
 
       $("#results").append(`
       <div>
@@ -40,7 +48,7 @@ Spotify.prototype.getArtist = function (artist) {
         <a href='${urlSpotify}'><img src='${src}'></a>
       </div>
       `); 
-      console.log({items});
+      console.log({src});
     });
   });
 };
@@ -76,6 +84,7 @@ $(function () {
   var spotify = new Spotify();
 
   $('#bgetArtist').on('click', function () {
+    console.log($('#artistName').val());
     spotify.getArtist($('#artistName').val());
   });
 
