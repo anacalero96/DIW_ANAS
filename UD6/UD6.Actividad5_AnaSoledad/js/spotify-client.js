@@ -7,6 +7,8 @@ function Spotify() {
   this.apiUrl = 'https://api.spotify.com/';
 }
 
+var spotify = new Spotify();
+
 $.ajax({
   url: './js/keys.json',
   dataType: 'json',
@@ -26,7 +28,7 @@ Spotify.prototype.getArtist = function (artist) {
     },
   }).done( function(response){
     $("#results").empty("");
-    console.log(response);
+    // console.log(response);
 
     let items = response.artists.items;
 
@@ -48,7 +50,8 @@ Spotify.prototype.getArtist = function (artist) {
         <a href='${urlSpotify}'><img src='${src}'></a>
       </div>
       `); 
-      console.log({src});
+      spotify.getArtistById({id});
+      // console.log({src});
     });
   });
 };
@@ -64,6 +67,26 @@ Spotify.prototype.getArtistById = function (artistId) {
     },
   }).done( function(response){
     console.log(response);
+
+    $("#results").empty("");
+
+    let items = response.items;
+
+    items.map(function(item){
+      let id = item.id;
+      let urlSpotify = item.external_urls;
+      let name = item.name;
+
+      let src = item.images.length !=0? item.images[0].url :'No_Image_Available.jpg';
+
+      $("#results").append(`
+        <div>
+          <h3>${name}</h3>
+          <a href='${urlSpotify}'><img src='${src}'></a>
+        </div>
+      `);
+      console.log({item});
+    });
   });
 };
 
@@ -81,10 +104,10 @@ $(function () {
     access_token = response.access_token;    
   });
 
-  var spotify = new Spotify();
+  // var spotify = new Spotify();
 
   $('#bgetArtist').on('click', function () {
-    console.log($('#artistName').val());
+    // console.log($('#artistName').val());
     spotify.getArtist($('#artistName').val());
   });
 
