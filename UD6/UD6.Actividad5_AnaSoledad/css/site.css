@@ -1,0 +1,23 @@
+
+#results{
+  margin-top: 3em;
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(6, 1fr);
+  padding: 5px;
+  text-align: center;
+}
+
+form label{
+  display: inline-block;
+  width: 30%;
+}
+
+img {
+  height: 235px;
+  width: 235px;
+  align-items: center;
+  display: inline;
+  border-radius: 15px;
+  border: 2px solid #666;
+}
