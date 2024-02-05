@@ -9,14 +9,14 @@ function Spotify() {
 
 var spotify = new Spotify();
 
-$.ajax({
-  url: './js/keys.json',
-  dataType: 'json',
-  success: function (data) {
-    client_id = data.client_id;
-    client_secret = data.client_secret;
-  }
-});
+// $.ajax({
+//   url: './js/keys.json',
+//   dataType: 'json',
+//   success: function (data) {
+//     client_id = data.client_id;
+//     client_secret = data.client_secret;
+//   }
+// });
 
 //Search for information on an artist, adding the possibility of obtaining their albums.
 Spotify.prototype.getArtist = function (artist) {
@@ -50,7 +50,7 @@ Spotify.prototype.getArtist = function (artist) {
         <a href='${urlSpotify}'><img src='${src}'></a>
       </div>
       `); 
-      spotify.getArtistById({id});
+      spotify.getArtistById(id);
       // console.log({src});
     });
   });
@@ -68,27 +68,84 @@ Spotify.prototype.getArtistById = function (artistId) {
   }).done( function(response){
     console.log(response);
 
-    $("#results").empty("");
+    // $("#albums").empty("");
 
     let items = response.items;
 
     items.map(function(item){
       let id = item.id;
-      let urlSpotify = item.external_urls;
+      // let urlSpotify = item.external_urls;
       let name = item.name;
 
       let src = item.images.length !=0? item.images[0].url :'No_Image_Available.jpg';
 
-      $("#results").append(`
+      $("#albums").append(`
+        <div id='${id}'>
+          <h3>${name}</h3>
+          <img src='${src}'>
+        </div>
+      `);
+      console.log({item});
+
+      $("#" + id + ">img").on("click", function(){
+        console.log(id);
+        spotify.getTracks(id);
+      });
+    });
+  });
+};
+
+//Muestra las canciones en los albumes seleccionados.
+Spotify.prototype.getTracks = function (albumName) { 
+  $.ajax({
+    type: "GET",
+    url: this.apiUrl + 'v1/albums/' + albumName + '/tracks',
+    headers: {
+      'Authorization' : 'Bearer ' + access_token
+    },
+  }).done( function(response){
+    $("#" + albumName + ">div").remove("");
+    
+    let items = response.items;
+
+      items.map(function(item) {
+        let name = item.name; 
+        $("#" + albumName).append(`
+        <div>
+          <h3>${name}</h3>
+        </div>
+        `);
+      });
+  });
+};
+
+Spotify.prototype.getSongs = function (songName) { 
+  $.ajax({
+    type: "GET",
+    url: this.apiUrl + 'v1/search?type=track&q=' + songName,    
+    headers: {
+      'Authorization' : 'Bearer ' + access_token
+    },
+  }).done( function(response){
+    $("#results").empty("");
+    let items = response.items;
+
+      items.map(function(item) {
+        let urlSpotify = item.external_urls.spotify;
+        let name = item.name; 
+        let src = item.images.length !=0? item.images[0].url :'No_Image_Available.jpg';
+
+        $("#results").append(`
         <div>
           <h3>${name}</h3>
           <a href='${urlSpotify}'><img src='${src}'></a>
         </div>
-      `);
-      console.log({item});
-    });
+        `);
+      });
   });
 };
+
+
 
 //This fragment is the first thing that is loaded, when the $(document).ready
 $(function () {
@@ -108,11 +165,18 @@ $(function () {
 
   $('#bgetArtist').on('click', function () {
     // console.log($('#artistName').val());
+    $("#albums").empty("");
     spotify.getArtist($('#artistName').val());
   });
 
   $('#results').on('click', '.artistId', function () {
     spotify.getArtistById($(this).attr("data-id"));
   });
+  $('#getSongs').on('click', function () {
+    $("#albums").empty("");
+    spotify.getSongs($("#").val());
+  });
+
+  
 
 });

@@ -1,16 +1,26 @@
 
-#results{
+#results {
   margin-top: 3em;
   display: grid;
   gap: 1px;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   padding: 5px;
   text-align: center;
 }
-
+#albums {
+  margin-top: 3em;
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 5px;
+  text-align: center;
+}
 form label{
   display: inline-block;
   width: 30%;
+}
+#albums > div > div {
+  font-size: 11px;
 }
 
 img {
