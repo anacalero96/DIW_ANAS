@@ -35,9 +35,10 @@ Spotify.prototype.getArtist = function (artist) {
     items.map(function(item){
       let id = item.id;
       // let urlSpotify = item.external_urls.spotify;
-      let name = item.name;   //variable para obtener el nombre del artista.
 
-      //Muestra el numero de popularidad del artista.
+      let name = item.name;   //Variable to obtain the artist.
+
+      //Shows the artist's popularity number.
       let popularity = item.popularity; 
       
       //Comprueba si hay url para las imagenes, en el caso que no hay se pone una imagen predeterminada.
@@ -46,13 +47,13 @@ Spotify.prototype.getArtist = function (artist) {
       $("#results").append(`
       <div>
         <h3>${name}</h3>
-        <h4>${popularity}</h4>
+        <h4>Popularity: ${popularity}</h4>
         <a><img src='${src}'></a>
       </div>
       `); 
-      // spotify.getArtistById(id);  
-      
-      $("#results" + id +">img").on("click", function(){
+    
+      $(document).on("click", function(){
+        $("#results").empty("");
         spotify.getArtistById(id);
       });
     });
@@ -69,8 +70,6 @@ Spotify.prototype.getArtistById = function (artistId) {
       'Authorization' : 'Bearer ' + access_token
     },
   }).done( function(response){
-    console.log(response);
-
     let items = response.items;
 
     items.map(function(item){
@@ -86,10 +85,8 @@ Spotify.prototype.getArtistById = function (artistId) {
           <img src='${src}'>
         </div>
       `);
-      console.log({item});   
-
+      
       $("#" + id + ">img").on("click", function(){
-        console.log(id);
         spotify.getTracks(id);
       });
     });
