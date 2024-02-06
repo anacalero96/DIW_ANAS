@@ -1,10 +1,10 @@
 
 #results {
   margin-top: 3em;
-  display: grid;
+  display:grid;
   gap: 1px;
-  grid-template-columns: repeat(4, 1fr);
-  padding: 5px;
+  grid-template-columns: repeat(2, 2fr);
+  padding: 2px;
   text-align: center;
 }
 #albums {
@@ -30,4 +30,10 @@ img {
   display: inline;
   border-radius: 15px;
   border: 2px solid #666;
+}
+body{
+  background-color: #393D3F;
+  color: white;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  font-size: 13px;
 }

@@ -34,7 +34,7 @@ Spotify.prototype.getArtist = function (artist) {
 
     items.map(function(item){
       let id = item.id;
-      let urlSpotify = item.external_urls.spotify;
+      // let urlSpotify = item.external_urls.spotify;
       let name = item.name;   //variable para obtener el nombre del artista.
 
       //Muestra el numero de popularidad del artista.
@@ -47,11 +47,14 @@ Spotify.prototype.getArtist = function (artist) {
       <div>
         <h3>${name}</h3>
         <h4>${popularity}</h4>
-        <a href='${urlSpotify}'><img src='${src}'></a>
+        <a><img src='${src}'></a>
       </div>
       `); 
-      spotify.getArtistById(id);
-      // console.log({src});
+      // spotify.getArtistById(id);  
+      
+      $("#results" + id +">img").on("click", function(){
+        spotify.getArtistById(id);
+      });
     });
   });
 };
@@ -68,8 +71,6 @@ Spotify.prototype.getArtistById = function (artistId) {
   }).done( function(response){
     console.log(response);
 
-    // $("#albums").empty("");
-
     let items = response.items;
 
     items.map(function(item){
@@ -79,13 +80,13 @@ Spotify.prototype.getArtistById = function (artistId) {
 
       let src = item.images.length !=0? item.images[0].url :'No_Image_Available.jpg';
 
-      $("#albums").append(`
+      $("#results").append(`
         <div id='${id}'>
           <h3>${name}</h3>
           <img src='${src}'>
         </div>
       `);
-      console.log({item});
+      console.log({item});   
 
       $("#" + id + ">img").on("click", function(){
         console.log(id);
@@ -107,6 +108,7 @@ Spotify.prototype.getTracks = function (albumName) {
     $("#" + albumName + ">div").remove("");
     
     let items = response.items;
+    // let src = item.images.length !=0? item.images[0].url :'No_Image_Available.jpg';
 
       items.map(function(item) {
         let name = item.name; 
@@ -122,7 +124,7 @@ Spotify.prototype.getTracks = function (albumName) {
 Spotify.prototype.getSongs = function (songName) { 
   $.ajax({
     type: "GET",
-    url: this.apiUrl + 'v1/search?type=track&q=' + songName,    
+    url: this.apiUrl + 'v1/search?type=artists,track&q=' + songName,    
     headers: {
       'Authorization' : 'Bearer ' + access_token
     },
@@ -165,18 +167,16 @@ $(function () {
 
   $('#bgetArtist').on('click', function () {
     // console.log($('#artistName').val());
-    $("#albums").empty("");
     spotify.getArtist($('#artistName').val());
   });
 
   $('#results').on('click', '.artistId', function () {
     spotify.getArtistById($(this).attr("data-id"));
   });
+
   $('#getSongs').on('click', function () {
     $("#albums").empty("");
     spotify.getSongs($("#").val());
   });
-
-  
 
 });
