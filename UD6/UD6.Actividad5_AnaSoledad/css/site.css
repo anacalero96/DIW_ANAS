@@ -71,6 +71,18 @@ input{
     margin: 2px;
     font-size: 12px;
   }
+  div{
+    padding: 2px 14px;
+  }
+  input{
+    margin: auto;
+  }
+  #container{
+    display: grid;
+    gap: 5px;
+    width: 50%;
+    grid-template-columns: repeat(2, 2fr);
+  }
   #results {
     margin-top: 3em;
     display:grid;
@@ -79,17 +91,28 @@ input{
     padding: 2px;
     text-align: center;
     background-color: #515252;
-    width: 99%;
+    /* width: 60%; */
+    height: fit-content;
     border-radius: 5px;
   }
-  div{
-    padding: 2px 16px;
-  }
-  h1{
+  #tracks {
+    margin-top: 3em;
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(2, 2fr);
+    padding: 2px;
     text-align: center;
+    background-color: #c0c2c2;
+    color:black;
+    /* width: 40%; */
+    border-radius: 5px;
   }
-  input{
-    margin: auto;
+  img {
+    height: 100px;
+    width: 100px;
+    align-items: center;
+    display: inline;
+    border-radius: 15px;
+    border: 2px solid #666;
   }
- 
 }
