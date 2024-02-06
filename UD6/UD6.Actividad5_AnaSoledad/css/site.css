@@ -37,3 +37,15 @@ body{
   font-family:Georgia, 'Times New Roman', Times, serif;
   font-size: 13px;
 }
+h1{
+  text-align: center;
+}
+input{
+  margin: auto;
+  width: 200px;
+  height: 30px;
+}
+#bgetArtist{
+  width: 70px;
+  height: 36.5px;
+}
