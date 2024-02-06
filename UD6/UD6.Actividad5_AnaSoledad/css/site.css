@@ -7,22 +7,44 @@
   padding: 2px;
   text-align: center;
   background-color: #515252;
-  width: 60%;
+  /* width: 60%; */
+  height: fit-content;
   border-radius: 5px;
 }
-
+#tracks {
+  margin-top: 3em;
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(4, 2fr);
+  padding: 2px;
+  text-align: center;
+  background-color: #c0c2c2;
+  color:black;
+  /* width: 40%; */
+  border-radius: 5px;
+}
+/* div{
+  padding: 2px 16px;
+} */
+#results:hover{
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
 form label{
   display: inline-block;
   width: 30%;
 }
-
 img {
-  height: 235px;
-  width: 235px;
+  height: 200px;
+  width: 200px;
   align-items: center;
   display: inline;
   border-radius: 15px;
   border: 2px solid #666;
+}
+#container{
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(2, 2fr);
 }
 body{
   background-color: #393D3F;
@@ -34,12 +56,40 @@ body{
 input{
   margin: auto;
   width: 200px;
-  height: 29px;
-  
+  height: 29px; 
 }
+
 #bgetArtist{
   width: 70px;
   height: 37px;
   background-color:#5A1A18;
   color: white;
+}
+
+@media only screen and (max-width: 576px){
+  body{
+    margin: 2px;
+    font-size: 12px;
+  }
+  #results {
+    margin-top: 3em;
+    display:grid;
+    gap: 1px;
+    grid-template-columns: repeat(2, 2fr);
+    padding: 2px;
+    text-align: center;
+    background-color: #515252;
+    width: 99%;
+    border-radius: 5px;
+  }
+  div{
+    padding: 2px 16px;
+  }
+  h1{
+    text-align: center;
+  }
+  input{
+    margin: auto;
+  }
+ 
 }
