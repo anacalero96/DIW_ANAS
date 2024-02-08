@@ -5,11 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UD7-VUE3 ACTIVIDAD_1</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!--Introducir todo dentro de un div-->
-    <div>
-        
+    <div id="app">
+        <h1>List of Posts</h1>
     </div>
+   
+
+    <!--CREATING A POST-->
+    <div>
+        <p>Create de post</p>
+        <ul>
+            <li>
+                <label for="title">Title</label>
+                <input type="text" id="title">
+            </li>
+            <li>
+                <label for="resum">Summary</label>
+                <textarea></textarea>
+            </li>
+            <li>
+                <label for="autor">Autor</label>
+                <!--El autor contiene un despegable-->
+                <select>
+                    <option>user1</option>
+                    <option>user2</option>
+                    <option>user3</option>
+                </select>
+            </li>
+            <li>
+                <label for="img">Image</label>
+                <img>
+            </li>
+            <button v-on:click="count++">Create</button>
+        </ul>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

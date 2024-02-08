@@ -1,0 +1,6 @@
+li, ul{
+    list-style: none;
+}
+li{
+    margin: 12px;
+}
