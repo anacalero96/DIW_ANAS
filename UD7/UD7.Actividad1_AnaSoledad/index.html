@@ -38,30 +38,29 @@
    
     <!--CREATING A POST-->
     <div id="app">
-        
-       <div class="form" v-for="formulario">
-            <p>Create de post</p>
+       <div class="form2" v-for="(title, resum, autor, img) in form">
+            <p class="title_createPost">Create de post</p>
             <div class="form-control">
-                <label>Title</label>
-                <input v-model="title" type="text" id="title">
+                <label for="title">Title</label>
+                <input type="text" v-model="form.title" id="title">
             </div>
             <div class="form-control">
-                <label>Summary</label>
-                <textarea v-model="resum"></textarea>
+                <label for="resum">Summary</label>
+                <textarea v-model="form.resum" id="resum"></textarea>
             </div>
             <div class="form-control">
-                <label>Autor</label>
+                <label for="autor">Autor</label>
                 <!--El autor contiene un despegable-->
-                <select v-model="autor">
+                <select v-model="form.autor" id="autor">
                     <option>user1</option>
                     <option>user2</option>
                     <option>user3</option>
                 </select>
             </div>
-            <div class="form-control">
+            <!-- <div class="form-control">
                 <label>Image</label>
-                <img v-model="img" >
-            </div>
+                <img v-model="form.img">
+            </div> -->
             <!--Botón para crear post-->
             <button type="button" @click="addForm()">Create</button>
        </div>
@@ -69,21 +68,30 @@
 
     <script>
         const { createApp } = Vue;
-
-        const app = createApp({
+        var app = createApp({
             data(){
                 return{
+                    //Revisar porque se duplican los elementos.
                     form: {
+                        // list:[],
                         title: '',
-                        resum: '',
-                        autor: '',
-                        img: ''
-                    }, 
-                    methods: {
-                        addForm(){
-                            //añadir los datos insertados en el formulario de creación de un POST
-                        }
-                    }
+                        // resum: "",
+                        // autor: "",
+                        // // img: ''
+                    },
+                    // list: [],
+                }
+            },
+            methods: {
+                addForm: function (){
+                    //añadir los datos insertados en el formulario de creación de un POST.
+
+                    this.list.push({
+                        title: this.form.title,
+                        resum: this.form.resum,
+                        autor: this.form.autor,
+                            // img: this.form.img
+                    });
                 }
             }
         }).mount("#app");
@@ -93,11 +101,11 @@
 <footer>
      <p class=" col-6 col-sm-6 mb-0 text-light">© 2023 Ana.S Martínez</p>
         <ul class="nav col-6 col-sm-6 justify-content-end">
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-light">HOME</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-light">MENU</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-light">SOCIAL MEDIA</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-light">PRIVACY POLICY</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-light">CONTACT US</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-3 text-light">HOME</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-3 text-light">MENU</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-3 text-light">SOCIAL MEDIA</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-3 text-light">PRIVACY POLICY</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-3 text-light">CONTACT US</a></li>
         </ul>
 </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
