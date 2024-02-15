@@ -23,9 +23,10 @@ div{margin:5px;}
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     width: 500px;
     padding: 30px 40px;
-    margin: auto;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     margin-bottom: 20px;
+    display: inline-block;
+
 }
 .title-listposts{
     font-size: 16px;
