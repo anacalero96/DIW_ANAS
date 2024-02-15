@@ -30,6 +30,47 @@
                 </div>
              </div>
         </nav>
+
+        <nav id="fondo" class="navbar navbar-expand-lg">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="material-symbols-outlined" style="background-color:rgb(222, 180, 231) ;">menu</span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">HOME</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">FASHION</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            LIVING</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <li><a class="dropdown-item" href="#">ART</a></li>
+                              <li><a class="dropdown-item" href="#">INTERVIEW</a></li>
+                              <li><a class="dropdown-item" href="#">SHOPPING</a></li>
+                              <li><a class="dropdown-item" href="#">GASTRONOMY </a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item" href="#">OTHER ARTICLES</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">BUSINESS</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <div class="input-group">
+                            <input type="text" class="form-control m-0 p-0" placeholder="Search" aria-label="Search" aria-describedby="button-addon2"style="vertical-align: middle;">   
+                            <button class="btn" type="button" id="button-addon2"><span class="material-symbols-outlined md-18" style="vertical-align: middle;">search</span> Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        
     </header>
    
     <!--CREATING A POST-->
@@ -53,9 +94,11 @@
                 <p v-if="msg_autor">This field cannot be empty</p>
                 <!--El autor contiene un despegable-->
                 <select v-model="form.autor" id="autor">
-                    <option>user1</option>
-                    <option>user2</option>
-                    <option>user3</option>
+                    <option>ART</option>
+                    <option>INTERVIEW</option>
+                    <option>SHOPPING</option>
+                    <option>GASTRONOMY</option>
+                    <option>OTHER ARTICLES</option>
                 </select>
             </div>
         
@@ -71,9 +114,9 @@
        <div id="lista">
             <h1 class="title-listposts">List of Posts</h1>
             <div v-for="item in list">
-                <p>{{item.title}} {{item.autor}} {{item.fecha}}</p>
+                <p>{{item.title}} {{item.resum}} {{item.autor}}  {{item.fecha}}</p>
                 <button type="button" @click="deletePost(item)">Delete</button>
-                <button type="button" @click="editPost()">Edit</button>
+                <button type="button" @click="editPost(item)">Edit</button>
             </div>
         </div>
     </div>
@@ -90,7 +133,8 @@
                         autor: "",
                         //fecha actual
                         fecha: "",
-                        // img: ''
+                        // img: '',
+                        editing: false,     //se usará cuando quieras editar un post, para ver que se está editando.
                     },
                     list: [],
                     msg_title: false,
@@ -121,7 +165,7 @@
                         resum: this.form.resum,
                         autor: this.form.autor,
                         // img: this.form.img
-                        fecha: new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric'}),
+                        fecha: new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'}),
                     }); 
                 },
                 deletePost: function(item){
@@ -129,7 +173,10 @@
                         this.list.indexOf(item), 1
                     );
                 }, 
-                editPost: function(item){
+                editPost: function(item){ 
+                    //Editamos todos los valores del post.
+                    this.editing = true;
+                    
                     
                 }
 
@@ -137,17 +184,16 @@
         }).mount("#app");
 
     </script>
-<!-- 
 <footer>
-     <p class=" col-6 col-sm-6 mb-0 text-light">© 2023 Ana.S Martínez</p>
         <ul class="nav col-6 col-sm-6 justify-content-end">
             <li class="nav-item"><a href="#" class="nav-link px-3 text-light">HOME</a></li>
             <li class="nav-item"><a href="#" class="nav-link px-3 text-light">MENU</a></li>
             <li class="nav-item"><a href="#" class="nav-link px-3 text-light">SOCIAL MEDIA</a></li>
             <li class="nav-item"><a href="#" class="nav-link px-3 text-light">PRIVACY POLICY</a></li>
             <li class="nav-item"><a href="#" class="nav-link px-3 text-light">CONTACT US</a></li>
+            <p class=" col-6 col-sm-6 mb-0 text-light">© 2024 Ana.S Martínez</p>
         </ul>
-</footer> -->
+</footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <!-- <script src="script.js"></script> -->
 </body>
