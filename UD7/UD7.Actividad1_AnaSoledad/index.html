@@ -31,25 +31,26 @@
              </div>
         </nav>
     </header>
-    <!--Introducir todo dentro de un div-->
-    <div id="app2">
-        <h1 class="title-listposts">List of Posts</h1>
-    </div>
    
     <!--CREATING A POST-->
     <div id="app">
-       <div class="form2" v-for="(title, resum, autor, img) in form">
+       <div class="form" id="formulario">
             <p class="title_createPost">Create de post</p>
+
             <div class="form-control">
                 <label for="title">Title</label>
+                <p v-if="msg_title">This field cannot be empty</p>
                 <input type="text" v-model="form.title" id="title">
             </div>
+
             <div class="form-control">
                 <label for="resum">Summary</label>
                 <textarea v-model="form.resum" id="resum"></textarea>
             </div>
+
             <div class="form-control">
                 <label for="autor">Autor</label>
+                <p v-if="msg_autor">This field cannot be empty</p>
                 <!--El autor contiene un despegable-->
                 <select v-model="form.autor" id="autor">
                     <option>user1</option>
@@ -57,13 +58,24 @@
                     <option>user3</option>
                 </select>
             </div>
+        
             <!-- <div class="form-control">
                 <label>Image</label>
                 <img v-model="form.img">
             </div> -->
+
             <!--Botón para crear post-->
-            <button type="button" @click="addForm()">Create</button>
+            <button type="button" @click="createPost()">Create</button>
        </div>
+
+       <div id="lista">
+            <h1 class="title-listposts">List of Posts</h1>
+            <div v-for="item in list">
+                <p>{{item.title}} {{item.autor}} {{item.fecha}}</p>
+                <button type="button" @click="deletePost(item)">Delete</button>
+                <button type="button" @click="editPost()">Edit</button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -73,31 +85,59 @@
                 return{
                     //Revisar porque se duplican los elementos.
                     form: {
-                        // list:[],
                         title: '',
-                        // resum: "",
-                        // autor: "",
-                        // // img: ''
+                        resum: "",
+                        autor: "",
+                        //fecha actual
+                        fecha: "",
+                        // img: ''
                     },
-                    // list: [],
+                    list: [],
+                    msg_title: false,
+                    msg_autor: false,
                 }
             },
             methods: {
-                addForm: function (){
-                    //añadir los datos insertados en el formulario de creación de un POST.
+                createPost: function (){
+                    //Comprueba que los campos no están vacios.
+                    if(this.form.title === ''){
+                        this.msg_title = true;
+                    } else {
+                        this.msg_title = false;
+                    }
+                    //Comprueba que el campo del autor no este vacio.
+                    if(this.form.autor === ''){
+                        this.msg_autor = true;
+                    } else {
+                        this.msg_autor = false;
+                    }
+                    //Si hay algun de los dos campos vacios, no crea el post.
+                    if(this.msg_autor || this.msg_title) {
+                        return;
+                    }
 
                     this.list.push({
                         title: this.form.title,
                         resum: this.form.resum,
                         autor: this.form.autor,
-                            // img: this.form.img
-                    });
+                        // img: this.form.img
+                        fecha: new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric'}),
+                    }); 
+                },
+                deletePost: function(item){
+                    this.list.splice(
+                        this.list.indexOf(item), 1
+                    );
+                }, 
+                editPost: function(item){
+                    
                 }
+
             }
         }).mount("#app");
 
     </script>
-
+<!-- 
 <footer>
      <p class=" col-6 col-sm-6 mb-0 text-light">© 2023 Ana.S Martínez</p>
         <ul class="nav col-6 col-sm-6 justify-content-end">
@@ -107,7 +147,7 @@
             <li class="nav-item"><a href="#" class="nav-link px-3 text-light">PRIVACY POLICY</a></li>
             <li class="nav-item"><a href="#" class="nav-link px-3 text-light">CONTACT US</a></li>
         </ul>
-</footer>
+</footer> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <!-- <script src="script.js"></script> -->
 </body>

@@ -8,13 +8,12 @@ li{
 }
 div{margin:5px}
 
-/*App*/
-#app2{
+
+#lista{
     background-color: rgba(255, 255, 255, 0.3);
     border-radius: 5px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     width: 500px;
-    height: 55px;
     padding: 30px 40px;
     margin: auto;
     margin-top: 20px;
@@ -29,7 +28,7 @@ div{margin:5px}
     font-size: 20px;
 }
 
-#app {
+#formulario {
     text-align: center;
     background-color: rgba(255, 255, 255, 0.3);
     border-radius: 5px;
