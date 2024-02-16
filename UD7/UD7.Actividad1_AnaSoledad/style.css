@@ -6,40 +6,42 @@ li{
     list-style: none;   
     margin: 12px;
 }
-div{margin:5px;}
+
+div { margin:5px; }
 
 /*HEADER - NAV*/
-#fondo{
-    background-color: #E8E1D5;
-    height: 80px;
-}
-.nav-link {
-    font-weight: bold;
-}
+#fondo{ background-color: #E8E1D5; height: 80px; }
 
-#app {
-    display: flex;
-}
+.nav-link { font-weight: bold;}
+
+.dropdown-item{ font-size: 14px; font-weight: bold; }
+
+#app { display: flex; }
+
+
+/*Layout of the list where the created posts will be shown*/
 #lista{
     background-color: rgba(255, 255, 255, 0.3);
     border-radius: 5px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     width: 500px;
     padding: 30px 40px;
-    /* margin-top: 20px; */
     margin-bottom: 20px;
-    
     left: auto;
-
+}
+#contenido_publicacion{
+    font-size: 13px;
+    width: 100%;
+    height: 60px;
 }
 .title-listposts{
     font-size: 16px;
     text-align: center;
-}
-.title_createPost{
     font-weight: bold;
 }
+.title_createPost{ font-weight: bold; }
 
+/*Design of the form to create a post*/
 #formulario {
     text-align: center;
     background-color: rgba(255, 255, 255, 0.3);
@@ -47,23 +49,16 @@ div{margin:5px;}
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     width: 500px;
     padding: 30px 40px;
-    /* margin: auto;
-    margin-top: 30px; */
     margin-bottom: 20px;
 }
-/*Formulario*/
+
+/*Design of the form-control*/
 .form-control input {
-    border: 2px solid #f0f0f0;
+    border: 2px solid #3f3f3f;
     border-radius: 4px;
     display: block;
     width: 100%;
     padding: 10px;
-    font-size: 14px;
-}
-textarea{
-    font-size: 14px;
-}
-select{
     font-size: 14px;
 }
 .form-control input:focus {
@@ -82,7 +77,7 @@ select{
     padding: 10px;
     margin-top: 20px;
     width: 100%;
-    /*Aplicamos un degradado a los botones*/
+    /*Apply a gradient to the buttons*/
     background: linear-gradient(#7E7297,#1A090D);
 }
 .form-control label {
@@ -98,15 +93,15 @@ select{
     width: 100%;
     height: 25px;
 }
+
 footer {
     background-color: #1A090D;
     position: absolute;
     bottom: 0;
+    font-size: 15px;
     width: 100%;
 }
-header {
-    background-color: #1A090D;
-}
+header { background-color: #1A090D; }
 
 /*Button*/
 button {
@@ -125,6 +120,22 @@ button {
     background-color: #6F1F42;
     color: #E8E1D5;
 }
-img{
-    width: 20%;
-}
+#btn_delete{ margin:10px; font-weight: bold; font-size: 14px; }
+#btn_edit { font-weight: bold; font-size: 14px;}
+
+/*Image size*/
+img { width: 20%;}
+
+/*Label size*/
+label[for="title"]{ font-size: 15px; }
+label[for="resum"]{ font-size: 15px; }
+label[for="autor"]{ font-size: 15px; }
+label[for="image"]{ font-size: 15px; }
+
+
+/*Textarea font size*/
+textarea{ font-size: 14px; }
+/*Select font size*/
+select{ font-size: 14px; }
+/*Textarea*/
+#resum{ resize: none; }
