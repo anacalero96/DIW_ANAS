@@ -18,7 +18,6 @@ div { margin:5px; }
 
 #app { display: flex; }
 
-
 /*Layout of the list where the created posts will be shown*/
 #lista{
     background-color: rgba(255, 255, 255, 0.3);
