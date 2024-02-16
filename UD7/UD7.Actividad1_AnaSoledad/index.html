@@ -69,12 +69,20 @@
                 </div>
             </div>
         </nav>
-
-        
     </header>
    
     <!--CREATING A POST-->
     <div id="app">
+
+        <div id="lista">
+            <h1 class="title-listposts">List of Posts</h1>
+            <div v-for="item in list">
+                <p>{{item.title}} {{item.resum}} {{item.autor}} {{item.img}} {{item.fecha}}</p>
+                <img v-bind:src="item.img">
+                <button type="button" @click="deletePost(item)">Delete</button>
+                <button type="button" @click="editPost(item)">Edit</button>
+            </div>
+        </div>
        <div class="form" id="formulario">
             <p class="title_createPost">Create de post</p>
 
@@ -102,23 +110,14 @@
                 </select>
             </div>
         
-            <!-- <div class="form-control">
+            <div class="form-control">
                 <label>Image</label>
-                <img v-model="form.img">
-            </div> -->
+                <input type="file" @change="saveimg">
+            </div>
 
             <!--Botón para crear post-->
             <button type="button" @click="createPost()">Create</button>
-       </div>
-
-       <div id="lista">
-            <h1 class="title-listposts">List of Posts</h1>
-            <div v-for="item in list">
-                <p>{{item.title}} {{item.resum}} {{item.autor}}  {{item.fecha}}</p>
-                <button type="button" @click="deletePost(item)">Delete</button>
-                <button type="button" @click="editPost(item)">Edit</button>
-            </div>
-        </div>
+       </div>    
     </div>
 
     <script>
@@ -133,10 +132,11 @@
                         autor: "",
                         //fecha actual
                         fecha: "",
-                        // img: '',
-                        editing: false,     //se usará cuando quieras editar un post, para ver que se está editando.
-                    },
+                        img: '',
+                    },  
+                    editing: false,
                     list: [],
+                    editIndex: -1,       //es una variable para saber que se esta editando.
                     msg_title: false,
                     msg_autor: false,
                 }
@@ -159,14 +159,37 @@
                     if(this.msg_autor || this.msg_title) {
                         return;
                     }
+                    console.log(this.editing);
+                   
+                    //Condicional para comprobar si está editando o creando.
+                    if(this.editing == true){
+                        this.editing = false;
+                        
+                        this.list.splice(
+                            this.editIndex, 1, {
+                                title: this.form.title,
+                                resum: this.form.resum,
+                                autor: this.form.autor,
+                                img: this.form.img,
+                                fecha: this.form.fecha
+                            }
+                        );
+                    } else {
+                        this.list.push({
+                            title: this.form.title,
+                            resum: this.form.resum,
+                            autor: this.form.autor,
+                            img: './img/'+ this.form.img,
+                            fecha: new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'}),
+                        }); 
+                    }
 
-                    this.list.push({
-                        title: this.form.title,
-                        resum: this.form.resum,
-                        autor: this.form.autor,
-                        // img: this.form.img
-                        fecha: new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'}),
-                    }); 
+                    //Deja los valores del formulario vacios.
+                    this.form.title = '';
+                    this.form.resum = '';
+                    this.form.autor = '';
+                    this.form.fecha = '';
+                    this.editIndex = -1;
                 },
                 deletePost: function(item){
                     this.list.splice(
@@ -176,17 +199,23 @@
                 editPost: function(item){ 
                     //Editamos todos los valores del post.
                     this.editing = true;
-                    this.list.splice(
-                        
-                    );
-                    
+                    //Obtiene los valores que vamos a editar.
+                    this.form.title = item.title;
+                    this.form.resum = item.resum;
+                    this.form.autor = item.autor;
+                    this.form.fecha = item.fecha;
+                    this.form.img = item.img;
+                    this.editIndex =  this.list.indexOf(item);
+                },
+                saveimg: function(event){
+                    //Almacena el nombre la imagen.
+                    this.form.img = event.target.files[0].name;
                 }
-
             }
         }).mount("#app");
 
     </script>
-<footer>
+<!-- <footer>
         <ul class="nav col-6 col-sm-6 justify-content-end">
             <li class="nav-item"><a href="#" class="nav-link px-3 text-light">HOME</a></li>
             <li class="nav-item"><a href="#" class="nav-link px-3 text-light">MENU</a></li>
@@ -195,8 +224,7 @@
             <li class="nav-item"><a href="#" class="nav-link px-3 text-light">CONTACT US</a></li>
             <p class=" col-6 col-sm-6 mb-0 text-light">© 2024 Ana.S Martínez</p>
         </ul>
-</footer>
+</footer> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <!-- <script src="script.js"></script> -->
 </body>
 </html>
