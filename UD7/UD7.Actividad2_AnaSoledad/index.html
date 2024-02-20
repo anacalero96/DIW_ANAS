@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad2 Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <h3>Introduce un número</h3>
+        <input v-model="num" type="number" name="integer">
+        <p><input type="button" value="Send" @click="send"></p>
+        
+        <p v-if="error">
+            <small>{{ error }}</small>
+        </p>
+        <Number v-for="n in numbers" v-bind:numero="n" key="n" v-on:clicked-numero="numberSelected"></Number>
+        <p v-if="selectedItem">
+            <span>The number pressed is {{selectedItem}}</span>
+        </p>
+     
+    </div>
+
+    <script type="module">
+        import Number from "./Number.js";
+        const {createApp} = Vue;
+
+        const app = createApp ({
+            data: function(){
+                return {
+                    num: null,
+                    numbers: [],
+                    error: "",
+                    selectedItem: null
+                }
+            },
+            //Define el tipo de componentes que tenemos.
+            components: {
+                Number
+            },
+            methods: {
+                send: function(){
+                    this.error = "";
+                    this.selectedItem = "";
+
+                    // console.log(~~this.num);
+                    //Elimina los decimales y comprueba si es igual al valor introducido.
+                    //Si introduce un string devuelve 0.
+                    if(~~this.num === this.num) {
+                        //Comprobar si existe este nombre en la lista[]
+                        if (this.numbers.indexOf(this.num)<0) {
+                            this.numbers.push(this.num);
+
+                            this.num = null;
+                        } else {
+                            this.error = "The numbers already exisys";
+                        }
+                    } else {
+                        this.error = "You need to enter a correct value";
+                    }
+                },
+                numberSelected: function(item){
+                    this.selectedItem = item;
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+<style>
+    #app{
+        text-align: center;
+    }
+    /* input[type="number"]{ } */ç
+    small{
+        color: rgb(114, 36, 36);
+    }
+</style>
+</html>
