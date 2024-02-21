@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UD7-VUE3 ACTIVIDAD_3</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="shortcut icon" href="./img/base_logo_mobile.png" type="image/x-icon">
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--CREATING A POST-->
+    <div id="app"> 
+        <Cabecera><!--Contenido del header--></Cabecera>
+
+        <Posts>
+            <h1 class="title-listposts">LIST OF POSTS</h1>
+            <div id="lista">
+                <div id="contenido_publicacion" v-for="item in list"></div>
+            </div>   
+        </Posts>
+
+
+        <div class="form" id="formulario">
+            <p class="title_createPost">CREATE DE POST</p>
+
+            <div class="form-control">
+                <label for="title">Title</label>
+                <p v-if="msg_title">This field cannot be empty</p>
+                <input type="text" v-model="form.title" id="title">
+            </div>
+    
+            <div class="form-control">
+                <label for="resum">Summary</label>
+                <textarea v-model="form.resum" id="resum"></textarea>
+            </div>
+    
+            <div class="form-control">
+                <label for="autor">Autor</label>
+                <p v-if="msg_autor">This field cannot be empty</p>
+            <!--Drop-down to indicate which category the author belongs to.-->
+                <select v-model="form.autor" id="autor">
+                    <option>ART</option>
+                    <option>INTERVIEW</option>
+                    <option>SHOPPING</option>
+                    <option>GASTRONOMY</option>
+                    <option>OTHER ARTICLES</option>
+                </select>
+            </div>
+            <div class="form-control">
+                <label for="image">Image</label>
+                <input type="file" @change="saveimg">
+            </div>
+    
+            <!--Button to create post-->
+            <button type="button" @click="createPost()">Create</button> 
+        </div> 
+
+       <New_footer id="new_ftr"> <!--Contenido del footer--> </New_footer>
+    </div>
+
+    <script type="module">
+        import Cabecera from "./Header.js";
+        import New_footer from "./Footer.js";
+        import Posts from "./Posts.js";
+    
+        const { createApp } = Vue;
+        var app = createApp({
+            data(){
+                return{
+                    form: {
+                        title: '',
+                        resum: "",
+                        autor: "",
+                        //Current date
+                        fecha: "",
+                        img: '',
+                        publication_status: 'published',
+                    },  
+                    editing: false,
+                    list: [],
+                    editIndex: -1,       //Variable indicating that the post is being edited.
+                    msg_title: false,
+                    msg_autor: false,
+                }
+            },
+            //Componentes de nuestra página.
+            components: {
+                Cabecera,
+                New_footer,
+                Posts,
+            },
+            methods: {
+                createPost: function (){
+                    //Check that the title field is not empty
+                    if(this.form.title === ''){
+                        this.msg_title = true;
+                    } else {
+                        this.msg_title = false;
+                    }
+                   //Check that the author field is not empty.
+                    if(this.form.autor === ''){
+                        this.msg_autor = true;
+                    } else {
+                        this.msg_autor = false;
+                    }
+                    //If either field is empty, do not create the post.
+                    if(this.msg_autor || this.msg_title) {
+                        return;
+                    }
+                    console.log(this.editing);
+                   
+                    //Conditional to check whether you are editing or creating.
+                    if(this.editing == true){
+                        this.editing = false;
+                        
+                        this.list.splice(
+                            this.editIndex, 1, {
+                                title: this.form.title,
+                                resum: this.form.resum,
+                                autor: this.form.autor,
+                                img: this.form.img,
+                                fecha: this.form.fecha
+                            }
+                        );
+                    } else {
+                        this.list.push({
+                            title: this.form.title,
+                            resum: this.form.resum,
+                            autor: this.form.autor,
+                            img: './img/'+ this.form.img,
+                            fecha: new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'}),
+                        }); 
+                    }
+
+                    //Leave the form values empty.
+                    this.form.title = '';
+                    this.form.resum = '';
+                    this.form.autor = '';
+                    this.form.fecha = '';
+                    this.editIndex = -1;
+                },
+                deletePost: function(item){
+                    this.list.splice(
+                        this.list.indexOf(item), 1
+                    );
+                }, 
+                editPost: function(item){ 
+                   //Edit all values in the post.
+                    this.editing = true;
+                    //Obtains the values to be edited.
+                    this.form.title = item.title;
+                    this.form.resum = item.resum;
+                    this.form.autor = item.autor;
+                    this.form.fecha = item.fecha;
+                    this.form.img = item.img;
+                    this.editIndex =  this.list.indexOf(item);
+                },
+                saveimg: function(event){
+                    //Stores the name of the image.
+                    this.form.img = event.target.files[0].name;
+                }
+            }
+        }).mount("#app");
+    </script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
