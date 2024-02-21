@@ -16,11 +16,8 @@
     <div id="app"> 
         <Cabecera><!--Contenido del header--></Cabecera>
 
-        <Posts>
-            <h1 class="title-listposts">LIST OF POSTS</h1>
-            <div id="lista">
-                <div id="contenido_publicacion" v-for="item in list"></div>
-            </div>   
+        <Posts id="lista">
+            <div id="contenido_publicacion" v-for="item in list"></div>
         </Posts>
 
 
@@ -72,7 +69,7 @@
             data(){
                 return{
                     form: {
-                        title: '',
+                        title: "",
                         resum: "",
                         autor: "",
                         //Current date
