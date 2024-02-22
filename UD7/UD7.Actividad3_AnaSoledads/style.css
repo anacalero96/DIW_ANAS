@@ -15,9 +15,10 @@ div { margin:5px; }
 .nav-link { font-weight: bold;}
 
 .dropdown-item{ font-size: 14px; font-weight: bold; }
-/* 
-#app { display: flex; } */
 
+#body{
+    display: flex;
+}
 /*Layout of the list where the created posts will be shown*/
 #lista{
     background-color: rgba(255, 255, 255, 0.3);
@@ -25,21 +26,18 @@ div { margin:5px; }
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     width: 500px;
     padding: 30px 40px;
-    margin-bottom: 20px;
-   display: flex;
-   justify-content: center;
-    /* left: auto;
-    margin: auto; */
+    margin-bottom: 20px; 
+    left: auto;
 } 
 nav{
     background-color: #1A090D;
+    width: 100%;
 }
 #nav_principal{
-    
     margin: 0;
-    display: flex;
+    /* display: flex; */
+
     width: 100%;
-    justify-content: center;
 }
 #contenido_publicacion{
     font-size: 13px;
@@ -126,19 +124,29 @@ button {
 .btn {
     background-color: #7E7297;  
     width: 130px; 
+    height: 50px;
     padding: 5px;
+    margin-top: 10px;
     border-radius: 5px;
+    justify-self: end;
 }
 .btn:hover {
     background-color: #6F1F42;
     color: #E8E1D5;
 }
-#btn_delete{ margin:10px; font-weight: bold; font-size: 14px; }
-#btn_edit { font-weight: bold; font-size: 14px;}
+.btn_search{
+    background-color: #7E7297;  
+    width: 130px; 
+    height: 50px;
+    padding: 5px;
+    border-radius: 5px;
+}
+#btn_delete{ margin:10px; font-weight: bold; font-size: 14px; height: 40px;}
+#btn_edit { font-weight: bold; font-size: 14px; height: 40px;}
 
 /*Image size*/
-img { width: 50%;}
-.img_logo{ width: 20%; margin-top: 10px;}
+img { width: 30%;}
+.img_logo{ width: 30%; margin-top: 10px;}
 
 /*Label size*/
 label[for="title"]{ font-size: 15px; }
