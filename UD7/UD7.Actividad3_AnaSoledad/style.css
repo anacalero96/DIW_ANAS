@@ -21,7 +21,7 @@ div { margin:5px; }
 }
 /*Layout of the list where the created posts will be shown*/
 #lista{
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color:rgb(255, 255, 255);
     border-radius: 5px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     width: 500px;
@@ -29,16 +29,17 @@ div { margin:5px; }
     margin-bottom: 20px; 
     left: auto;
 } 
-nav{
-    background-color: #1A090D;
-    width: 100%;
+/*POST*/
+#style_post{
+    background-color: #eee4e6;
+    font-size: 12px;
+    height: 30%;
 }
-#nav_principal{
-    margin: 0;
-    /* display: flex; */
 
-    width: 100%;
-}
+/*NAV*/
+nav { background-color: #1A090D; width: 100%;}
+#nav_principal{ margin: 0; width: 100%; }
+
 #contenido_publicacion{
     font-size: 13px;
     width: 100%;
@@ -141,12 +142,13 @@ button {
     padding: 5px;
     border-radius: 5px;
 }
-#btn_delete{ margin:10px; font-weight: bold; font-size: 14px; height: 40px;}
-#btn_edit { font-weight: bold; font-size: 14px; height: 40px;}
+#btn_delete{ margin:8px; font-weight: bold; font-size: 12px; height: 35px; width: 80px;}
+#btn_edit { margin:8px; font-weight: bold; font-size: 12px; height: 35px; width: 80px;}
+#btn_published { font-weight: bold; font-size: 12px; height: 35px; width: 80px;}
 
 /*Image size*/
-img { width: 30%;}
-.img_logo{ width: 30%; margin-top: 10px;}
+img { width: 20%; margin: auto;padding: 10px;} /*Imagen del post*/
+.img_logo{ width: 30%; margin-top: 10px; margin-bottom: 10px; }
 
 /*Label size*/
 label[for="title"]{ font-size: 15px; }

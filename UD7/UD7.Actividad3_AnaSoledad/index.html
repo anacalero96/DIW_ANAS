@@ -19,7 +19,8 @@
         <div id="body">
             <div id="lista">
                 <h1 class="title-listposts">LIST OF POSTS</h1>
-                <Posts id="contenido_publicacion" v-for="item in list" :item="item" v-on:delete_post="deletePost" v-on:edit_post="editPost" v-on:published_post="publishedPost"></Posts>
+                <!--id="contenido_publicacion" -->
+                <Posts v-for="item in list" :item="item" v-on:delete_post="deletePost" v-on:edit_post="editPost" v-on:published_post="publishedPost"></Posts>
             </div>
 
             <div class="form" id="formulario">
@@ -169,13 +170,13 @@
                     // this.publication_status = "publicado";
                     this.list.splice(
                         this.list.indexOf(item), 1, {
-                                title: item.title,
-                                resum: item.resum,
-                                autor: item.autor,
-                                img: item.img,
-                                fecha: item.fecha,
-                                publication_status: "publicado",
-                            }
+                            title: item.title,
+                            resum: item.resum,
+                            autor: item.autor,
+                            img: item.img,
+                            fecha: item.fecha,
+                            publication_status: "publicado",
+                        }
                     );
                 }
             }

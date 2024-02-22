@@ -3,7 +3,7 @@ export default {
     template: `
     <nav>
         <div class="container" id="nav_principal">
-            <div class="row">
+            <div class="row m-0">
                 <div class="col-6 col-sm-6">
                     <a class="navbar-brand" href="#"><img  class="img_logo" src="./img/LOGO.png"></a>
                 </div>
