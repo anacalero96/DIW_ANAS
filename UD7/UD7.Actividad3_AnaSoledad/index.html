@@ -16,45 +16,46 @@
     <div id="app"> 
         <Cabecera><!--Contenido del header--></Cabecera>
 
-        <Posts id="lista">
-            <div id="contenido_publicacion" v-for="item in list"></div>
-        </Posts>
+        <div id="body">
+            <div id="lista">
+                <h1 class="title-listposts">LIST OF POSTS</h1>
+                <Posts id="contenido_publicacion" v-for="item in list" :item="item" v-on:delete_post="deletePost" v-on:edit_post="editPost" v-on:published_post="publishedPost"></Posts>
+            </div>
 
-
-        <div class="form" id="formulario">
-            <p class="title_createPost">CREATE DE POST</p>
-
-            <div class="form-control">
-                <label for="title">Title</label>
-                <p v-if="msg_title">This field cannot be empty</p>
-                <input type="text" v-model="form.title" id="title">
-            </div>
+            <div class="form" id="formulario">
+                <p class="title_createPost">CREATE DE POST</p>
     
-            <div class="form-control">
-                <label for="resum">Summary</label>
-                <textarea v-model="form.resum" id="resum"></textarea>
-            </div>
-    
-            <div class="form-control">
-                <label for="autor">Autor</label>
-                <p v-if="msg_autor">This field cannot be empty</p>
-            <!--Drop-down to indicate which category the author belongs to.-->
-                <select v-model="form.autor" id="autor">
-                    <option>ART</option>
-                    <option>INTERVIEW</option>
-                    <option>SHOPPING</option>
-                    <option>GASTRONOMY</option>
-                    <option>OTHER ARTICLES</option>
-                </select>
-            </div>
-            <div class="form-control">
-                <label for="image">Image</label>
-                <input type="file" @change="saveimg">
-            </div>
-    
-            <!--Button to create post-->
-            <button type="button" @click="createPost()">Create</button> 
-        </div> 
+                <div class="form-control">
+                    <label for="title">Title</label>
+                    <p v-if="msg_title">This field cannot be empty</p>
+                    <input type="text" v-model="form.title" id="title">
+                </div>
+        
+                <div class="form-control">
+                    <label for="resum">Summary</label>
+                    <textarea v-model="form.resum" id="resum"></textarea>
+                </div>
+        
+                <div class="form-control">
+                    <label for="autor">Autor</label>
+                    <p v-if="msg_autor">This field cannot be empty</p>
+                <!--Drop-down to indicate which category the author belongs to.-->
+                    <select v-model="form.autor" id="autor">
+                        <option>ART</option>
+                        <option>INTERVIEW</option>
+                        <option>SHOPPING</option>
+                        <option>GASTRONOMY</option>
+                        <option>OTHER ARTICLES</option>
+                    </select>
+                </div>
+                <div class="form-control">
+                    <label for="image">Image</label>
+                    <input type="file" @change="saveimg">
+                </div>
+                <!--Button to create post-->
+                <button type="button" @click="createPost()">Create</button> 
+            </div> 
+        </div>
 
        <New_footer id="new_ftr"> <!--Contenido del footer--> </New_footer>
     </div>
@@ -75,10 +76,11 @@
                         //Current date
                         fecha: "",
                         img: '',
-                        publication_status: 'published',
+                        publication_status: 'borrador',
                     },  
                     editing: false,
-                    list: [],
+                    //Comprueba si existe datos guardados, si los hay, los lee y sino crea un array vacio.
+                    list:localStorage.getItem("posts")!=null? JSON.parse(localStorage.getItem("posts")):[],
                     editIndex: -1,       //Variable indicating that the post is being edited.
                     msg_title: false,
                     msg_autor: false,
@@ -120,7 +122,8 @@
                                 resum: this.form.resum,
                                 autor: this.form.autor,
                                 img: this.form.img,
-                                fecha: this.form.fecha
+                                fecha: this.form.fecha,
+                                publication_status: this.form.publication_status,
                             }
                         );
                     } else {
@@ -130,8 +133,10 @@
                             autor: this.form.autor,
                             img: './img/'+ this.form.img,
                             fecha: new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'}),
+                            publication_status: this.form.publication_status,
                         }); 
                     }
+                    localStorage.setItem("posts", JSON.stringify(this.list));
 
                     //Leave the form values empty.
                     this.form.title = '';
@@ -159,6 +164,19 @@
                 saveimg: function(event){
                     //Stores the name of the image.
                     this.form.img = event.target.files[0].name;
+                },
+                publishedPost: function(item){
+                    // this.publication_status = "publicado";
+                    this.list.splice(
+                        this.list.indexOf(item), 1, {
+                                title: item.title,
+                                resum: item.resum,
+                                autor: item.autor,
+                                img: item.img,
+                                fecha: item.fecha,
+                                publication_status: "publicado",
+                            }
+                    );
                 }
             }
         }).mount("#app");

@@ -4,16 +4,13 @@ export default {
     <nav>
         <div class="container" id="nav_principal">
             <div class="row">
-                <div class="col-12 col-sm-12">
+                <div class="col-6 col-sm-6">
                     <a class="navbar-brand" href="#"><img  class="img_logo" src="./img/LOGO.png"></a>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-12 justify-content-end">
-                    <form class="d-flex">
-                        <button class="btn me-1" type="submit"><span class="material-symbols-outlined md-18 m-1" style="vertical-align: middle;">help</span>Help</button>
-                        <button class="btn ms-1" type="submit"><span class="material-symbols-outlined md-18 m-1" style="vertical-align: middle;">account_circle</span>Sign in</button>
-                    </form>
+            
+                <div class="col-5 col-sm-5">
+                    <button class="btn me-1" type="submit"><span class="material-symbols-outlined md-18 m-1" style="vertical-align: middle;">help</span>Help</button>
+                    <button class="btn ms-1" type="submit"><span class="material-symbols-outlined md-18 m-1" style="vertical-align: middle;">account_circle</span>Sign in</button>
                 </div>
             </div>
         </div>
@@ -50,7 +47,7 @@ export default {
                 <form class="d-flex" role="search">
                     <div class="input-group">
                         <input type="text" class="form-control m-0 p-0" placeholder="Search" aria-label="Search" aria-describedby="button-addon2"style="vertical-align: middle;">   
-                        <button class="btn" type="button" id="button-addon2"><span class="material-symbols-outlined md-18" style="vertical-align: middle; ">search</span> Search</button>
+                        <button class="btn_search" type="button" id="button-addon2"><span class="material-symbols-outlined md-18" style="vertical-align: middle; ">search</span> Search</button>
                     </div>
                 </form>
             </div>
