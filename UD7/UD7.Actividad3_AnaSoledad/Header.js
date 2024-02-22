@@ -5,12 +5,11 @@ export default {
         <div class="container" id="nav_principal">
             <div class="row m-0">
                 <div class="col-6 col-sm-6">
-                    <a class="navbar-brand" href="#"><img  class="img_logo" src="./img/LOGO.png"></a>
+                    <img class="img_logo" src="./img/LOGO.png"></a>
                 </div>
-            
-                <div class="col-5 col-sm-5">
-                    <button class="btn me-1" type="submit"><span class="material-symbols-outlined md-18 m-1" style="vertical-align: middle;">help</span>Help</button>
-                    <button class="btn ms-1" type="submit"><span class="material-symbols-outlined md-18 m-1" style="vertical-align: middle;">account_circle</span>Sign in</button>
+                <div class="col-5 col-sm-5 d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button class="btn me-md-2" type="submit"><span class="material-symbols-outlined md-18 m-1" style="vertical-align: middle;">help</span>Help</button>
+                    <button class="btn " type="submit"><span class="material-symbols-outlined md-18 m-1" style="vertical-align: middle;">account_circle</span>Sign in</button>
                 </div>
             </div>
         </div>

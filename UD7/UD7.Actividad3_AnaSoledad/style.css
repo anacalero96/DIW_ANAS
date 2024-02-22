@@ -37,8 +37,8 @@ div { margin:5px; }
 }
 
 /*NAV*/
-nav { background-color: #1A090D; width: 100%;}
-#nav_principal{ margin: 0; width: 100%; }
+nav { background-color: #1A090D; width: 100%; }
+#nav_principal{width: 100%; margin: 0;}
 
 #contenido_publicacion{
     font-size: 13px;
