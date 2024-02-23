@@ -81,7 +81,8 @@
                     },  
                     editing: false,
                     //Comprueba si existe datos guardados, si los hay, los lee y sino crea un array vacio.
-                    list:localStorage.getItem("posts")!=null? JSON.parse(localStorage.getItem("posts")):[],
+                    // list:localStorage.getItem("posts")!=null? JSON.parse(localStorage.getItem("posts")):[],
+                    list:[],
                     editIndex: -1,       //Variable indicating that the post is being edited.
                     msg_title: false,
                     msg_autor: false,
@@ -179,6 +180,19 @@
                         }
                     );
                 }
+            }, mounted(item){
+                //muestra el contenido almacenado en el localStorage
+                let objeto = JSON.parse(localStorage.getItem("posts"));
+                console.log(objeto);
+
+                this.list.push({
+                    title: this.form.title,
+                    resum: this.form.resum,
+                    autor: this.form.autor,
+                    img: './img/'+ this.form.img,
+                    fecha: new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'}),
+                    publication_status: this.form.publication_status,
+                });
             }
         }).mount("#app");
     </script>

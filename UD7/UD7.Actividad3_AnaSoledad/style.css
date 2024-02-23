@@ -2,23 +2,20 @@
     margin: 0;
     font-family:Arial, Helvetica, sans-serif;
 }
-li{
-    list-style: none;   
-    margin: 12px;
-}
 
-div { margin:5px; }
+li{ list-style: none; margin: 12px; }
+
+div { margin:6px; }
 
 /*HEADER - NAV*/
-#fondo{ background-color: #E8E1D5; height: 80px; margin: 0;}
+#fondo{ background-color: #E8E1D5; height: 80px;}
 
-.nav-link { font-weight: bold;}
+.nav-link {font-weight: bold;}
 
 .dropdown-item{ font-size: 14px; font-weight: bold; }
 
-#body{
-    display: flex;
-}
+#body { display: flex; }
+
 /*Layout of the list where the created posts will be shown*/
 #lista{
     background-color:rgb(255, 255, 255);
@@ -37,8 +34,9 @@ div { margin:5px; }
 }
 
 /*NAV*/
-nav { background-color: #1A090D; width: 100%; }
-#nav_principal{width: 100%; margin: 0;}
+#nav_principal{width: 100%; background-color: #1A090D;}
+.navbar-nav{ width: 100%; font-size: 14px; }
+
 
 #contenido_publicacion{
     font-size: 13px;
@@ -111,9 +109,9 @@ nav { background-color: #1A090D; width: 100%; }
     position: absolute;
     bottom: 0;
     font-size: 15px;
+    height: 10%;
     width: 100%;
 }
-#hdr{ background-color: #1A090D; }
 
 /*Button*/
 button {
@@ -137,11 +135,12 @@ button {
 }
 .btn_search{
     background-color: #7E7297;  
-    width: 130px; 
+    width: 120px; 
     height: 50px;
-    padding: 5px;
+    /* padding: 5px; */
     border-radius: 5px;
 }
+
 #btn_delete{ margin:8px; font-weight: bold; font-size: 12px; height: 35px; width: 80px;}
 #btn_edit { margin:8px; font-weight: bold; font-size: 12px; height: 35px; width: 80px;}
 #btn_published { font-weight: bold; font-size: 12px; height: 35px; width: 80px;}

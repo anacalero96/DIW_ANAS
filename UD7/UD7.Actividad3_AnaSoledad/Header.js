@@ -1,11 +1,11 @@
 export default {
     name: "Cabecera",
     template: `
-    <nav>
-        <div class="container" id="nav_principal">
-            <div class="row m-0">
+    <nav id="nav_principal">
+        <div class="container">
+            <div class="row">
                 <div class="col-6 col-sm-6">
-                    <img class="img_logo" src="./img/LOGO.png"></a>
+                    <img class="img_logo" src="./img/LOGO.png">
                 </div>
                 <div class="col-5 col-sm-5 d-grid gap-2 d-md-flex justify-content-md-end">
                     <button class="btn me-md-2" type="submit"><span class="material-symbols-outlined md-18 m-1" style="vertical-align: middle;">help</span>Help</button>
@@ -23,7 +23,7 @@ export default {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">HOME</a>
+                        <a class="nav-link" aria-current="page" href="#">HOME</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">FASHION</a>
@@ -44,9 +44,9 @@ export default {
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
-                    <div class="input-group">
-                        <input type="text" class="form-control m-0 p-0" placeholder="Search" aria-label="Search" aria-describedby="button-addon2"style="vertical-align: middle;">   
-                        <button class="btn_search" type="button" id="button-addon2"><span class="material-symbols-outlined md-18" style="vertical-align: middle; ">search</span> Search</button>
+                     <div class="input-group">
+                        <input type="text" class="form-control " placeholder="Search" aria-label="Search" aria-describedby="button-addon2"style="vertical-align: middle;">   
+                        <button class="btn_search" type="button" id="button-addon2"><span class="material-symbols-outlined md-15" style="vertical-align: middle;">search</span> Search</button>
                     </div>
                 </form>
             </div>
