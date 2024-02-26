@@ -168,8 +168,7 @@
                     //Stores the name of the image.
                     this.form.img = event.target.files[0].name;
                 },
-                publishedPost: function(item){
-                    // this.publication_status = "publicado";
+                publishedPost: function(item) {
                     this.list.splice(
                         this.list.indexOf(item), 1, {
                             title: item.title,
@@ -186,7 +185,7 @@
                 let objeto = JSON.parse(localStorage.getItem("posts"));
                 console.log(objeto);
 
-                this.list = objeto ;
+                this.list = objeto;
             }
         }).mount("#app");
     </script>
