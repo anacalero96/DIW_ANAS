@@ -151,6 +151,7 @@
                     this.list.splice(
                         this.list.indexOf(item), 1
                     );
+                    localStorage.setItem("posts", JSON.stringify(this.list));
                 }, 
                 editPost: function(item){ 
                    //Edit all values in the post.
@@ -185,14 +186,7 @@
                 let objeto = JSON.parse(localStorage.getItem("posts"));
                 console.log(objeto);
 
-                this.list.push({
-                    title: this.form.title,
-                    resum: this.form.resum,
-                    autor: this.form.autor,
-                    img: './img/'+ this.form.img,
-                    fecha: new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'}),
-                    publication_status: this.form.publication_status,
-                });
+                this.list = objeto ;
             }
         }).mount("#app");
     </script>
