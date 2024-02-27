@@ -106,7 +106,7 @@ div { margin:6px; }
 /*FOOTER*/
 #new_ftr{
     background-color: #1A090D;
-    /* position: absolute; */
+    position: absolute;
     bottom: 0;
     font-size: 15px;
     height: 10%;
