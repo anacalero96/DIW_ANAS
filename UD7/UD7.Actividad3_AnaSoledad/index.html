@@ -17,12 +17,15 @@
         <Cabecera><!--Contents of the header --></Cabecera>
 
         <div id="body">
+            <!--Otra vista, que ocupa todo el body-->
             <div id="lista">
+                <!--Habrá un botón para crear nuevo post y cuando lo pulses, se mostrara la vista del formulario de crear posts-->
                 <h1 class="title-listposts">LIST OF POSTS</h1>
               
                 <Posts v-for="item in list" :item="item" v-on:delete_post="deletePost" v-on:edit_post="editPost" v-on:published_post="publishedPost"></Posts>
             </div>
 
+            <!--Esto es una vista a parte-->
             <div class="form" id="formulario">
                 <p class="title_createPost">CREATE DE POST</p>
     
