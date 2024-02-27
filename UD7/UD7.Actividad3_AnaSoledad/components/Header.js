@@ -9,7 +9,7 @@ export default {
                 </div>
                 <div class="col-5 col-sm-5 d-grid gap-2 d-md-flex justify-content-md-end">
                     <button class="btn me-md-2" type="submit"><span class="material-symbols-outlined md-18 m-1" style="vertical-align: middle;">help</span>Help</button>
-                    <button class="btn " type="submit"><span class="material-symbols-outlined md-18 m-1" style="vertical-align: middle;">account_circle</span>Sign in</button>
+                    <button class="btn" type="submit"><span class="material-symbols-outlined md-18 m-1" style="vertical-align: middle;">account_circle</span>Sign in</button>
                 </div>
             </div>
         </div>
