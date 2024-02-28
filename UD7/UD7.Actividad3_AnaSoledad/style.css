@@ -6,13 +6,6 @@
 
 li{ list-style: none; margin: 12px; }
 
-div { margin:6px; }
-
-/*HEADER - NAV*/
-#fondo{ background-color: #E8E1D5; height: 80px;}
-
-.nav-link {font-weight: bold;}
-
 .dropdown-item{ font-size: 14px; font-weight: bold; }
 
 #body { display: flex; }
@@ -25,6 +18,7 @@ div { margin:6px; }
     width: 500px;
     padding: 30px 40px;
     margin-bottom: 20px; 
+    margin-top: 20px;
     left: auto;
 } 
 /*POST*/
@@ -33,10 +27,11 @@ div { margin:6px; }
     font-size: 12px;
     height: 30%;
 }
-/*NAV*/
-#nav_principal{width: 100%; background-color: #1A090D; }
-.navbar-nav{ width: 100%; font-size: 14px; }
 
+/*NAV*/
+#nav_principal{width: 100%; background-color: #1A090D;}
+.navbar{ width: 100%; font-size: 14px; background-color: #E8E1D5;}
+.nav-link {font-weight: bold;}
 
 #contenido_publicacion{
     font-size: 13px;
@@ -60,6 +55,7 @@ div { margin:6px; }
     width: 500px;
     padding: 30px 40px;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 /*Design of the form-control*/
 .form-control input {
@@ -106,7 +102,7 @@ div { margin:6px; }
 #new_ftr{
     background-color: #1A090D;
     /*Si la pantalla es más grande, descomentar para que el footer se posicione abajo.*/
-    /* position: absolute; */
+    position: absolute;
     bottom: 0;
     font-size: 15px;
     height: 10%;

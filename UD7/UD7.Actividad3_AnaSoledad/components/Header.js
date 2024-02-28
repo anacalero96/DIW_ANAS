@@ -15,13 +15,13 @@ export default {
         </div>
     </nav>
 
-    <nav id="fondo" class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg m-0">
         <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="material-symbols-outlined" style="background-color:rgb(222, 180, 231) ;">menu</span>
+                <span class="material-symbols-outlined" style="background-color:rgb(222, 180, 231);">menu</span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="#">HOME</a>
                     </li>

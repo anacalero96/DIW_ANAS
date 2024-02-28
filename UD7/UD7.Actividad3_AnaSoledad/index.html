@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UD7-VUE3 ACTIVIDAD_3</title>
+    <title>UD7-VUE3-ROUTER</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <!-- <link rel="shortcut icon" href="./img/base_logo_mobile.png" type="image/x-icon"> -->
@@ -37,10 +37,10 @@
         import New_footer from "./components/Footer.js";
         import Posts from "./components/Posts.js";
         import Formulario from "./components/Formulario.js";
-    
-        const { createApp } = Vue;
 
         import router from "./components/router.js";
+        const { createApp } = Vue;
+        
         var app = createApp({
             data(){
                 return{
@@ -163,10 +163,10 @@
                 this.list = objeto;
             }
         });
-        app.use(router);
+        app.use(router)
         app.mount("#app");
     </script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!--Este script hace que funcione la pestaña despegable de living-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
