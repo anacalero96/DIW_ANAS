@@ -102,7 +102,7 @@ li{ list-style: none; margin: 12px; }
 #new_ftr{
     background-color: #1A090D;
     /*Si la pantalla es más grande, descomentar para que el footer se posicione abajo.*/
-    position: absolute;
+    /* position: absolute; */
     bottom: 0;
     font-size: 15px;
     height: 10%;

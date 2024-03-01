@@ -1,7 +1,5 @@
 export default {
     name: "Formulario",
-    props: ["msg_autor", "msg_title", "saveimg"],
-    emits:["create_post"],
     data(){
         return{
             form: {
@@ -11,13 +9,85 @@ export default {
                 fecha: "",
                 img: '',
                 publication_status: 'borrador',
-            }
+            },
+            list:[],
+            editing: false,
+            editIndex: -1,       //Variable indicating that the post is being edited.
+            msg_title: false,
+            msg_autor: false,
         } 
     },
-    methods: {
-        create_post:function(){
-            this.$emit("create_post");
+    created(){
+        let objeto = JSON.parse(localStorage.getItem("posts"));
+        this.list = objeto;
+     
+        if(this.$router.params!=undefined){
+            console.log("true");
+        } else{
+            console.log(this.$router.params);
         }
+        // this.list.indexOf(item);
+    },
+    methods: { 
+        create_post:function(){
+            // this.$emit("create_post");
+
+            if(this.form.title === ''){
+                this.msg_title = true;
+            } else {
+                this.msg_title = false;
+            }
+           //Check that the author field is not empty.
+            if(this.form.autor === ''){
+                this.msg_autor = true;
+            } else {
+                this.msg_autor = false;
+            }
+            //If either field is empty, do not create the post.
+            if(this.msg_autor || this.msg_title) {
+                return;
+            }
+            // console.log(this.editing);
+           
+            //Conditional to check whether you are editing or creating.
+            if(this.editing == true){
+                this.editing = false;
+                
+                this.list.splice(
+                    this.editIndex, 1, {
+                        title: this.form.title,
+                        resum: this.form.resum,
+                        autor: this.form.autor,
+                        img: this.form.img,
+                        fecha: this.form.fecha,
+                        publication_status: this.form.publication_status,
+                    }
+                );
+            } else {
+                this.list.push({
+                    title: this.form.title,
+                    resum: this.form.resum,
+                    autor: this.form.autor,
+                    img: '/UD7/UD7.Actividad3_AnaSoledad/img/'+ this.form.img,
+                    fecha: new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'}),
+                    publication_status: this.form.publication_status,
+                }); 
+            }
+            localStorage.setItem("posts", JSON.stringify(this.list));
+
+            //Leave the form values empty.
+            this.form.title = '';
+            this.form.resum = '';
+            this.form.autor = '';
+            this.form.fecha = '';
+            this.editIndex = -1;
+
+            this.$router.push("/");
+        },
+        saveimg: function(event){
+            //Stores the name of the image.
+            this.form.img = event.target.files[0].name;
+        },
     },
     template: `
     <div class="form" id="formulario">
@@ -49,7 +119,7 @@ export default {
             <input type="file" @change="saveimg">
         </div>
         <!--Button to create post-->
-        <button type="button" @click="createPost()">Create</button> 
+        <button type="button" @click="create_post()">Create</button> 
     </div>
     `,
 }

@@ -18,14 +18,10 @@
         <Cabecera><!--Contents of the header --></Cabecera>
 
         <div id="body">
-            <!--Otra vista, que ocupa todo el body-->
-            <div id="lista">
-                <!--Habrá un botón para crear nuevo post y cuando lo pulses, se mostrará la vista del formulario de crear posts-->
-                <h1 class="title-listposts">LIST OF POSTS</h1>
-                <Posts v-for="item in list" :item="item" v-on:delete_post="deletePost" v-on:edit_post="editPost" v-on:published_post="publishedPost"></Posts>
-            </div>
+         
+          
             <!--Esto es una vista a parte-->
-            <router-link to="/Formulario" v-on:create_post="createPost">New Post</router-link>
+            <!-- <router-link to="/Formulario">New Post</router-link> -->
 
             <router-view></router-view>
         </div>
@@ -33,33 +29,35 @@
     </div>
 
     <script type="module">
+      
+        const { createApp } = Vue;
         import Cabecera from "./components/Header.js";
         import New_footer from "./components/Footer.js";
         import Posts from "./components/Posts.js";
         import Formulario from "./components/Formulario.js";
+        import Lista from "./components/Lista.js";
 
         import router from "./components/router.js";
-        const { createApp } = Vue;
-        
+
         var app = createApp({
             data(){
                 return{
-                    form: {
-                        title: "",
-                        resum: "",
-                        autor: "",
-                        //Current date
-                        fecha: "",
-                        img: '',
-                        publication_status: 'borrador',
-                    },  
-                    editing: false,
+                    // form: {
+                    //     title: "",
+                    //     resum: "",
+                    //     autor: "",
+                    //     //Current date
+                    //     fecha: "",
+                    //     img: '',
+                    //     publication_status: 'borrador',
+                    // },  
+                    // editing: false,
                     //Comprueba si existe datos guardados, si los hay, los lee y sino crea un array vacio.
                     // list:localStorage.getItem("posts")!=null? JSON.parse(localStorage.getItem("posts")):[],
                     list:[],
-                    editIndex: -1,       //Variable indicating that the post is being edited.
-                    msg_title: false,
-                    msg_autor: false,
+                    // editIndex: -1,       //Variable indicating that the post is being edited.
+                    // msg_title: false,
+                    // msg_autor: false,
                 }
             },
             //Components of our website.
@@ -68,100 +66,53 @@
                 New_footer,
                 Posts,
                 Formulario,
+                Lista,
             },
             methods: {
-                createPost: function (){
-                    //Check that the title field is not empty
-                    if(this.form.title === ''){
-                        this.msg_title = true;
-                    } else {
-                        this.msg_title = false;
-                    }
-                   //Check that the author field is not empty.
-                    if(this.form.autor === ''){
-                        this.msg_autor = true;
-                    } else {
-                        this.msg_autor = false;
-                    }
-                    //If either field is empty, do not create the post.
-                    if(this.msg_autor || this.msg_title) {
-                        return;
-                    }
-                    // console.log(this.editing);
-                   
-                    //Conditional to check whether you are editing or creating.
-                    if(this.editing == true){
-                        this.editing = false;
-                        
-                        this.list.splice(
-                            this.editIndex, 1, {
-                                title: this.form.title,
-                                resum: this.form.resum,
-                                autor: this.form.autor,
-                                img: this.form.img,
-                                fecha: this.form.fecha,
-                                publication_status: this.form.publication_status,
-                            }
-                        );
-                    } else {
-                        this.list.push({
-                            title: this.form.title,
-                            resum: this.form.resum,
-                            autor: this.form.autor,
-                            img: './img/'+ this.form.img,
-                            fecha: new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'}),
-                            publication_status: this.form.publication_status,
-                        }); 
-                    }
-                    localStorage.setItem("posts", JSON.stringify(this.list));
+                //createPost: function (){ 
+                //Check that the title field is not empty },
 
-                    //Leave the form values empty.
-                    this.form.title = '';
-                    this.form.resum = '';
-                    this.form.autor = '';
-                    this.form.fecha = '';
-                    this.editIndex = -1;
-                },
-                deletePost: function(item){
-                    this.list.splice(
-                        this.list.indexOf(item), 1
-                    );
-                    localStorage.setItem("posts", JSON.stringify(this.list));
-                }, 
-                editPost: function(item){ 
-                   //Edit all values in the post.
-                    this.editing = true;
-                    //Obtains the values to be edited.
-                    this.form.title = item.title;
-                    this.form.resum = item.resum;
-                    this.form.autor = item.autor;
-                    this.form.fecha = item.fecha;
-                    this.form.img = item.img;
-                    this.editIndex =  this.list.indexOf(item);
-                },
-                saveimg: function(event){
-                    //Stores the name of the image.
-                    this.form.img = event.target.files[0].name;
-                },
-                publishedPost: function(item) {
-                    this.list.splice(
-                        this.list.indexOf(item), 1, {
-                            title: item.title,
-                            resum: item.resum,
-                            autor: item.autor,
-                            img: item.img,
-                            fecha: item.fecha,
-                            publication_status: "publicado",
-                        }
-                    );
-                    localStorage.setItem("posts", JSON.stringify(this.list));
-                }
+                // deletePost: function(item){
+                //     this.list.splice(
+                //         this.list.indexOf(item), 1
+                //     );
+                //     localStorage.setItem("posts", JSON.stringify(this.list));
+                // }, 
+                // editPost: function(item){ 
+                //    //Edit all values in the post.
+                //     this.editing = true;
+                //     //Obtains the values to be edited.
+                //     this.form.title = item.title;
+                //     this.form.resum = item.resum;
+                //     this.form.autor = item.autor;
+                //     this.form.fecha = item.fecha;
+                //     this.form.img = item.img;
+                //     this.editIndex =  this.list.indexOf(item);
+                // },
+                // saveimg: function(event){
+                //     //Stores the name of the image.
+                //     this.form.img = event.target.files[0].name;
+                // },
+                // publishedPost: function(item) {
+                //     this.list.splice(
+                //         this.list.indexOf(item), 1, {
+                //             title: item.title,
+                //             resum: item.resum,
+                //             autor: item.autor,
+                //             img: item.img,
+                //             fecha: item.fecha,
+                //             publication_status: "publicado",
+                //         }
+                //     );
+                //     localStorage.setItem("posts", JSON.stringify(this.list));
+                // }
             }, mounted(item){
                 //Displays the content stored in localStorage.
-                let objeto = JSON.parse(localStorage.getItem("posts"));
-                // console.log(objeto);
-                this.list = objeto;
-            }
+                // let objeto = JSON.parse(localStorage.getItem("posts"));
+                // // console.log(objeto);
+                // this.list = objeto;
+                this.$router.push("/");
+            },
         });
         app.use(router)
         app.mount("#app");
