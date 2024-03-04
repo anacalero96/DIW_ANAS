@@ -22,7 +22,6 @@ export default{
             localStorage.setItem("posts", JSON.stringify(this.list));
         }, 
         editPost: function(item){ 
-         
             this.editing = true;
             localStorage.setItem("editing", this.list.indexOf(item));
             this.$router.push(`/Formulario`);

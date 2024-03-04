@@ -21,7 +21,6 @@ export default {
         <button id="btn_delete" type="button" @click="delete_post(item)">DELETE</button>
         <button id="btn_edit" type="button" @click="edit_post(item)">EDIT</button>
         <button id="btn_published" type="button" @click="published_post(item)" v-if="item.publication_status=='borrador'">PUBLISH</button>
-    </div>
-        
+    </div> 
   `,
 }
