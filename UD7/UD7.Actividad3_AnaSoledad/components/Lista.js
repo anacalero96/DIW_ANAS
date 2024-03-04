@@ -22,10 +22,10 @@ export default{
             localStorage.setItem("posts", JSON.stringify(this.list));
         }, 
         editPost: function(item){ 
-           //Edit all values in the post.
+         
             this.editing = true;
-            //Obtains the values to be edited.
-            this.$router.push(`/Formulario/?item${item}`);
+            localStorage.setItem("editing", this.list.indexOf(item));
+            this.$router.push(`/Formulario`);
             // this.editIndex =  this.list.indexOf(item);
         },
         publishedPost: function(item) {

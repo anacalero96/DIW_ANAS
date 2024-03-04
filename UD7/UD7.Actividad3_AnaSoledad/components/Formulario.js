@@ -17,21 +17,29 @@ export default {
             msg_autor: false,
         } 
     },
-    created(){
+    mounted(){
         let objeto = JSON.parse(localStorage.getItem("posts"));
-        this.list = objeto;
-     
-        if(this.$router.params!=undefined){
-            console.log("true");
-        } else{
-            console.log(this.$router.params);
+        console.log(objeto);
+        console.log(this.list);
+
+        this.list = objeto!=null?objeto:[];
+        if(localStorage.getItem("editing") != null){
+            this.editing = true;
+            this.editIndex = localStorage.getItem("editing");
+            this.form.title = this.list[this.editIndex].title;
+            this.form.resum = this.list[this.editIndex].resum;
+            this.form.autor = this.list[this.editIndex].autor;
+            this.form.img = this.list[this.editIndex].img;
+            this.form.fecha = this.list[this.editIndex].fecha;
+            this.form.publication_status = this.list[this.editIndex].publication_status;
+
+            localStorage.removeItem("editing");
         }
         // this.list.indexOf(item);
     },
     methods: { 
         create_post:function(){
-            // this.$emit("create_post");
-
+       
             if(this.form.title === ''){
                 this.msg_title = true;
             } else {
@@ -119,7 +127,7 @@ export default {
             <input type="file" @change="saveimg">
         </div>
         <!--Button to create post-->
-        <button type="button" @click="create_post()">Create</button> 
+        <button type="button" @click="create_post()">Save</button> 
     </div>
     `,
 }
