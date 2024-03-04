@@ -18,11 +18,7 @@
         <Cabecera><!--Contents of the header --></Cabecera>
 
         <div id="body">
-         
-          
-            <!--Esto es una vista a parte-->
             <!-- <router-link to="/Formulario">New Post</router-link> -->
-
             <router-view></router-view>
         </div>
        <New_footer id="new_ftr"> <!--Footer content--> </New_footer>
@@ -41,23 +37,9 @@
 
         var app = createApp({
             data(){
-                return{
-                    // form: {
-                    //     title: "",
-                    //     resum: "",
-                    //     autor: "",
-                    //     //Current date
-                    //     fecha: "",
-                    //     img: '',
-                    //     publication_status: 'borrador',
-                    // },  
-                    // editing: false,
-                    //Comprueba si existe datos guardados, si los hay, los lee y sino crea un array vacio.
-                    // list:localStorage.getItem("posts")!=null? JSON.parse(localStorage.getItem("posts")):[],
+                return {
+
                     list:[],
-                    // editIndex: -1,       //Variable indicating that the post is being edited.
-                    // msg_title: false,
-                    // msg_autor: false,
                 }
             },
             //Components of our website.
@@ -68,48 +50,9 @@
                 Formulario,
                 Lista,
             },
-            methods: {
-                //createPost: function (){ 
-                //Check that the title field is not empty },
-
-                // deletePost: function(item){
-                //     this.list.splice(
-                //         this.list.indexOf(item), 1
-                //     );
-                //     localStorage.setItem("posts", JSON.stringify(this.list));
-                // }, 
-                // editPost: function(item){ 
-                //    //Edit all values in the post.
-                //     this.editing = true;
-                //     //Obtains the values to be edited.
-                //     this.form.title = item.title;
-                //     this.form.resum = item.resum;
-                //     this.form.autor = item.autor;
-                //     this.form.fecha = item.fecha;
-                //     this.form.img = item.img;
-                //     this.editIndex =  this.list.indexOf(item);
-                // },
-                // saveimg: function(event){
-                //     //Stores the name of the image.
-                //     this.form.img = event.target.files[0].name;
-                // },
-                // publishedPost: function(item) {
-                //     this.list.splice(
-                //         this.list.indexOf(item), 1, {
-                //             title: item.title,
-                //             resum: item.resum,
-                //             autor: item.autor,
-                //             img: item.img,
-                //             fecha: item.fecha,
-                //             publication_status: "publicado",
-                //         }
-                //     );
-                //     localStorage.setItem("posts", JSON.stringify(this.list));
-                // }
-            }, mounted(){
+            mounted(){
                 //Displays the content stored in localStorage.
                 // let objeto = JSON.parse(localStorage.getItem("posts"));
-                // // console.log(objeto);
                 // this.list = objeto;
                 this.$router.push("/");
             },
