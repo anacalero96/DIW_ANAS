@@ -29,7 +29,8 @@ export default {
             this.form.title = this.list[this.editIndex].title;
             this.form.resum = this.list[this.editIndex].resum;
             this.form.autor = this.list[this.editIndex].autor;
-            this.form.img = this.list[this.editIndex].img;
+            var img = this.list[this.editIndex].img.split("/");
+            this.form.img = img[img.length-1];
             this.form.fecha = this.list[this.editIndex].fecha;
             this.form.publication_status = this.list[this.editIndex].publication_status;
 
@@ -66,7 +67,7 @@ export default {
                         title: this.form.title,
                         resum: this.form.resum,
                         autor: this.form.autor,
-                        img: this.form.img,
+                        img: '/UD7/UD7.Actividad3_AnaSoledad/img/'+ this.form.img,
                         fecha: this.form.fecha,
                         publication_status: this.form.publication_status,
                     }

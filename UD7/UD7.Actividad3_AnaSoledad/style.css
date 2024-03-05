@@ -8,18 +8,35 @@ li{ list-style: none; margin: 12px; }
 
 .dropdown-item{ font-size: 14px; font-weight: bold; }
 
+html,body{
+    height: 100%;
+}
+#app{
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 5%;
+}
+
+/* .content{
+    position: relative;
+    margin-bottom: 10%;
+} */
 
 /*Layout of the list where the created posts will be shown*/
 #lista{
     background-color:rgb(255, 255, 255);
     border-radius: 5px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    width: 500px;
+    width: 100%;
     padding: 30px 40px;
     margin-bottom: 20px; 
     margin-top: 20px;
     left: auto;
 } 
+.posts{
+    display: flex;
+    flex-wrap: wrap;
+}
 /*POST*/
 #style_post{
     background-color: #eee4e6;
@@ -53,6 +70,7 @@ li{ list-style: none; margin: 12px; }
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     width: 500px;
     padding: 30px 40px;
+    margin: auto;
     margin-bottom: 20px;
     margin-top: 20px;
 }
@@ -101,8 +119,9 @@ li{ list-style: none; margin: 12px; }
     font-size: 15px;
     height: 10%;
     width: 100%;
-    position:static;
+    position:absolute;
     bottom: 0;
+    left: 0;
 }
 /*Button*/
 button {
@@ -153,27 +172,23 @@ select{ font-size: 14px; }
 
 p { margin-top:20px; }
 /*MEDIA QUERIES*/
-@media (max-width: 1280px){
-    /*FOOTER*/
-    #new_ftr { 
-        /* position: absolute;
-        bottom: 0; */
-        font-size: 15px;
-        height: 10%;
+@media (max-width: 900px){
+ 
+    #app{
+        padding-bottom: 20%;
+    }
+
+    #formulario{
         width: 100%;
     }
-    #formulario {
-        /* position: absolute;
-        bottom: 0; */
-
+    
+    #lista{
+        width: 100%;
     }
-}
 
-@media (min-width: 560px){
     #new_ftr {
-        /* position: absolute;
-        bottom: 0; */
+        height: auto;
+        width: 100%;
         background-color: #1A090D;
-        margin: 0;
     }
 }
