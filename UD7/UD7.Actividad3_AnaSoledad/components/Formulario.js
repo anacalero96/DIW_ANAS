@@ -19,8 +19,8 @@ export default {
     },
     mounted(){
         let objeto = JSON.parse(localStorage.getItem("posts"));
-        console.log(objeto);
-        console.log(this.list);
+        // console.log(objeto);
+        // console.log(this.list);
 
         this.list = objeto!=null?objeto:[];
         if(localStorage.getItem("editing") != null){
