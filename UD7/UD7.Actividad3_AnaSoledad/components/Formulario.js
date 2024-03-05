@@ -36,7 +36,6 @@ export default {
 
             localStorage.removeItem("editing");
         }
-        // this.list.indexOf(item);
     },
     methods: { 
         create_post:function(){
@@ -56,8 +55,7 @@ export default {
             if(this.msg_autor || this.msg_title) {
                 return;
             }
-            // console.log(this.editing);
-           
+            
             //Conditional to check whether you are editing or creating.
             if(this.editing == true){
                 this.editing = false;
@@ -100,6 +98,7 @@ export default {
     },
     template: `
     <div class="form" id="formulario">
+        <router-link to="/">POSTS</router-link>
         <p class="title_createPost">CREATE DE POST</p>
         <div class="form-control">
             <label for="title">Title</label>

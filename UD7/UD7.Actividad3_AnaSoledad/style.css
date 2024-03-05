@@ -33,15 +33,13 @@ html,body{
     margin-top: 20px;
     left: auto;
 } 
-.posts{
-    display: flex;
-    flex-wrap: wrap;
-}
+
 /*POST*/
+.posts{ display: flex; flex-wrap: wrap; }
+
 #style_post{
     background-color: #eee4e6;
     font-size: 12px;
-    /* height: 30%; */
     margin: 20px;
 }
 /*NAV*/
@@ -171,20 +169,17 @@ select{ font-size: 14px; }
 #resum{ resize: none; }
 
 p { margin-top:20px; }
+#contenido_post {
+    margin: 10px;
+}
 /*MEDIA QUERIES*/
 @media (max-width: 900px){
  
-    #app{
-        padding-bottom: 20%;
-    }
+    #app{ padding-bottom: 20%; }
 
-    #formulario{
-        width: 100%;
-    }
+    #formulario{ width: 100%; }
     
-    #lista{
-        width: 100%;
-    }
+    #lista{ width: 100%; margin-bottom: 10px;}
 
     #new_ftr {
         height: auto;

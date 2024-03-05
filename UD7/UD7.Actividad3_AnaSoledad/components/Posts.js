@@ -16,7 +16,7 @@ export default {
     },
     template: `
     <div id="style_post">
-        <p>{{item.title}} {{item.resum}} {{item.autor}} {{item.img}} {{item.fecha}}</p>
+        <p id="contenido_post">{{item.title}} {{item.resum}} {{item.autor}} {{item.img}} {{item.fecha}}</p>
         <img v-bind:src="item.img">
         <button id="btn_delete" type="button" @click="delete_post(item)">DELETE</button>
         <button id="btn_edit" type="button" @click="edit_post(item)">EDIT</button>
