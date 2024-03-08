@@ -1,0 +1,194 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+li{ list-style: none; margin: 12px; }
+
+.dropdown-item{ font-size: 14px; font-weight: bold; }
+
+html,body{
+    height: 100%;
+}
+#app{
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 5%;
+}
+
+/* .content{
+    position: relative;
+    margin-bottom: 10%;
+} */
+
+/*Layout of the list where the created posts will be shown*/
+#lista{
+    background-color:rgb(255, 255, 255);
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    padding: 30px 40px;
+    margin-bottom: 20px; 
+    margin-top: 20px;
+    left: auto;
+} 
+.posts{
+    display: flex;
+    flex-wrap: wrap;
+}
+/*POST*/
+#style_post{
+    background-color: #eee4e6;
+    font-size: 12px;
+    /* height: 30%; */
+    margin: 20px;
+}
+/*NAV*/
+#nav_principal{width: 100%; background-color: #1A090D;}
+.navbar{ width: 100%; font-size: 14px; background-color: #E8E1D5;}
+.nav-link {font-weight: bold;}
+
+#contenido_publicacion{
+    font-size: 13px;
+    width: 100%;
+    height: 60px;
+    margin: 35px;
+}
+.title-listposts{
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+}
+.title_createPost{ font-weight: bold; }
+
+/*Design of the form to create a post*/
+#formulario {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    width: 500px;
+    padding: 30px 40px;
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+/*Design of the form-control*/
+.form-control input {
+    border: 2px solid #3f3f3f;
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+}
+.form-control input:focus {
+    outline: 0;
+    border-color: #303030;
+}
+.form-control button{
+    cursor: pointer;
+    background-color: #7e7297;
+    border: 2px solid #303030;
+    color: #f0f0f0;
+    font-weight: bold;
+    border-radius: 8px;
+    display: block;
+    font-size: 16px;
+    padding: 10px;
+    margin-top: 20px;
+    width: 100%;
+    /*Apply a gradient to the buttons*/
+    background: linear-gradient(#7E7297,#1A090D);
+}
+.form-control label {
+    color: #000000;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.form-control textarea{
+    width: 100%;
+    height: 100px;
+}
+/* .form-control select { width: 100%; height: 25px; } */
+
+/*FOOTER*/
+#new_ftr{
+    background-color: #1b1214;
+    font-size: 15px;
+    height: 10%;
+    width: 100%;
+    position:absolute;
+    bottom: 0;
+    left: 0;
+}
+/*Button*/
+button {
+    background-color: #7E7297;
+    border-radius: 5px;
+    padding: 8px;
+    width: 30%;
+}
+.btn {
+    background-color: #7E7297;  
+    width: 130px; 
+    height: 50px;
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 5px;
+    justify-self: end;
+}
+.btn:hover { background-color: #6F1F42; color: #E8E1D5; }
+.btn_search{
+    background-color: #7E7297;  
+    width: 120px; 
+    height: 50px;
+    /* padding: 5px; */
+    border-radius: 5px;
+}
+
+#btn_delete{ margin:8px; font-weight: bold; font-size: 12px; height: 35px; width: 80px;}
+#btn_edit { margin:8px; font-weight: bold; font-size: 12px; height: 35px; width: 80px;}
+#btn_published { font-weight: bold; font-size: 12px; height: 35px; width: 80px;}
+
+/*Image size*/
+img { width: 20%; margin: auto;padding: 10px;} /*Imagen del post*/
+.img_logo{ width: 30%; margin-top: 10px; margin-bottom: 10px; }
+
+/*Label size*/
+label[for="title"]{ font-size: 15px; }
+label[for="resum"]{ font-size: 15px; }
+label[for="autor"]{ font-size: 15px; }
+label[for="image"]{ font-size: 15px; }
+
+
+/*Textarea font size*/
+textarea{ font-size: 14px; }
+/*Select font size*/
+select{ font-size: 14px; }
+/*Textarea*/
+#resum{ resize: none; }
+
+p { margin-top:20px; }
+/*MEDIA QUERIES*/
+@media (max-width: 900px){
+ 
+    #app{
+        padding-bottom: 20%;
+    }
+
+    #formulario{
+        width: 100%;
+    }
+    
+    #lista{
+        width: 100%;
+    }
+
+    #new_ftr {
+        height: auto;
+        width: 100%;
+        background-color: #1A090D;
+    }
+}
