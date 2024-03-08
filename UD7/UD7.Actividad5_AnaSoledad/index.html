@@ -10,6 +10,7 @@
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://unpkg.com/vue-router@4.0.15/dist/vue-router.global.js"></script>
+    <script src="https://unpkg.com/pinia"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -23,21 +24,24 @@
     </div>
 
     <script type="module">
-      
         const { createApp } = Vue;
+
         import Cabecera from "./components/Header.js";
         import New_footer from "./components/Footer.js";
         import Posts from "./components/Posts.js";
         import Formulario from "./components/Formulario.js";
         import Lista from "./components/Lista.js";
 
-        import router from "./components/router.js";
+        import router from "./router.js";
+        import store from "./store.js";
+
+        const pinia = Pinia.createPinia();
 
         var app = createApp({
             data(){
                 return {
-
                     list:[],
+                    
                 }
             },
             //Components of our website.
@@ -48,6 +52,10 @@
                 Formulario,
                 Lista,
             },
+            //Cada componente debe tener su computed.
+            computed: {
+                ...Pinia.mapState(store, ['publication_status']),
+            },
             mounted(){
                 //Displays the content stored in localStorage.
                 // let objeto = JSON.parse(localStorage.getItem("posts"));
@@ -55,6 +63,7 @@
                 this.$router.push("/");
             },
         });
+        app.use(pinia);
         app.use(router)
         app.mount("#app");
     </script>

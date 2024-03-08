@@ -1,6 +1,6 @@
 
-import Formulario from "./Formulario.js";
-import Lista from "./Lista.js";
+import Formulario from "./components/Formulario.js";
+import Lista from "./components/Lista.js";
 
 const router = VueRouter.createRouter({
     history: VueRouter.createWebHistory(),
